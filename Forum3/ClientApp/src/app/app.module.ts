@@ -10,14 +10,16 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import {CategoriesComponent} from "./categories/categories.component";
+import { CategoriesComponent } from "./categories/categories.component";
+import {ThreadsComponent} from "./threads/threads.components";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ThreadsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,6 +29,7 @@ import {CategoriesComponent} from "./categories/categories.component";
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'categories', component: CategoriesComponent},
+      { path: 'thread', component: ThreadsComponent},
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
     ])
   ],

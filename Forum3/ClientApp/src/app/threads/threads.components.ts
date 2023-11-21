@@ -3,19 +3,19 @@ import {CategoriesService} from "../services/categories.service";
 import {Category} from "../models/category.model";
 
 @Component({
-  selector: 'app-categories-component',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-threads-component',
+  templateUrl: './threads.component.html',
+  styleUrls: ['./threads.component.css']
 })
 
-export class CategoriesComponent implements OnInit{
+export class ThreadsComponent implements OnInit{
   categories: Category[] = [];
   constructor(private categoriesServices: CategoriesService) { }
   ngOnInit(): void {
-    this.categoriesServices.getAllCategories().subscribe({
-      next:(categories) => {
-        console.log(categories);
-        this.categories = categories;
+    this.categoriesServices.getAllThreadsOfCategory().subscribe({
+      next:(threads) => {
+        console.log(threads);
+        this.categories = threads;
       },
       error:(response) =>{
         console.log(response);
