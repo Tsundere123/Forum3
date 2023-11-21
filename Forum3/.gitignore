@@ -232,3 +232,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/ClientApp/.angular/
+/app.db-shm
+/app.db-wal
