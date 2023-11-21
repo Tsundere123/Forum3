@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+# IDEA files
+/.idea/.idea.Forum3/.idea/encodings.xml
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
