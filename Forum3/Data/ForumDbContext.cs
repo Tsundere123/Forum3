@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Duende.IdentityServer.EntityFramework.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using Forum3.Models;
 
 namespace Forum3.Data;
 
-public class ForumDbContext
+public class ForumDbContext : DbContext
 {
     public ForumDbContext(DbContextOptions<ForumDbContext> options) : base(options)
     {
-        // Database.EnsureCreated();
+        Database.EnsureCreated();
     }
     public DbSet<ForumCategory> ForumCategory { get; set; }
     public DbSet<ForumThread> ForumThread { get; set; }
