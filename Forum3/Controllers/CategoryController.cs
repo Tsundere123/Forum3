@@ -19,6 +19,13 @@ public class CategoryController : Controller
     public async Task<IActionResult> GetAllCategories()
     {
         var categories = await _forumDbContext.ForumCategory.ToListAsync();
+        var count = 0;
+        foreach (var category in categories)
+        {
+            count = category.Threads.Count;
+        }
+        
         return Ok(categories);
     }
+
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {CategoriesService} from "../services/categories.service";
 import {Category} from "../models/category.model";
+import {ThreadsService} from "../services/threads.service";
+import {Thread} from "../models/thread.model";
 
 @Component({
   selector: 'app-threads-component',
@@ -9,13 +11,13 @@ import {Category} from "../models/category.model";
 })
 
 export class ThreadsComponent implements OnInit{
-  categories: Category[] = [];
-  constructor(private categoriesServices: CategoriesService) { }
+  threadsInCategory: Thread[] = [];
+  constructor(private threadsServices: ThreadsService) { }
   ngOnInit(): void {
-    this.categoriesServices.getAllThreadsOfCategory().subscribe({
+    this.threadsServices.getAllThreadsOfCategory().subscribe({
       next:(threads) => {
         console.log(threads);
-        this.categories = threads;
+        this.threadsInCategory = threads;
       },
       error:(response) =>{
         console.log(response);

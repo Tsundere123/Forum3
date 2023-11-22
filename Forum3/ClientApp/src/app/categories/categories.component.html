@@ -1,18 +1,144 @@
 <h1 class="h2 fw-normal">Categories</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let category of categories">
-      <td>{{ category.id }}</td>
-      <td>{{ category.name }}</td>
-      <td>{{ category.description }}</td>
-    </tr>
-  </tbody>
-</table>
+<ul class="list-group list-group-flush">
+  <li *ngFor="let category of categories" class="list-group-item px-0">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="d-flex align-items-center gap-2">
+          <div class="bg-dark text-light rounded d-flex justify-content-center align-items-center"
+               style="width: 36px; height: 36px;">
+            <svg class="bi bi-chat-right-text-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                 width="16" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+            </svg>
+          </div>
+          <div>
+            <div>
+              <a asp-action="ForumThreadOfCategoryTable" asp-controller="ForumThread"
+                 asp-route-forumCategoryId="@category.Id.ToString()" class="fw-bold link-dark text-decoration-none">
+                {{category.name}}
+              </a>
+            </div>
+            <div style="font-size: 14px;">
+              {{category.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div style="font-size: 14px;" *ngFor="let category of categories">
+
+          <!--                  Counts non soft deleted threads-->
+          <!--                  {{-->
+          <!--                      var list = category.Threads;-->
+          <!--                      if (list == null) return;-->
+          <!--                      var count = 0;-->
+          <!--                      foreach (var thread in list)-->
+          <!--                      {-->
+          <!--                      if (!thread.IsSoftDeleted) count++;-->
+          <!--                      }-->
+          <!--                }}-->
+
+
+          <span class="fw-bold">{{category.count}}</span> Threads
+        </div>
+        <div style="font-size: 14px;">
+          <span class="fw-bold">NUMBER</span> Posts
+        </div>
+      </div>
+      <div class="col-md-3">
+
+        <!--@if (lastThread is null)-->
+        <!--  {-->
+        <!--  <div class="d-flex gap-2" style="font-size: 12px;">-->
+        <!--    <div class="bg-dark text-light rounded d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;">-->
+        <!--      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">-->
+        <!--        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>-->
+        <!--      </svg>-->
+        <!--    </div>-->
+        <!--    <div>-->
+        <!--      <div>-->
+        <!--        No threads in category-->
+        <!--      </div>-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--  }-->
+
+        <!--  else-->
+        <!--  {-->
+        <!--  var lastPost = lastThread.Posts!.LastOrDefault(p => p.IsSoftDeleted == false);-->
+        <!--  if (lastPost is null)-->
+        <!--  {-->
+        <div style="font-size: 14px;">
+          <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
+             class="link-dark text-decoration-none">
+            @lastThread.Title
+          </a>
+        </div>
+        <div class="d-flex gap-2" style="font-size: 12px;">
+          <div class="bg-dark text-light rounded d-flex justify-content-center align-items-center"
+               style="width: 32px; height: 32px;">
+            <svg class="bi bi-pencil-fill" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+            </svg>
+          </div>
+          <div>
+            <div>
+              Thread has no posts
+            </div>
+          </div>
+        </div>
+        <!--  }-->
+        <!--  else-->
+        <!--  {-->
+        <!--  var poster = UserManager.FindByIdAsync(lastPost.CreatorId).Result;-->
+        <div style="font-size: 14px;">
+          <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
+             class="link-dark text-decoration-none">
+            @lastThread.Title
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-2" style="font-size: 12px;">
+          <a asp-action="Index" asp-controller="Profile" asp-route-displayName="@poster.DisplayName">
+            <img alt="@poster.DisplayName" class="rounded" height="32" src="~/avatars/@poster.Avatar" width="32"/>
+          </a>
+          <div style="font-size:12px;">
+            <div>
+              <a asp-action="Index" asp-controller="Profile" asp-route-displayName="@poster.DisplayName"
+                 class="link-dark text-decoration-none">
+                @poster.DisplayName
+              </a>
+            </div>
+            <div>
+              @lastPost.CreatedAt.ToString("g")
+            </div>
+          </div>
+        </div>
+        <!--  }-->
+        <!--  }-->
+      </div>
+    </div>
+  </li>
+  <!--  }-->
+</ul>
+
+
+<!--<table class="table table-striped">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th>Id</th>-->
+<!--      <th>Name</th>-->
+<!--      <th>Description</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <tr *ngFor="let category of categories">-->
+<!--      <td>{{ category.id }}</td>-->
+<!--      <td>{{ category.name }}</td>-->
+<!--      <td>{{ category.description }}</td>-->
+<!--    </tr>-->
+<!--  </tbody>-->
+<!--</table>-->

@@ -11,7 +11,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { CategoriesComponent } from "./categories/categories.component";
-import {ThreadsComponent} from "./threads/threads.components";
+import { ThreadsComponent } from "./threads/threads.components";
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import {ThreadsComponent} from "./threads/threads.components";
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'categories', component: CategoriesComponent},
       { path: 'thread', component: ThreadsComponent},
+      // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
     ])
   ],
