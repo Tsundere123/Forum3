@@ -102,6 +102,9 @@ namespace Forum3.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            
+            [Display(Name = "Avatar")]
+            public IFormFile Avatar { get; set; }
         }
 
 
@@ -118,6 +121,42 @@ namespace Forum3.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                if (Input.Avatar is { Length: > 0 })
+                {
+                    // Ensure avatar is an image
+                    var isImage = Input.Avatar.ContentType.StartsWith("image/");
+                    if (!isImage)
+                    {
+                        ModelState.AddModelError(string.Empty, "The avatar must be an image.");
+                        return Page();
+                    }
+                    
+                    // Ensure avatar is not too large
+                    var isTooLarge = Input.Avatar.Length > 1024 * 1024 * 2;
+                    if (isTooLarge)
+                    {
+                        ModelState.AddModelError(string.Empty, "The avatar must be less than 2 MB.");
+                        return Page();
+                    }
+                    
+                    // Get file extension
+                    var extension = Input.Avatar.FileName.Split('.').Last().ToLower();
+                    
+                    // Save avatar to disk
+                    var avatarFileName = $"{Guid.NewGuid()}.{extension}";
+                    var avatarPath = $"wwwroot/avatars/{avatarFileName}";
+                    await using (var stream = System.IO.File.Create(avatarPath))
+                    {
+                        await Input.Avatar.CopyToAsync(stream);
+                    }
+                    
+                    user.Avatar = $"{avatarFileName}";
+                }
+                else
+                {
+                    user.Avatar = "default.png";
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
