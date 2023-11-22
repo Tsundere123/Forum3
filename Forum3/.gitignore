@@ -235,3 +235,5 @@ _Pvt_Extensions
 /ClientApp/.angular/
 /app.db-shm
 /app.db-wal
+/ForumDatabase.db-shm
+/ForumDatabase.db-wal

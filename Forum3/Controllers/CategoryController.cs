@@ -24,8 +24,9 @@ public class CategoryController : Controller
         {
             count = category.Threads.Count;
         }
-        
-        return Ok(categories);
+
+        var responseData = new { categories = categories, count = count };
+        return Ok(responseData);
     }
 
 }
