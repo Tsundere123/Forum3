@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {CategoriesService} from "../services/categories.service";
-import {Category} from "../models/category.model";
+import {Category} from "../models/forumCategory.model";
 import {ThreadsService} from "../services/threads.service";
-import {Thread} from "../models/thread.model";
+import {Thread} from "../models/forumThread.model";
 
 @Component({
   selector: 'app-threads-component',

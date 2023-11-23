@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {CategoriesService} from "../services/categories.service";
-import {Category} from "../models/category.model";
-import {Thread} from "../models/thread.model";
+import {Category} from "../models/forumCategory.model";
+import {Thread} from "../models/forumThread.model";
+import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
 
 @Component({
   selector: 'app-categories-component',
@@ -11,7 +12,7 @@ import {Thread} from "../models/thread.model";
 
 export class CategoriesComponent implements OnInit{
   categories: Category[] = [];
-  threads: Thread[] = [];
+  nonSoftDeletedThreadsCount: CategoryThreadCount[] = [];
   constructor(private categoriesServices: CategoriesService) { }
   ngOnInit(): void {
     this.categoriesServices.getAllCategories().subscribe({
@@ -24,11 +25,14 @@ export class CategoriesComponent implements OnInit{
       }
     });
 
-    this.categoriesServices.getThreadsOfCategory().subscribe({
-      next:(threads) => {
-        console.log(threads);
-        this.threads = threads;
-      }
-    })
+    // this.categoriesServices.getNumberOfThreadsByCategoryId.subscribe({
+    //   next:(nonSoftDeletedThreadsCount) => {
+    //     console.log(nonSoftDeletedThreadsCount);
+    //     this.categories = nonSoftDeletedThreadsCount;
+    //   },
+    //   error:(response) =>{
+    //     console.log(response);
+    //   }
+    // });
   }
 }
