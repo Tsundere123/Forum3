@@ -12,10 +12,112 @@
 </div>
 
 <h2 class="h2 fw-normal">Latest Threads</h2>
-<!-- Threads here -->
+<div class="navigation-wrapper mb-2">
+  <div class="keen-slider keen-slider--vertical" #threadsRef>
+    <div class="keen-slider__slide" *ngFor="let thread of threads">
+      <div class="card">
+        <div class="card-body">{{thread.title}}</div>
+      </div>
+    </div>
+  </div>
+  <svg
+    [ngClass]="
+      'arrow arrow--left ' + (threadsCurrentSlide === 0 ? 'arrow--disabled' : '')
+    "
+    (click)="threadsSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    *ngIf="threadsSlider"
+    [ngClass]="
+      'arrow arrow--right ' +
+      (threadsSlider.track.details.slides.length - 1 === threadsCurrentSlide
+        ? 'arrow--disabled'
+        : '')
+    "
+    (click)="threadsSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>
 
 <h2 class="h2 fw-normal">Latest Posts</h2>
-<!-- Posts here -->
+<div class="navigation-wrapper mb-2">
+  <div class="keen-slider keen-slider--vertical" #postsRef>
+    <div class="keen-slider__slide" *ngFor="let post of posts">
+      <div class="card">
+        <div class="card-body">{{post.title}}</div>
+      </div>
+    </div>
+  </div>
+  <svg
+    [ngClass]="
+      'arrow arrow--left ' + (postsCurrentSlide === 0 ? 'arrow--disabled' : '')
+    "
+    (click)="postsSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    *ngIf="postsSlider"
+    [ngClass]="
+      'arrow arrow--right ' +
+      (postsSlider.track.details.slides.length - 1 === postsCurrentSlide
+        ? 'arrow--disabled'
+        : '')
+    "
+    (click)="postsSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>
 
 <h2 class="h2 fw-normal">Latest Members</h2>
-<!-- Members here -->
+<div class="navigation-wrapper">
+  <div class="keen-slider keen-slider--vertical" #membersRef>
+    <div class="keen-slider__slide" *ngFor="let member of members">
+      <div class="card">
+        <div class="card-body">{{member.username}}</div>
+      </div>
+    </div>
+  </div>
+  <svg
+    [ngClass]="
+      'arrow arrow--left ' + (membersCurrentSlide === 0 ? 'arrow--disabled' : '')
+    "
+    (click)="membersSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    *ngIf="membersSlider"
+    [ngClass]="
+      'arrow arrow--right ' +
+      (membersSlider.track.details.slides.length - 1 === membersCurrentSlide
+        ? 'arrow--disabled'
+        : '')
+    "
+    (click)="membersSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>
