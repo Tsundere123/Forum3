@@ -52,25 +52,21 @@ namespace Forum3.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Required]
+            [StringLength(32, ErrorMessage = "The {0} must be atleast {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
+            
+            public IFormFile Avatar { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                UserName = userName
             };
         }
 
@@ -100,16 +96,54 @@ namespace Forum3.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (user.UserName != Input.UserName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                var usernameExists = await _userManager.FindByNameAsync(Input.UserName);
+                if (usernameExists != null)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
+                    ModelState.AddModelError(string.Empty, "Username already exists.");
+                    return Page();
                 }
+                
+                user.UserName = Input.UserName;
             }
+
+            // Check if Avatar is changed
+            if (Input.Avatar is { Length: > 0 })
+            {
+                // Ensure avatar is an image
+                var isImage = Input.Avatar.ContentType.StartsWith("image/");
+                if (!isImage)
+                {
+                    ModelState.AddModelError(string.Empty, "The avatar must be an image.");
+                    return Page();
+                }
+                
+                // Ensure avatar is not too large
+                var isTooLarge = Input.Avatar.Length > 1024 * 1024 * 2;
+                if (isTooLarge)
+                {
+                    ModelState.AddModelError(string.Empty, "The avatar must be less than 2 MB.");
+                    return Page();
+                }
+                
+                // Get file extension
+                var extension = Input.Avatar.FileName.Split('.').Last().ToLower();
+                
+                // Save avatar to disk
+                var avatarFileName = $"{Guid.NewGuid()}.{extension}";
+                var avatarPath = $"wwwroot/avatars/{avatarFileName}";
+                await using (var stream = System.IO.File.Create(avatarPath))
+                {
+                    await Input.Avatar.CopyToAsync(stream);
+                }
+                    
+                // Update user avatar
+                user.Avatar = avatarFileName;
+            }
+            
+            // Update user
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

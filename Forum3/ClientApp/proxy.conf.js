@@ -6,13 +6,16 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 const PROXY_CONFIG = [
   {
     context: [
+      "/avatars",
+      "/js",
+      "/lib",
       "/api",
       "/_configuration",
       "/.well-known",
       "/Identity",
       "/connect",
       "/ApplyDatabaseMigrations",
-      "/_framework"
+      "/_framework",
    ],
     proxyTimeout: 10000,
     target: target,
