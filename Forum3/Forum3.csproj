@@ -35,6 +35,12 @@
         <Content Remove="$(SpaRoot)**" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Include="DAL\ForumCategoryRepository.cs" />
+        <None Include="DAL\ForumPostRepository.cs" />
+        <None Include="DAL\ForumThreadRepository.cs" />
+        <None Include="DAL\IForumCategoryRepository.cs" />
+        <None Include="DAL\IForumPostRepository.cs" />
+        <None Include="DAL\IForumThreadRepository.cs" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="wwwroot\avatars\" />

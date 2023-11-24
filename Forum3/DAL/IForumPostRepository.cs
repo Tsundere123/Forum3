@@ -1,6 +1,6 @@
 ﻿using Forum3.Models;
 
-namespace Forum3.ClientApp.DAL;
+namespace Forum3.DAL;
 
 public interface IForumPostRepository
 {

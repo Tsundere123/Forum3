@@ -1,8 +1,9 @@
-﻿using Forum3.Data;
+﻿using Forum3.DAL;
+using Forum3.Data;
 using Forum3.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Forum3.ClientApp.DAL;
+namespace Forum3.DAL;
 
 public class ForumCategoryRepository : IForumCategoryRepository
 {
