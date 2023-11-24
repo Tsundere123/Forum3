@@ -10,8 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { ForumCategoriesComponent } from "./categories/forumCategories.component";
-import { ForumThreadsComponent } from "./threads/forumThreads.component";
+import { ForumCategoriesComponent } from "./forumCategories/forumCategories.component";
+import { ForumThreadsComponent } from "./forumThreads/forumThreads.component";
+import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ForumThreadsComponent } from "./threads/forumThreads.component";
     NavMenuComponent,
     HomeComponent,
     ForumCategoriesComponent,
-    ForumThreadsComponent
+    ForumThreadsComponent,
+    ForumPostsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,8 +30,9 @@ import { ForumThreadsComponent } from "./threads/forumThreads.component";
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'categories', component: ForumCategoriesComponent},
-      { path: 'categories/:id', component: ForumThreadsComponent},
+      { path: 'categories', component: ForumCategoriesComponent },
+      { path: 'categories/:id', component: ForumThreadsComponent },
+      { path: 'threads/:id', component: ForumPostsComponent }
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 

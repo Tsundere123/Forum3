@@ -1,0 +1,31 @@
+<h1>Posts</h1>
+<div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>Id</th>
+    <th>Thread ID</th>
+    <th>Creator ID</th>
+    <th>Content</th>
+    <th>Created At</th>
+    <th>Edited At</th>
+    <th>Edited by?</th>
+    <th>Soft deleted?</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let post of postsInThread">
+      <td>{{post.id}}</td>
+      <td>{{post.threadId}}</td>
+      <td>{{post.creatorId}}</td>
+      <td>{{post.content}}</td>
+      <td>{{post.createdAt}}</td>
+      <td>{{post.editedAt}}</td>
+      <td>{{post.editedBy}}</td>
+      <td>{{post.isSoftDeleted}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

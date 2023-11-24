@@ -1,4 +1,4 @@
-export interface Thread{
+export interface ForumThread {
   id: number;
   title: string;
   categoryId: number;
