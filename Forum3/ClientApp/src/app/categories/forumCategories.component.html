@@ -15,8 +15,7 @@
           </div>
           <div>
             <div>
-              <a asp-action="ForumThreadOfCategoryTable" asp-controller="ForumThread"
-                 asp-route-forumCategoryId="@category.Id.ToString()" class="fw-bold link-dark text-decoration-none">
+              <a routerLink="/categories/{{category.id}}">
                 {{category.name}}
               </a>
             </div>
@@ -27,21 +26,9 @@
         </div>
       </div>
       <div class="col-md-2">
-        <div style="font-size: 14px;" *ngFor="let category of categories">
-
-          <!--                  Counts non soft deleted threads-->
-          <!--                  {{-->
-          <!--                      var list = category.Threads;-->
-          <!--                      if (list == null) return;-->
-          <!--                      var count = 0;-->
-          <!--                      foreach (var thread in list)-->
-          <!--                      {-->
-          <!--                      if (!thread.IsSoftDeleted) count++;-->
-          <!--                      }-->
-          <!--                }}-->
-
-
-          <span class="fw-bold">{{category}}</span> Threads
+<!--        Number of non soft deleted threads in category-->
+        <div style="font-size: 14px;">
+          <span class="fw-bold">NUMBER</span> Threads
         </div>
         <div style="font-size: 14px;">
           <span class="fw-bold">NUMBER</span> Posts
@@ -71,8 +58,10 @@
         <!--  if (lastPost is null)-->
         <!--  {-->
         <div style="font-size: 14px;">
-          <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
-             class="link-dark text-decoration-none">
+          <a
+            asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
+             class="link-dark text-decoration-none"
+          >
             @lastThread.Title
           </a>
         </div>
