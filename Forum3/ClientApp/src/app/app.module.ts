@@ -13,6 +13,8 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { ForumCategoriesComponent } from "./forumCategories/forumCategories.component";
 import { ForumThreadsComponent } from "./forumThreads/forumThreads.component";
 import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
+import {ConvertToReadableDate} from "./shared/convertToReadableDate";
+import {LimitStringLength} from "./shared/limitStringLength";
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
     ForumCategoriesComponent,
     ForumThreadsComponent,
     ForumPostsComponent,
+    ConvertToReadableDate,
+    LimitStringLength
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
