@@ -22,7 +22,9 @@
   <tbody>
   <tr *ngFor="let thread of threadsInCategory">
     <td>{{ thread.id }}</td>
-    <td>{{ thread.title }}</td>
+    <td>
+      <a routerLink="/threads/{{thread.id}}">{{ thread.title }}</a>
+    </td>
     <td>{{ thread.categoryId }}</td>
     <td>{{ thread.creatorId }}</td>
     <td>{{ thread.createdAt }}</td>
