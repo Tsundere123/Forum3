@@ -1,7 +1,18 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {Observable} from "rxjs";
 import {AuthorizeService} from "../../api-authorization/authorize.service";
 import KeenSlider, {KeenSliderInstance} from "keen-slider";
+import {HomeService} from "../services/home.service";
+import {LookupMember} from "../models/lookup/lookupMember.model";
+import {LookupThread} from "../models/lookup/lookupThread.model";
+import {LookupPost} from "../models/lookup/lookupPost.model";
 
 @Component({
   selector: 'app-home',
@@ -12,86 +23,9 @@ import KeenSlider, {KeenSliderInstance} from "keen-slider";
   ]
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  threads: any[] = [
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-  ];
-
-  posts: any[] = [
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-    {
-      title: "Thread 1",
-      description: "Thread 1 description"
-    },
-  ];
-
-  members: any[] = [
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-    {
-      username: "Ceno",
-      avatar: "default.png"
-    },
-  ]
+  threads: LookupThread[] = [];
+  posts: LookupPost[] = [];
+  members: LookupMember[] = [];
 
   @ViewChild("threadsRef") threadsRef: ElementRef<HTMLElement>;
   @ViewChild("postsRef") postsRef: ElementRef<HTMLElement>;
@@ -107,11 +41,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   membersCurrentSlide: number = 1;
   membersSlider: KeenSliderInstance = null;
-
-  constructor(private authorizeService: AuthorizeService) { }
+  constructor(private authorizeService: AuthorizeService, private homeService: HomeService) { }
 
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
+
+    this.homeService.getData().subscribe({
+      next:(data) => {
+        this.threads = data.threads;
+        this.posts = data.posts;
+        this.members = data.members;
+
+        if (this.threadsSlider || this.postsSlider || this.membersSlider) {
+          setTimeout(() => {
+            this.threadsSlider?.update(undefined, 0);
+            this.postsSlider?.update(undefined, 0);
+            this.membersSlider?.update(undefined, 0);
+          }, 1);
+        }
+      },
+      error:(response) =>{
+        console.log(response);
+      }
+    })
   }
 
   ngAfterViewInit() {

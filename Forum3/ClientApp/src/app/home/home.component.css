@@ -3,8 +3,8 @@
 }
 
 .arrow {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
