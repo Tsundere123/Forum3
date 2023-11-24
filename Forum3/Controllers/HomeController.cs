@@ -1,4 +1,4 @@
-using Forum3.ClientApp.DAL;
+using Forum3.DAL;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
