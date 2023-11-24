@@ -24,10 +24,9 @@ public class ForumThreadController : Controller
         _userManager = userManager;
         _forumPostRepository = forumPostRepository;
     }
+    
 
-
-    [HttpGet]
-    [Route("/api/[controller]/{forumCategoryId}/{page?}")]
+    [HttpGet("{forumCategoryId}/{page?}")]
     public async Task<IActionResult> ForumThreadsOfCategory(int forumCategoryId, int? page)
     {
         // var forumCategory = await _forumCategoryRepository.GetForumCategoryById(forumCategoryId);
