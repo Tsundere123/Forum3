@@ -1,0 +1,46 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-12 col-md-6">
+        <h1 class="h3 mb-3 fw-normal">@ViewData["Title"]</h1>
+        <form id="account" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-2">
+                <input asp-for="Input.Username" class="form-control" autocomplete="username" placeholder="Username" aria-required="true" id="first-form-control"/>
+                <label asp-for="Input.Username"></label>
+                <span asp-validation-for="Input.Username" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="Input.Email" class="form-control middle-form-control" autocomplete="email" placeholder="Email" aria-required="true"/>
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="Input.Password" class="form-control middle-form-control" autocomplete="new-password" placeholder="New Password" aria-required="true"/>
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Confirm Password" aria-required="true" id="last-form-control"/>
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="Input.Avatar" class="form-label"></label> <i>(Optional)</i>
+                <input asp-for="Input.Avatar" class="form-control form-control-lg" type="file">
+                <span asp-validation-for="Input.Avatar" class="text-danger"></span>
+            </div>
+            <div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
