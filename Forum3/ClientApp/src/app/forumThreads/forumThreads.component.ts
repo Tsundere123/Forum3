@@ -4,7 +4,7 @@ import {Category} from "../models/forumCategory.model";
 import {ForumThreadsService} from "../services/forumThreads.service";
 import {Thread} from "../models/forumThread.model";
 import {ActivatedRoute} from "@angular/router";
-import {ForumCategoriesComponent} from "../categories/forumCategories.component";
+import {ForumCategoriesComponent} from "../forumCategories/forumCategories.component";
 import {inject} from "@angular/core/testing";
 
 @Component({
