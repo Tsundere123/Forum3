@@ -1,3 +1,4 @@
+using Forum3.ClientApp.DAL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -27,6 +28,14 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
     options.UseSqlite(
         builder.Configuration["ConnectionStrings:ForumDbContextConnection"]);
 });
+
+// Repositories
+builder.Services.AddScoped<IForumCategoryRepository, ForumCategoryRepository>();
+builder.Services.AddScoped<IForumThreadRepository, ForumThreadRepository>();
+builder.Services.AddScoped<IForumPostRepository, ForumPostRepository>();
+// builder.Services.AddScoped<IWallPostRepository, WallPostRepository>();
+// builder.Services.AddScoped<IWallPostReplyRepository, WallPostReplyRepository>();
+
 
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();

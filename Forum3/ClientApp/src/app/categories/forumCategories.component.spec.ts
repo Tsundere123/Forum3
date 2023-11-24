@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThreadssComponent } from './threadss.component';
+import { ForumCategoriesComponent } from './forumCategories.component';
 
-describe('ThreadssComponent', () => {
-  let component: ThreadssComponent;
-  let fixture: ComponentFixture<ThreadssComponent>;
+describe('CategoriesComponent', () => {
+  let component: ForumCategoriesComponent;
+  let fixture: ComponentFixture<ForumCategoriesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThreadssComponent ]
+      declarations: [ ForumCategoriesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ThreadssComponent);
+    fixture = TestBed.createComponent(ForumCategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

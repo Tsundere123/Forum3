@@ -9,12 +9,12 @@ import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService {
+export class ForumCategoriesService {
 
   // baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
   getAllCategories():Observable<Category[]>{
-    return this.http.get<Category[]>( "api/Category")
+    return this.http.get<Category[]>( "api/ForumCategory")
   }
   // getNumberOfThreadsByCategoryId():Observable<CategoryThreadCount[]>{
   //   return this.http.get<Category[]>("api/Category{id}")

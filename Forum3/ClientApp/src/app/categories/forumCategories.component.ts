@@ -1,19 +1,23 @@
 import {Component, OnInit} from "@angular/core";
-import {CategoriesService} from "../services/categories.service";
+import {ForumCategoriesService} from "../services/forumCategories.service";
 import {Category} from "../models/forumCategory.model";
 import {Thread} from "../models/forumThread.model";
 import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-categories-component',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-forumCategories-component',
+  templateUrl: './forumCategories.component.html',
+  styleUrls: ['./forumCategories.component.css']
 })
 
-export class CategoriesComponent implements OnInit{
+export class ForumCategoriesComponent implements OnInit{
   categories: Category[] = [];
-  nonSoftDeletedThreadsCount: CategoryThreadCount[] = [];
-  constructor(private categoriesServices: CategoriesService) { }
+  // nonSoftDeletedThreadsCount: CategoryThreadCount[] = [];
+  constructor(private categoriesServices: ForumCategoriesService, private route: ActivatedRoute) { }
+
   ngOnInit(): void {
     this.categoriesServices.getAllCategories().subscribe({
       next:(categories) => {

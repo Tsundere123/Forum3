@@ -15,8 +15,7 @@
           </div>
           <div>
             <div>
-              <a asp-action="ForumThreadOfCategoryTable" asp-controller="ForumThread"
-                 asp-route-forumCategoryId="@category.Id.ToString()" class="fw-bold link-dark text-decoration-none">
+              <a routerLink="/categories/{{category.id}}">
                 {{category.name}}
               </a>
             </div>
@@ -59,8 +58,10 @@
         <!--  if (lastPost is null)-->
         <!--  {-->
         <div style="font-size: 14px;">
-          <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
-             class="link-dark text-decoration-none">
+          <a
+            asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
+             class="link-dark text-decoration-none"
+          >
             @lastThread.Title
           </a>
         </div>
