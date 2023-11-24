@@ -32,6 +32,7 @@ import { ForumThreadsComponent } from "./threads/forumThreads.component";
       { path: 'categories/:id', component: ForumThreadsComponent},
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+
     ])
   ],
   providers: [

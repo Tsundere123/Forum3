@@ -7,10 +7,13 @@ import {Thread} from "../models/forumThread.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ThreadsService {
+export class ForumThreadsService {
 
   constructor(private http: HttpClient) { }
-  getAllThreadsOfCategory():Observable<Thread[]>{
-    return this.http.get<Thread[]>("api/Thread")
+  // getCategoryName():Observable<Category[]>{
+  //   return this.http.get<Category[]>("api/ForumCategory/:id")
+  // }
+  getAllThreadsOfCategory(id:number):Observable<Thread[]>{
+    return this.http.get<Thread[]>("api/ForumThread/" + id)
   }
 }
