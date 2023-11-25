@@ -1,8 +1,5 @@
 <h1>Posts</h1>
 
-<div *ngFor="let post of postsInThread">
-  <ng-container *ngComponentOutlet="
-    forumPostsServices.">
-
-  </ng-container>
+<div *ngFor="let forumPost of postsInThread">
+<app-forum-post-card [currentPost]="forumPost"></app-forum-post-card>
 </div>
