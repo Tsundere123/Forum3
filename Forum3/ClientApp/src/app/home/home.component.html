@@ -15,33 +15,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #threadsRef>
     <div class="keen-slider__slide" *ngFor="let thread of threads">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex">
-            <img src="avatars/{{thread.creatorAvatar}}" alt="{{thread.creatorName}}" class="rounded me-2" height="48" width="48" />
-            <div>
-              <div class="d-block">
-                {{thread.title | limitStringLength: 30}}
-              </div>
-              <div class="d-block" style="font-size: 14px">
-                in {{thread.category}}
-              </div>
-              <div class="d-block" style="font-size: 12px;">
-                <span class="me-2">
-                  {{thread.creatorName}}
-                </span>
-                <span class="text-muted">{{thread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-lookup-thread [thread]="thread"></app-lookup-thread>
     </div>
   </div>
   <svg
-    [ngClass]="
-      'arrow arrow--left ' + (threadsCurrentSlide === 0 ? 'arrow--disabled' : '')
-    "
+    class="arrow arrow--left"
     (click)="threadsSlider.prev()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -51,13 +29,8 @@
     />
   </svg>
   <svg
+    class="arrow arrow--right"
     *ngIf="threadsSlider"
-    [ngClass]="
-      'arrow arrow--right ' +
-      (threadsSlider.track.details.slides.length - 1 === threadsCurrentSlide
-        ? 'arrow--disabled'
-        : '')
-    "
     (click)="threadsSlider.next()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -70,31 +43,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #postsRef>
     <div class="keen-slider__slide" *ngFor="let post of posts">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex">
-            <img src="avatars/{{post.creatorAvatar}}" alt="{{post.creatorName}}" class="rounded me-2" height="48" width="48" />
-            <div>
-              <div class="d-block">
-                {{post.threadTitle | limitStringLength: 30}}
-              </div>
-              <div class="d-block" style="font-size: 14px;">
-                {{post.content | limitStringLength: 30}}
-              </div>
-              <div class="d-block" style="font-size: 12px;">
-                <span class="me-1">{{post.creatorName}}</span>
-                <span class="text-muted">{{post.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-lookup-post [post]="post"></app-lookup-post>
     </div>
   </div>
   <svg
-    [ngClass]="
-      'arrow arrow--left ' + (postsCurrentSlide === 0 ? 'arrow--disabled' : '')
-    "
+    class="arrow arrow--left"
     (click)="postsSlider.prev()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -105,12 +58,7 @@
   </svg>
   <svg
     *ngIf="postsSlider"
-    [ngClass]="
-      'arrow arrow--right ' +
-      (postsSlider.track.details.slides.length - 1 === postsCurrentSlide
-        ? 'arrow--disabled'
-        : '')
-    "
+    class="arrow arrow--right"
     (click)="postsSlider.next()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -123,23 +71,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #membersRef>
     <div class="keen-slider__slide" *ngFor="let member of members">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <img src="avatars/{{member.avatar}}" class="rounded" height="48" width="48"  alt="{{member.userName}}"/>
-            <div class="ms-2">
-              <div>{{member.userName}}</div>
-              <div style="font-size: 14px;">Joined {{member.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-lookup-member [member]="member"></app-lookup-member>
     </div>
   </div>
   <svg
-    [ngClass]="
-      'arrow arrow--left ' + (membersCurrentSlide === 0 ? 'arrow--disabled' : '')
-    "
+    class="arrow arrow--left"
     (click)="membersSlider.prev()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -149,13 +85,8 @@
     />
   </svg>
   <svg
+    class="arrow arrow--right"
     *ngIf="membersSlider"
-    [ngClass]="
-      'arrow arrow--right ' +
-      (membersSlider.track.details.slides.length - 1 === membersCurrentSlide
-        ? 'arrow--disabled'
-        : '')
-    "
     (click)="membersSlider.next()"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
