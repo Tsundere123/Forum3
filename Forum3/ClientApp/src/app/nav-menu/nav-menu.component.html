@@ -38,6 +38,10 @@
             >
           </li>
         </ul>
+        <form class="d-flex" [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+          <input class="form-control form-control-sm me-2" type="text" placeholder="Search" aria-label="Search" id="searchQuery" formControlName="searchQuery" />
+          <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="searchForm.invalid">Search</button>
+        </form>
         <app-login-menu></app-login-menu>
       </div>
     </div>

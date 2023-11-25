@@ -1,0 +1,18 @@
+<h1 class="h1 fw-normal">Search Posts</h1>
+
+<div>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="d-flex">
+    <input type="text" class="form-control me-2" id="query" formControlName="query">
+    <button type="submit" class="btn btn-outline-success" [disabled]="searchForm.invalid">Search</button>
+  </form>
+</div>
+
+<hr class="my-4" />
+
+<p *ngIf="posts.length < 1">No posts matching the search query.</p>
+
+<ul class="list-group mb-2" *ngIf="posts.length > 0">
+  <li class="list-group-item" *ngFor="let post of posts">
+    <app-lookup-post [post]="post"></app-lookup-post>
+  </li>
+</ul>
