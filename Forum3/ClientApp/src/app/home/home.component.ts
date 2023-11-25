@@ -67,52 +67,38 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.threadsSlider = new KeenSlider(this.threadsRef.nativeElement, {
-        initial: this.threadsCurrentSlide,
-        slideChanged: (s) => {
-          this.threadsCurrentSlide = s.track.details.rel
+    this.threadsSlider = new KeenSlider(this.threadsRef.nativeElement, {
+      breakpoints: {
+        "(min-width: 400px)": {
+          slides: { perView: 2, spacing: 5 },
         },
-        breakpoints: {
-          "(min-width: 400px)": {
-            slides: { perView: 2, spacing: 5 },
-          },
-          "(min-width: 1000px)": {
-            slides: { perView: 3, spacing: 10 },
-          },
+        "(min-width: 1000px)": {
+          slides: { perView: 3, spacing: 10 },
         },
-      });
+      },
+    });
 
-      this.postsSlider = new KeenSlider(this.postsRef.nativeElement, {
-        initial: this.postsCurrentSlide,
-        slideChanged: (s) => {
-          this.postsCurrentSlide = s.track.details.rel
+    this.postsSlider = new KeenSlider(this.postsRef.nativeElement, {
+      breakpoints: {
+        "(min-width: 400px)": {
+          slides: { perView: 2, spacing: 5 },
         },
-        breakpoints: {
-          "(min-width: 400px)": {
-            slides: { perView: 2, spacing: 5 },
-          },
-          "(min-width: 1000px)": {
-            slides: { perView: 3, spacing: 10 },
-          },
+        "(min-width: 1000px)": {
+          slides: { perView: 3, spacing: 10 },
         },
-      });
+      },
+    });
 
-      this.membersSlider = new KeenSlider(this.membersRef.nativeElement, {
-        initial: this.membersCurrentSlide,
-        slideChanged: (s) => {
-          this.membersCurrentSlide = s.track.details.rel
+    this.membersSlider = new KeenSlider(this.membersRef.nativeElement, {
+      breakpoints: {
+        "(min-width: 400px)": {
+          slides: { perView: 2, spacing: 5 },
         },
-        breakpoints: {
-          "(min-width: 400px)": {
-            slides: { perView: 2, spacing: 5 },
-          },
-          "(min-width: 1000px)": {
-            slides: { perView: 3, spacing: 10 },
-          },
+        "(min-width: 1000px)": {
+          slides: { perView: 3, spacing: 10 },
         },
-      });
-    })
+      },
+    });
   }
 
   ngOnDestroy() {
