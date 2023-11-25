@@ -10,7 +10,5 @@ import {ForumPostsComponent} from "../forumPosts.component";
 })
 
 export class ForumPostCardComponent {
-  @Input()   currentPost: ForumPost;
-
-
+  @Input() currentPost: ForumPost;
 }
