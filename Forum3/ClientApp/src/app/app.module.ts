@@ -16,6 +16,9 @@ import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
 import {ConvertToReadableDate} from "./shared/convertToReadableDate";
 import {LimitStringLength} from "./shared/limitStringLength";
 import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-card.component";
+import {LookupMemberComponent} from "./shared/lookup/lookup-member/lookupMember.component";
+import {LookupThreadComponent} from "./shared/lookup/lookup-threads/lookupThread.component";
+import {LookupPostComponent} from "./shared/lookup/lookup-post/lookupPost.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-ca
     ForumPostsComponent,
     ConvertToReadableDate,
     LimitStringLength,
-    ForumPostCardComponent
+    ForumPostCardComponent,
+    LookupMemberComponent,
+    LookupThreadComponent,
+    LookupPostComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
