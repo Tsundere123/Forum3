@@ -16,6 +16,7 @@ import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
 import {ConvertToReadableDate} from "./shared/convertToReadableDate";
 import {LimitStringLength} from "./shared/limitStringLength";
 import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-card.component";
+import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-ca
     ForumPostsComponent,
     ConvertToReadableDate,
     LimitStringLength,
-    ForumPostCardComponent
+    ForumPostCardComponent,
+    ForumThreadListItemComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

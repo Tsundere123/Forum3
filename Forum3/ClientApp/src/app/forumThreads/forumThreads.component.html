@@ -1,39 +1,16 @@
-<!--<div *ngFor="let category of categories">-->
-  <h1 class="h2 fw-normal">
-    Threads of category</h1>
-<!--</div>-->
+<h1 class="h2 fw-normal">
+  {{currentCategory.name}}</h1>
+<p>{{currentCategory.description}}</p>
 
+<!--Pinned threads-->
+<div *ngIf="pinnedThreads.length > 0">
+  <ul class="list-group list-group-flush" *ngFor="let pinnedThread of pinnedThreads">
+    <app-forum-thread-list-item [currentThread]="pinnedThread"></app-forum-thread-list-item>
+  </ul>
+  <hr style="height: 2px;" />
+</div>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Title</th>
-    <th>CategoryId</th>
-    <th>CreatorId</th>
-    <th>CreatedAt</th>
-    <th>EditedAt</th>
-    <th>EditedBy</th>
-    <th>IsSoftDeleted</th>
-    <th>IsPinned</th>
-    <th>IsLocked</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let thread of threadsInCategory">
-    <td>{{ thread.id }}</td>
-    <td>
-      <a routerLink="/threads/{{thread.id}}">{{ thread.title }}</a>
-    </td>
-    <td>{{ thread.categoryId }}</td>
-    <td>{{ thread.creatorId }}</td>
-    <td>{{ thread.createdAt }}</td>
-    <td>{{ thread.editedAt }}</td>
-    <td>{{ thread.editedBy }}</td>
-    <td>{{ thread.isSoftDeleted }}</td>
-    <td>{{ thread.isPinned }}</td>
-    <td>{{ thread.isLocked }}</td>
+<ul class="list-group list-group-flush" *ngFor="let forumThread of threadsInCategory">
+  <app-forum-thread-list-item [currentThread]="forumThread"></app-forum-thread-list-item>
+</ul>
 
-  </tr>
-  </tbody>
-</table>

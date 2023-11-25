@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {ForumCategory} from "../models/forumCategory.model";
-import {ForumThread} from "../models/forumThread.model";
+import {ForumThreadViewModel} from "../models/forumThreadView.model";
+import {ForumThread} from "../models/forumThread/forumThread.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class ForumThreadsService {
   // getCategoryName():Observable<Category[]>{
   //   return this.http.get<Category[]>("api/ForumCategory/:id")
   // }
-  getAllThreadsOfCategory(id:number):Observable<ForumThread[]>{
-    return this.http.get<ForumThread[]>("api/ForumThread/" + id)
+  getData(id:number){
+    return this.http.get<ForumThreadViewModel>("api/ForumThread/" + id)
   }
 }

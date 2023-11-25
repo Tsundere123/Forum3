@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ForumCategoriesService} from "../services/forumCategories.service";
 import {ForumCategory} from "../models/forumCategory.model";
-import {ForumThread} from "../models/forumThread.model";
+import {ForumThread} from "../models/forumThread/forumThread.model";
 import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
