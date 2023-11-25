@@ -8,6 +8,7 @@ import {ForumCategoriesComponent} from "../forumCategories/forumCategories.compo
 import {inject} from "@angular/core/testing";
 import {ForumThread} from "../models/forumThread/forumThread.model";
 import {ForumPost} from "../models/forumPost.model";
+import {ForumPostsService} from "../services/forumPosts.service";
 
 @Component({
   selector: 'app-forumThreads-component',

@@ -11,9 +11,6 @@ import {ForumThread} from "../models/forumThread/forumThread.model";
 export class ForumThreadsService {
 
   constructor(private http: HttpClient) { }
-  // getCategoryName():Observable<Category[]>{
-  //   return this.http.get<Category[]>("api/ForumCategory/:id")
-  // }
   getData(id:number){
     return this.http.get<ForumThreadViewModel>("api/ForumThread/" + id)
   }
