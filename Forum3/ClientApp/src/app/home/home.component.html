@@ -15,7 +15,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #threadsRef>
     <div class="keen-slider__slide" *ngFor="let thread of threads">
-      <app-lookup-thread [thread]="thread"></app-lookup-thread>
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-thread [thread]="thread"></app-lookup-thread>
+        </div>
+      </div>
     </div>
   </div>
   <svg
@@ -43,7 +47,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #postsRef>
     <div class="keen-slider__slide" *ngFor="let post of posts">
-      <app-lookup-post [post]="post"></app-lookup-post>
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-post [post]="post"></app-lookup-post>
+        </div>
+      </div>
     </div>
   </div>
   <svg
@@ -71,7 +79,11 @@
 <div class="navigation-wrapper mb-2">
   <div class="keen-slider keen-slider--vertical" #membersRef>
     <div class="keen-slider__slide" *ngFor="let member of members">
-      <app-lookup-member [member]="member"></app-lookup-member>
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-member [member]="member"></app-lookup-member>
+        </div>
+      </div>
     </div>
   </div>
   <svg

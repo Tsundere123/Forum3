@@ -1,11 +1,7 @@
-<div class="card">
-  <div class="card-body">
-    <div class="d-flex align-items-center">
-      <img src="avatars/{{member.avatar}}" class="rounded" height="48" width="48"  alt="{{member.userName}}"/>
-      <div class="ms-2">
-        <div>{{member.userName}}</div>
-        <div style="font-size: 14px;">Joined {{member.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</div>
-      </div>
-    </div>
+<div class="d-flex align-items-center">
+  <img src="avatars/{{member.avatar}}" class="rounded" height="48" width="48"  alt="{{member.userName}}"/>
+  <div class="ms-2">
+    <div>{{member.userName}}</div>
+    <div style="font-size: 14px;">Joined {{member.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</div>
   </div>
 </div>
