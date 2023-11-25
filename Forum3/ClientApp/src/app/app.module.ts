@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -19,6 +19,10 @@ import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-ca
 import {LookupMemberComponent} from "./shared/lookup/lookup-member/lookupMember.component";
 import {LookupThreadComponent} from "./shared/lookup/lookup-threads/lookupThread.component";
 import {LookupPostComponent} from "./shared/lookup/lookup-post/lookupPost.component";
+import {SearchThreadsComponent} from "./search/search-threads/searchThreads.component";
+import {SearchPostsComponent} from "./search/search-posts/searchPosts.component";
+import {SearchMembersComponent} from "./search/search-members/searchMembers.component";
+import {SearchComponent} from "./search/search.component";
 
 @NgModule({
   declarations: [
@@ -33,22 +37,31 @@ import {LookupPostComponent} from "./shared/lookup/lookup-post/lookupPost.compon
     ForumPostCardComponent,
     LookupMemberComponent,
     LookupThreadComponent,
-    LookupPostComponent
+    LookupPostComponent,
+    SearchComponent,
+    SearchThreadsComponent,
+    SearchPostsComponent,
+    SearchMembersComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'categories', component: ForumCategoriesComponent },
-      { path: 'categories/:id', component: ForumThreadsComponent },
-      { path: 'threads/:id', component: ForumPostsComponent }
+      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'categories', component: ForumCategoriesComponent},
+      {path: 'categories/:id', component: ForumThreadsComponent},
+      {path: 'threads/:id', component: ForumPostsComponent},
+      {path: 'search/:query', component: SearchComponent},
+      {path: 'search/threads/:query', component: SearchThreadsComponent},
+      {path: 'search/posts/:query', component: SearchPostsComponent},
+      {path: 'search/members/:query', component: SearchMembersComponent}
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
-    ])
+    ]),
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
