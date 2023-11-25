@@ -60,7 +60,7 @@ public class HomeController : Controller
             .ToList();
         
         // Get username and avatar of latest 6 members
-        var members = await _userManager.Users
+        var members = _userManager.Users
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)
             .Select(u => new
@@ -69,8 +69,8 @@ public class HomeController : Controller
                 u.Avatar,
                 u.CreatedAt
             })
-            .ToListAsync();
+            .ToList();
 
-        return Json(new { threads = latestThreads, posts = latestPosts, members });
+        return Ok(new { threads = latestThreads, posts = latestPosts, members });
     }
 }
