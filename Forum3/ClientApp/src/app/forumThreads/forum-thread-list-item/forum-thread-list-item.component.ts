@@ -14,6 +14,7 @@ export class ForumThreadListItemComponent {
   @Input() viewModel: ForumThreadViewModel;
   @Input() currentThread: ForumThread;
   latestPost: ForumPost;
+  numberOfPosts: number;
 
   constructor(private forumPostsServices: ForumPostsService) {  }
 
@@ -29,6 +30,8 @@ export class ForumThreadListItemComponent {
           }
         });
         this.latestPost = latestPost;
+        this.numberOfPosts = posts.length;
+        if(!posts.length) this.numberOfPosts = 0;
       },
       error:(response) =>{
         console.log(response);

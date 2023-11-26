@@ -40,7 +40,7 @@ import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-ite
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'categories', component: ForumCategoriesComponent },
       { path: 'categories/:id', component: ForumThreadsComponent },
-      { path: 'threads/:id', component: ForumPostsComponent }
+      { path: 'thread/:id', component: ForumPostsComponent }
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 

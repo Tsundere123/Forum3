@@ -74,6 +74,9 @@ public class ForumThreadController : Controller
         var currentPage = page ?? 1;
         
         var forumThreadsOfCategory = pageList.Skip((currentPage - 1) * perPage).Take(perPage).ToList();
+        
+        // Post counter
+        
 
         return Json(new{forumCategory = forumCategory, pinnedThreads = pinnedThreads, forumThreads = forumThreadsOfCategory, currentPage = currentPage, totalPages = totalPages, });
     }

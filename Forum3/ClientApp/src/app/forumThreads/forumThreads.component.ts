@@ -34,6 +34,7 @@ export class ForumThreadsComponent implements OnInit{
         this.threadsInCategory = data.forumThreads;
         this.currentPage = data.currentPage;
         this.totalPages = data.totalPages;
+
         console.log(data);
       },
       error:(response) =>{
