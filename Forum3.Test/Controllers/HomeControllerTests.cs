@@ -64,6 +64,6 @@ public class HomeControllerTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.IsType<OkObjectResult>(result);
+        Assert.IsType<JsonResult>(result);
     }
 }

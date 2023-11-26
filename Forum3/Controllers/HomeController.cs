@@ -70,7 +70,9 @@ public class HomeController : Controller
                 u.CreatedAt
             })
             .ToList();
-
-        return Ok(new { threads = latestThreads, posts = latestPosts, members });
+        //return Ok(new { threads = latestThreads, posts = latestPosts, members });
+        
+        //return json
+        return Json(new { threads = latestThreads, posts = latestPosts, members });
     }
 }
