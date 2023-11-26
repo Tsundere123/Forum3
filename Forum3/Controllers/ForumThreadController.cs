@@ -82,14 +82,15 @@ public class ForumThreadController : Controller
     {
         //All threads in category
         var threads = await _forumThreadRepository.GetForumThreadsByCategoryId(forumCategoryId);
+        if (threads == null) return NotFound();
+        
         var threadsList = threads.ToList();
-        Console.WriteLine(threadsList.ToJson());
         var result = threadsList.Select(t => new ThreadDto()
         {
             Id = t.Id,
             Title = t.Title,
             PostCount = t.Posts.Count,
-            LatestPost = new LookupPostDto()
+            LatestPost = t.Posts.Any() ? new LookupPostDto()
             {
                 Id = t.Posts.LastOrDefault().Id,
                 Content = t.Posts.LastOrDefault().Content,
@@ -106,7 +107,7 @@ public class ForumThreadController : Controller
                     Avatar = "default.png",
                     CreatedAt = DateTime.Now
                 }
-            },
+            } : null,
             Creator = new LookupUserDto()
             {
                 // UserName = _userManager.Users.FirstOrDefault(u => u.Id == s.CreatorId)?.UserName,
@@ -122,10 +123,13 @@ public class ForumThreadController : Controller
         return Ok(result);
     }
 
-    [HttpGet("CategoryDetails/{forumCategoryId}")]
+    [HttpGet("CategoryDetails/{categoryId}")]
     public async Task<IActionResult> GetCategoryDetails(int categoryId)
     {
         var forumCategory = await _forumCategoryRepository.GetForumCategoryById(categoryId);
+        
+        if (forumCategory == null) return NotFound();
+        
         var result = new CategoryDetailsDto()
         {
             Id = forumCategory.Id,
