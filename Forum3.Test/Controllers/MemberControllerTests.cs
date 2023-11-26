@@ -18,17 +18,7 @@ public class MemberControllerTests
 
         var controller = new MemberController(userManagerMock.Object);
         
-        var users = new List<ApplicationUser>
-        {
-            new() { Id = "userId1", UserName = "User1", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId2", UserName = "User2", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId3", UserName = "User3", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId4", UserName = "User4", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId5", UserName = "User5", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId6", UserName = "User6", Avatar = "default.png", CreatedAt = DateTime.Now },
-            new() { Id = "userId7", UserName = "User7", Avatar = "default.png", CreatedAt = DateTime.Now },
-        };
-        userManagerMock.Setup(manager => manager.Users).Returns(users.AsQueryable());
+        userManagerMock.Setup(manager => manager.Users).Returns(Constants.Users.AsQueryable());
         
         // Act
         var result = await controller.Index();
