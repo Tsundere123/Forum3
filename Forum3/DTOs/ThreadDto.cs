@@ -16,5 +16,7 @@ public class ThreadDto
     
     public bool IsPinned { get; set; }
     
+    public DateTime CreatedAt { get; set; }
+    
 
 }

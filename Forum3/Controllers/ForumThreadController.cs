@@ -42,6 +42,7 @@ public class ForumThreadController : Controller
             Title = t.Title,
             PostCount = t.Posts.Count,
             IsPinned = t.IsPinned,
+            CreatedAt = t.CreatedAt,
             LatestPost = t.Posts.Any() ? new LookupPostDto()
             {
                 Id = t.Posts.LastOrDefault().Id,
