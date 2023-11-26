@@ -24,6 +24,7 @@ import { SearchPostsComponent } from "./search/search-posts/searchPosts.componen
 import { SearchMembersComponent } from "./search/search-members/searchMembers.component";
 import { SearchComponent } from "./search/search.component";
 import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
+import {MemberListComponent} from "./memberList/memberList.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-ite
     SearchPostsComponent,
     SearchMembersComponent,
     ForumThreadListItemComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +60,8 @@ import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-ite
       {path: 'search/:query', component: SearchComponent},
       {path: 'search/threads/:query', component: SearchThreadsComponent},
       {path: 'search/posts/:query', component: SearchPostsComponent},
-      {path: 'search/members/:query', component: SearchMembersComponent}
+      {path: 'search/members/:query', component: SearchMembersComponent},
+      {path: 'members', component: MemberListComponent},
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
