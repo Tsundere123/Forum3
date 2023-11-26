@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {LookupThread} from "../../../models/lookup/lookupThread.model";
 
 @Component({
   selector: 'app-forum-category-list-item-newest-thread',
@@ -9,5 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './forum-category-list-item-newest-thread.component.css'
 })
 export class ForumCategoryListItemNewestThreadComponent {
+  @Input() latestThread: LookupThread;
+
 
 }

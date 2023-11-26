@@ -26,16 +26,16 @@ public class ForumCategoryController : Controller
         _forumPostRepository = forumPostRepository;
     }
     
+    // [HttpGet]
+    // public async Task<IActionResult> GetAllCategories()
+    // {
+    //     var categories = await _forumCategoryRepository.GetAll();
+    //     
+    //     return Ok(categories);
+    // }
+    
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
-    {
-        var categories = await _forumCategoryRepository.GetAll();
-        
-        return Ok(categories);
-    }
-    
-    [HttpGet("Test")]
-    public async Task<IActionResult> GetAllCategoriesTest()
     {
         var categories = await _forumCategoryRepository.GetAll();
         var categoriesList = categories.ToList();

@@ -24,27 +24,18 @@
   <div class="col-md-2">
     <!--        Number of non soft deleted threads in category-->
     <div style="font-size: 14px;">
-      <span class="fw-bold">{{totalThreads}}</span> Threads
+      <span class="fw-bold">{{currentCategory.threadCount}}</span> Threads
     </div>
     <div style="font-size: 14px;">
-      <span class="fw-bold">NUMBER</span> Posts
+      <span class="fw-bold">{{currentCategory.postCount}}</span> Posts
     </div>
   </div>
-
-
-
   <div class="col-md-3">
 <!--Last thread is null-->
-    @if(!newestThread){
+    @if(currentCategory.latestThread.id == null){
       <app-forum-category-list-item-no-threads-in-category></app-forum-category-list-item-no-threads-in-category>
     }@else{
-<!--      var lastPost = lastThread.Posts!.LastOrDefault(p => p.IsSoftDeleted == false);-->
-      @if(true){
-        <app-forum-category-list-item-thread-has-no-posts></app-forum-category-list-item-thread-has-no-posts>
-      }
-      @else{
-        <app-forum-category-list-item-newest-thread></app-forum-category-list-item-newest-thread>
-      }
+      <app-forum-category-list-item-newest-thread [latestThread]="currentCategory.latestThread"></app-forum-category-list-item-newest-thread>
     }
   </div>
 </div>

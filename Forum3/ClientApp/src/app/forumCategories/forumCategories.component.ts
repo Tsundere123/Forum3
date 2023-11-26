@@ -16,6 +16,7 @@ import {ForumThreadsService} from "../services/forumThreads.service";
 
 export class ForumCategoriesComponent implements OnInit{
   categories: ForumCategory[] = [];
+
   // nonSoftDeletedThreadsCount: CategoryThreadCount[] = [];
   constructor(private forumThreadsServices: ForumThreadsService, private categoriesServices: ForumCategoriesService, private route: ActivatedRoute) { }
 
@@ -29,16 +30,5 @@ export class ForumCategoriesComponent implements OnInit{
         console.log(response);
       }
     });
-
-
-    // this.categoriesServices.getNumberOfThreadsByCategoryId.subscribe({
-    //   next:(nonSoftDeletedThreadsCount) => {
-    //     console.log(nonSoftDeletedThreadsCount);
-    //     this.categories = nonSoftDeletedThreadsCount;
-    //   },
-    //   error:(response) =>{
-    //     console.log(response);
-    //   }
-    // });
   }
 }
