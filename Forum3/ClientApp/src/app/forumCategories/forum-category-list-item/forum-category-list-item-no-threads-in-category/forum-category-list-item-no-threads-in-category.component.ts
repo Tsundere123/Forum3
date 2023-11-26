@@ -9,5 +9,4 @@ import { CommonModule } from '@angular/common';
   styleUrl: './forum-category-list-item-no-threads-in-category.component.css'
 })
 export class ForumCategoryListItemNoThreadsInCategoryComponent {
-
 }

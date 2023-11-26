@@ -42,7 +42,7 @@ public class ForumThreadRepository : IForumThreadRepository
         }
     }
 
-    public async Task<IEnumerable<ForumThread>?> GetForumThreadsByCategoryId(int id)
+    public async Task<List<ForumThread>?> GetForumThreadsByCategoryId(int id)
     {
         try
         {

@@ -1,5 +1,4 @@
 using Forum3.DAL;
-using Forum3.DAL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

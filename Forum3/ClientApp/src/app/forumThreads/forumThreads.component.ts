@@ -9,6 +9,7 @@ import {inject} from "@angular/core/testing";
 import {ForumThread} from "../models/forumThread/forumThread.model";
 import {ForumPost} from "../models/forumPost.model";
 import {ForumPostsService} from "../services/forumPosts.service";
+import {ForumCategoryDetailsModel} from "../models/forumCategoryDetails.model";
 
 @Component({
   selector: 'app-forumThreads-component',
@@ -18,28 +19,27 @@ import {ForumPostsService} from "../services/forumPosts.service";
 
 export class ForumThreadsComponent implements OnInit{
   threadsInCategory: ForumThread[] = [];
-  currentCategory: ForumCategory;
+  categoryDetails: ForumCategoryDetailsModel;
   categoryId:number = 0;
-  pinnedThreads: ForumThread[];
-  currentPage: number;
-  totalPages: number;
   constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => this.categoryId = +params['id']);
 
-    this.forumThreadsServices.getData(this.categoryId).subscribe({
-      next:(data) => {
-        this.currentCategory = data.forumCategory;
-        this.pinnedThreads = data.pinnedThreads;
-        this.threadsInCategory = data.forumThreads;
-        this.currentPage = data.currentPage;
-        this.totalPages = data.totalPages;
-
-        console.log(data);
+    this.forumThreadsServices.ForumThreadsOfCategory(this.categoryId).subscribe({
+      next:(threads) => {
+        console.log(threads);
+        this.threadsInCategory = threads;
       },
       error:(response) =>{
         console.log(response);
       }
     });
+
+    this.forumThreadsServices.GetCategoryDetails(this.categoryId).subscribe({
+      next:(category) =>{
+        console.log(category);
+        this.categoryDetails = category;
+      }
+    })
   }
 }

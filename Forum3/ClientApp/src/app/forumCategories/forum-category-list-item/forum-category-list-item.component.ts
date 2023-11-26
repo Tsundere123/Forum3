@@ -22,9 +22,4 @@ import {
 })
 export class ForumCategoryListItemComponent {
   @Input() currentCategory: ForumCategory;
-  totalPosts: number;
-  totalThreads: number;
-  newestThread: ForumThread;
-  ngOnInit(): void {
-  }
 }
