@@ -1,4 +1,5 @@
 using Forum3.DAL;
+using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -36,14 +37,18 @@ public class SearchController : Controller
             .Where(t => t.Title.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(t => t.CreatedAt)
             .Take(6)
-            .Select(t => new
+            .Select(t => new LookupThreadDto()
             {
-                t.Id,
-                t.Title,
-                t.CreatedAt,
+                Id = t.Id,
+                Title = t.Title,
+                CreatedAt = t.CreatedAt,
                 Category = t.Category.Name,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
         
@@ -54,36 +59,42 @@ public class SearchController : Controller
             .Where(p => p.Content.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(p => p.CreatedAt)
             .Take(6)
-            .Select(p => new
+            .Select(p => new LookupPostDto()
             {
-                p.Id,
-                p.Content,
-                p.CreatedAt,
+                Id = p.Id,
+                Content = p.Content,
+                CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
         
-        var membersResults = await _userManager.Users
+        var membersResults =  _userManager.Users
             .Where(u => u.UserName.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)
-            .Select(u => new
+            .Select(u => new LookupUserDto()
             {
-                u.UserName,
-                u.Avatar,
-                u.CreatedAt
+                UserName = u.UserName,
+                Avatar = u.Avatar,
+                CreatedAt = u.CreatedAt
             })
-            .ToListAsync();
+            .ToList();
 
-        return Ok(new
+        var dto = new SearchDto()
         {
             threads = threadResults,
             posts = postResults,
             members = membersResults
-        });
+        };
+
+        return Ok(dto);
     }
     
     [HttpGet("Threads")]
@@ -100,14 +111,18 @@ public class SearchController : Controller
             .Where(t => t.IsSoftDeleted == false)
             .Where(t => t.Title.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(t => t.CreatedAt)
-            .Select(t => new
+            .Select(t => new LookupThreadDto()
             {
-                t.Id,
-                t.Title,
-                t.CreatedAt,
+                Id = t.Id,
+                Title = t.Title,
+                CreatedAt = t.CreatedAt,
                 Category = t.Category.Name,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
 
@@ -128,15 +143,19 @@ public class SearchController : Controller
             .Where(p => p.IsSoftDeleted == false)
             .Where(p => p.Content.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(p => p.CreatedAt)
-            .Select(p => new
+            .Select(p => new LookupPostDto()
             {
-                p.Id,
-                p.Content,
-                p.CreatedAt,
+                Id = p.Id,
+                Content = p.Content,
+                CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
 
@@ -151,16 +170,16 @@ public class SearchController : Controller
             return BadRequest();
         }
         
-        var membersResults = await _userManager.Users
+        var membersResults = _userManager.Users
             .Where(u => u.UserName.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(u => u.CreatedAt)
-            .Select(u => new
+            .Select(u => new LookupUserDto()
             {
-                u.UserName,
-                u.Avatar,
-                u.CreatedAt
+                UserName = u.UserName,
+                Avatar = u.Avatar,
+                CreatedAt = u.CreatedAt
             })
-            .ToListAsync();
+            .ToList();
 
         return Ok(membersResults);
     }
