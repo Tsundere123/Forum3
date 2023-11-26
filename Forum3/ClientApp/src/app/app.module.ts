@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ApplicationConfig, NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -37,6 +37,8 @@ import {
   ForumThreadListNoPostsComponent
 } from "./forumThreads/forum-thread-list-item/forum-thread-list-no-posts/forum-thread-list-no-posts.component";
 
+import { provideMarkdown } from 'ngx-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +64,7 @@ import {
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    MarkdownModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'categories', component: ForumCategoriesComponent},
@@ -87,3 +90,4 @@ import {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

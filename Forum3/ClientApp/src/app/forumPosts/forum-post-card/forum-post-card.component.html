@@ -16,14 +16,15 @@
       <!--      </div>-->
 
 
-      <div id="postContent_@Model.Id.ToString()" class="card-body py-2 d-flex flex-column justify-content-between">
+      <div id="postContent_{{currentPost.id}}" class="card-body py-2 d-flex flex-column justify-content-between">
         <div class="post-content">
-          {{currentPost.content}}
+          <markdown>{{currentPost.content}}</markdown>
+
         </div>
 
         <!--        If edited-->
         <div>
-          EDITED BY: NAME
+          {{currentPost.editedBy}}
           <span class="text-muted fst-italic" style="font-size: 12px;">
 <!--              Posted on @Model.CreatedAt.ToString("g"), edited by-->
               <a>

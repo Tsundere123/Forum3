@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Forum3.Data;
 using Forum3.Models;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
