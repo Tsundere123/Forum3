@@ -4,11 +4,11 @@
       <div class="d-flex align-items-center gap-2">
 <!--        Link to profile-->
         <a asp-controller="Profile" asp-action="Index" asp-route-displayName="@creator.DisplayName">
-<!--          <img alt="{{latestThread.creator.userName}}" class="rounded" height="32" src="avatars/{{latestThread.creator.avatar}}" width="32">-->
+          <img alt="{{currentThread.creator.userName}}" class="rounded" height="32" src="avatars/{{currentThread.creator.avatar}}" width="32">
         </a>
         <div>
 <!--          Link to thread view-->
-          <a routerLink="/thread/{{currentThread.id}}">
+          <a routerLink="/threads/{{currentThread.id}}">
 <!--            Container for icons on title-->
             <div class="d-flex gap-1 align-items-center">
 
@@ -43,7 +43,7 @@
             By
 <!--            Username-->
             <a asp-controller="Profile" asp-action="Index" asp-route-displayName="@creator.DisplayName" class="link-dark text-decoration-none">
-              NAME
+              {{currentThread.creator.userName}}
             </a>
 <!--            Date-->
             on {{currentThread.createdAt}}
