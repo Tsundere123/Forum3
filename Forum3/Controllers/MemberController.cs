@@ -20,9 +20,7 @@ public class MemberController : Controller
     [HttpGet]
 public async Task<IActionResult> Index()
     {
-        var users = await _userManager.Users.ToListAsync();
-        var userList = users.ToList();
-        var userLookup = userList
+        var userLookup = _userManager.Users
             .Select(u => new LookupUserDto()
             {
                 UserName = u.UserName,
