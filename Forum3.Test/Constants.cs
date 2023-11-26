@@ -2,7 +2,7 @@ using Forum3.Models;
 
 namespace Forum3.Test;
 
-public class Constants
+public static class Constants
 {
     public static readonly List<ApplicationUser> Users = new()
     {
@@ -17,41 +17,13 @@ public class Constants
 
     public static readonly List<ForumThread> ForumThreads = new()
     {
-        new()
-        {
-            Id = 1, Title = "Thread 1", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId1"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 2", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId2"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 3", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId3"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 4", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId4"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 5", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId5"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 6", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId6"
-        },
-        new()
-        {
-            Id = 1, Title = "Thread 7", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" },
-            CreatorId = "userId7"
-        },
+        new() { Id = 1, Title = "Thread 1", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId1" },
+        new() { Id = 1, Title = "Thread 2", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId2" },
+        new() { Id = 1, Title = "Thread 3", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId3" },
+        new() { Id = 1, Title = "Thread 4", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId4" },
+        new() { Id = 1, Title = "Thread 5", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId5" },
+        new() { Id = 1, Title = "Thread 6", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId6" },
+        new() { Id = 1, Title = "Thread 7", CreatedAt = DateTime.Now, Category = new ForumCategory() { Name = "Category" }, CreatorId = "userId7" },
     };
 
     public static readonly List<ForumPost> ForumPosts = new()
