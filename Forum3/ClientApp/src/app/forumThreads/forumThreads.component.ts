@@ -9,6 +9,7 @@ import {inject} from "@angular/core/testing";
 import {ForumThread} from "../models/forumThread/forumThread.model";
 import {ForumPost} from "../models/forumPost.model";
 import {ForumPostsService} from "../services/forumPosts.service";
+import {ForumCategoryDetailsModel} from "../models/forumCategoryDetails.model";
 
 @Component({
   selector: 'app-forumThreads-component',
@@ -18,28 +19,46 @@ import {ForumPostsService} from "../services/forumPosts.service";
 
 export class ForumThreadsComponent implements OnInit{
   threadsInCategory: ForumThread[] = [];
-  currentCategory: ForumCategory;
+  pinnedThreadsInCategory: ForumThread[] = [];
+  unpinnedThreadsInCategory: ForumThread[] = [];
+  categoryDetails: ForumCategoryDetailsModel;
   categoryId:number = 0;
-  pinnedThreads: ForumThread[];
-  currentPage: number;
-  totalPages: number;
-  constructor(private forumThreadsServices: ForumThreadsService, private activatedRoute:ActivatedRoute) { }
+  constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute) { }
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.categoryId = +params['id']);
+    this.route.params.subscribe(params => this.categoryId = +params['id']);
 
-    this.forumThreadsServices.getData(this.categoryId).subscribe({
-      next:(data) => {
-        this.currentCategory = data.forumCategory;
-        this.pinnedThreads = data.pinnedThreads;
-        this.threadsInCategory = data.forumThreads;
-        this.currentPage = data.currentPage;
-        this.totalPages = data.totalPages;
-
-        console.log(data);
+    this.forumThreadsServices.ForumThreadsOfCategory(this.categoryId).subscribe({
+      next:(threads) => {
+        let pinnedThreads: ForumThread[] = [];
+        let unpinnedThreads: ForumThread[] = [];
+        threads.forEach(function(thread){
+          console.log("Testing thread...")
+          console.log(thread)
+          if(thread.isPinned){
+            pinnedThreads.push(thread);
+          }else{
+            unpinnedThreads.push(thread);
+          }
+        });
+        this.pinnedThreadsInCategory = pinnedThreads;
+        this.unpinnedThreadsInCategory = unpinnedThreads;
+        console.log("All threads")
+        console.log(threads);
+        console.log("Pinned threads")
+        console.log(pinnedThreads);
+        console.log("Unpinned threads")
+        console.log(unpinnedThreads);
       },
       error:(response) =>{
         console.log(response);
       }
     });
+
+    this.forumThreadsServices.GetCategoryDetails(this.categoryId).subscribe({
+      next:(category) =>{
+        console.log(category);
+        this.categoryDetails = category;
+      }
+    })
   }
 }

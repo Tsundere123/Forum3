@@ -1,11 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ForumCategoriesService} from "../services/forumCategories.service";
 import {ForumCategory} from "../models/forumCategory.model";
-import {ForumThread} from "../models/forumThread/forumThread.model";
-import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forumCategories-component',
@@ -15,8 +10,7 @@ import { switchMap } from 'rxjs/operators';
 
 export class ForumCategoriesComponent implements OnInit{
   categories: ForumCategory[] = [];
-  // nonSoftDeletedThreadsCount: CategoryThreadCount[] = [];
-  constructor(private categoriesServices: ForumCategoriesService, private route: ActivatedRoute) { }
+  constructor(private categoriesServices: ForumCategoriesService) { }
 
   ngOnInit(): void {
     this.categoriesServices.getAllCategories().subscribe({
@@ -28,15 +22,5 @@ export class ForumCategoriesComponent implements OnInit{
         console.log(response);
       }
     });
-
-    // this.categoriesServices.getNumberOfThreadsByCategoryId.subscribe({
-    //   next:(nonSoftDeletedThreadsCount) => {
-    //     console.log(nonSoftDeletedThreadsCount);
-    //     this.categories = nonSoftDeletedThreadsCount;
-    //   },
-    //   error:(response) =>{
-    //     console.log(response);
-    //   }
-    // });
   }
 }

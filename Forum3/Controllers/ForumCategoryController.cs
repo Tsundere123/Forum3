@@ -1,5 +1,6 @@
 ﻿using Forum3.DAL;
 using Forum3.Data;
+using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,27 +26,46 @@ public class ForumCategoryController : Controller
         _forumPostRepository = forumPostRepository;
     }
     
+    // [HttpGet]
+    // public async Task<IActionResult> GetAllCategories()
+    // {
+    //     var categories = await _forumCategoryRepository.GetAll();
+    //     
+    //     return Ok(categories);
+    // }
+    
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
     {
         var categories = await _forumCategoryRepository.GetAll();
+        var categoriesList = categories.ToList();
+        var categoriesResult = categoriesList.Select(c => new CategoryDto()
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Description = c.Description,
+            LatestThread = new LookupThreadDto()
+            {
+                Id = c.Threads.LastOrDefault()?.Id,
+                Title = c.Threads.LastOrDefault()?.Title,
+                CreatedAt = c.Threads.LastOrDefault()?.CreatedAt,
+                Category = c.Threads.LastOrDefault()?.Category.Name,
+                Creator = new LookupUserDto()
+                {
+                    // UserName = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.UserName,
+                    // Avatar = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.Avatar,
+                    // CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.CreatedAt
+                    
+                    UserName = "test",
+                    Avatar = "default.png",
+                    CreatedAt = DateTime.Now
+                }
+            },
+            ThreadCount = c.Threads.Count,
+            PostCount = c.Threads.Sum(t => t.Posts.Count)
+        }).ToList();
      
-        return Ok(categories);
+        return Ok(categoriesResult);
     }
-
-    // [HttpGet]
-    // public async Task<IActionResult> CountNonSoftDeletedThreadsOfCategory(int categoryId)
-    // {
-    //     var threads = await _forumThreadRepository.GetForumThreadsByCategoryId(categoryId);
-    //     var count = 0;
-    //     foreach (var thread in threads)
-    //     {
-    //         if (!thread.IsSoftDeleted)
-    //         {
-    //             count++;
-    //         }
-    //     }
-    //     return Ok(count);
-    // }
 
 }

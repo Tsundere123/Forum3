@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ApplicationConfig, NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -25,7 +25,21 @@ import { SearchMembersComponent } from "./search/search-members/searchMembers.co
 import { SearchComponent } from "./search/search.component";
 import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
 import {MemberListComponent} from "./memberList/memberList.component";
+import {
+    ForumCategoryListItemComponent
+} from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
+import {
+  ForumThreadListNewestSoftDeletedComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-newest-soft-deleted/forum-thread-list-newest-soft-deleted.component";
+import {
+  ForumThreadListNormalIconsComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-normal-icons/forum-thread-list-normal-icons.component";
+import {
+  ForumThreadListNoPostsComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-no-posts/forum-thread-list-no-posts.component";
 
+import { provideMarkdown } from 'ngx-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +66,7 @@ import {MemberListComponent} from "./memberList/memberList.component";
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    MarkdownModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'categories', component: ForumCategoriesComponent},
@@ -66,7 +81,11 @@ import {MemberListComponent} from "./memberList/memberList.component";
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
     ]),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ForumCategoryListItemComponent,
+    ForumThreadListNewestSoftDeletedComponent,
+    ForumThreadListNormalIconsComponent,
+    ForumThreadListNoPostsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

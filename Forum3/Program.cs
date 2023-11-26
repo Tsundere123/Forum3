@@ -1,11 +1,12 @@
 using Forum3.DAL;
-using Forum3.DAL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Forum3.Data;
 using Forum3.Models;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 

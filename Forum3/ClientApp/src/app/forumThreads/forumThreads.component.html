@@ -1,16 +1,17 @@
 <h1 class="h2 fw-normal">
-  {{currentCategory.name}}</h1>
-<p>{{currentCategory.description}}</p>
+  {{categoryDetails.name}}</h1>
+<p>{{categoryDetails.description}}</p>
 
 <!--Pinned threads-->
-<div *ngIf="pinnedThreads.length > 0">
-  <ul class="list-group list-group-flush" *ngFor="let pinnedThread of pinnedThreads">
+<div *ngIf="pinnedThreadsInCategory.length > 0">
+<!--  fix pinned-->
+  <ul class="list-group list-group-flush" *ngFor="let pinnedThread of pinnedThreadsInCategory">
     <app-forum-thread-list-item [currentThread]="pinnedThread"></app-forum-thread-list-item>
   </ul>
   <hr style="height: 2px;" />
 </div>
 
-<ul class="list-group list-group-flush" *ngFor="let forumThread of threadsInCategory">
+<ul class="list-group list-group-flush" *ngFor="let forumThread of unpinnedThreadsInCategory">
   <app-forum-thread-list-item [currentThread]="forumThread"></app-forum-thread-list-item>
 </ul>
 

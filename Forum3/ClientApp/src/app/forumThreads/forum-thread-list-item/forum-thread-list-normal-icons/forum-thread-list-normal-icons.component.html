@@ -1,0 +1,17 @@
+<!--      Normal-->
+<div class="d-flex align-items-center gap-2" style="font-size: 12px;">
+  <a asp-controller="Profile" asp-action="Index" asp-route-displayName="@poster.DisplayName">
+    <img src="avatars/{{currentThread.creator.avatar}}" alt="{{currentThread.creator.userName}}" width="32">
+  </a>
+  <div>
+    <div>
+      <a asp-controller="Profile" asp-action="Index" asp-route-displayName="@poster.DisplayName" class="link-dark text-decoration-none">
+        {{currentThread.creator.userName}}
+      </a>
+    </div>
+    <div>
+      <!--          Latest post date-->
+      {{currentThread.latestPost.createdAt}}
+    </div>
+  </div>
+</div>
