@@ -1,5 +1,6 @@
 using Forum3.Controllers;
 using Forum3.DAL;
+using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -63,7 +64,11 @@ public class HomeControllerTests
         var result = await controller.Index();
 
         // Assert
-        Assert.NotNull(result);
-        Assert.IsType<JsonResult>(result);
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var model = Assert.IsAssignableFrom<HomeDto>(okResult.Value);
+        
+        Assert.Equal(6, model.threads.Count);
+        Assert.Equal(6, model.posts.Count);
+        Assert.Equal(6, model.members.Count);
     }
 }

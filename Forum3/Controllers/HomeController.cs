@@ -1,4 +1,5 @@
 using Forum3.DAL;
+using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,14 +31,18 @@ public class HomeController : Controller
             .Where(t => t.IsSoftDeleted == false)
             .OrderByDescending(t => t.CreatedAt)
             .Take(6)
-            .Select(t => new
+            .Select(t => new LookupThreadDto()
             {
-                t.Id,
-                t.Title,
-                t.CreatedAt,
+                Id = t.Id,
+                Title = t.Title,
+                CreatedAt = t.CreatedAt,
                 Category = t.Category.Name,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
         
@@ -47,15 +52,19 @@ public class HomeController : Controller
             .Where(p => p.IsSoftDeleted == false)
             .OrderByDescending(p => p.CreatedAt)
             .Take(6)
-            .Select(p => new
+            .Select(p => new LookupPostDto()
             {
-                p.Id,
-                p.Content,
-                p.CreatedAt,
+                Id = p.Id,
+                Content = p.Content,
+                CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                CreatorName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                CreatorAvatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar
+                Creator = new LookupUserDto()
+                {
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
+                }
             })
             .ToList();
         
@@ -63,16 +72,21 @@ public class HomeController : Controller
         var members = _userManager.Users
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)
-            .Select(u => new
+            .Select(u => new LookupUserDto()
             {
-                u.UserName,
-                u.Avatar,
-                u.CreatedAt
+                UserName = u.UserName,
+                Avatar = u.Avatar,
+                CreatedAt = u.CreatedAt
             })
             .ToList();
-        //return Ok(new { threads = latestThreads, posts = latestPosts, members });
-        
-        //return json
-        return Json(new { threads = latestThreads, posts = latestPosts, members });
+
+        var dto = new HomeDto
+        {
+            threads = latestThreads,
+            posts = latestPosts,
+            members = members
+        };
+
+        return Ok(dto);
     }
 }
