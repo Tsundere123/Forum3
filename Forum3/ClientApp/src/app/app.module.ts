@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -12,17 +12,18 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { ForumCategoriesComponent } from "./forumCategories/forumCategories.component";
 import { ForumThreadsComponent } from "./forumThreads/forumThreads.component";
-import {ForumPostsComponent} from "./forumPosts/forumPosts.component";
-import {ConvertToReadableDate} from "./shared/convertToReadableDate";
-import {LimitStringLength} from "./shared/limitStringLength";
-import {ForumPostCardComponent} from "./forumPosts/forum-post-card/forum-post-card.component";
-import {LookupMemberComponent} from "./shared/lookup/lookup-member/lookupMember.component";
-import {LookupThreadComponent} from "./shared/lookup/lookup-threads/lookupThread.component";
-import {LookupPostComponent} from "./shared/lookup/lookup-post/lookupPost.component";
-import {SearchThreadsComponent} from "./search/search-threads/searchThreads.component";
-import {SearchPostsComponent} from "./search/search-posts/searchPosts.component";
-import {SearchMembersComponent} from "./search/search-members/searchMembers.component";
-import {SearchComponent} from "./search/search.component";
+import { ForumPostsComponent } from "./forumPosts/forumPosts.component";
+import { ConvertToReadableDate } from "./shared/convertToReadableDate";
+import { LimitStringLength } from "./shared/limitStringLength";
+import { ForumPostCardComponent } from "./forumPosts/forum-post-card/forum-post-card.component";
+import { LookupMemberComponent } from "./shared/lookup/lookup-member/lookupMember.component";
+import { LookupThreadComponent } from "./shared/lookup/lookup-threads/lookupThread.component";
+import { LookupPostComponent } from "./shared/lookup/lookup-post/lookupPost.component";
+import { SearchThreadsComponent } from "./search/search-threads/searchThreads.component";
+import { SearchPostsComponent } from "./search/search-posts/searchPosts.component";
+import { SearchMembersComponent } from "./search/search-members/searchMembers.component";
+import { SearchComponent } from "./search/search.component";
+import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
 
 @NgModule({
   declarations: [
@@ -41,10 +42,11 @@ import {SearchComponent} from "./search/search.component";
     SearchComponent,
     SearchThreadsComponent,
     SearchPostsComponent,
-    SearchMembersComponent
+    SearchMembersComponent,
+    ForumThreadListItemComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,

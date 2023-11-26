@@ -2,10 +2,13 @@ import {Component, OnInit} from "@angular/core";
 import {ForumCategoriesService} from "../services/forumCategories.service";
 import {ForumCategory} from "../models/forumCategory.model";
 import {ForumThreadsService} from "../services/forumThreads.service";
-import {ForumThread} from "../models/forumThread.model";
+import {ForumThreadViewModel} from "../models/forumThreadView.model";
 import {ActivatedRoute} from "@angular/router";
 import {ForumCategoriesComponent} from "../forumCategories/forumCategories.component";
 import {inject} from "@angular/core/testing";
+import {ForumThread} from "../models/forumThread/forumThread.model";
+import {ForumPost} from "../models/forumPost.model";
+import {ForumPostsService} from "../services/forumPosts.service";
 
 @Component({
   selector: 'app-forumThreads-component',
@@ -15,38 +18,28 @@ import {inject} from "@angular/core/testing";
 
 export class ForumThreadsComponent implements OnInit{
   threadsInCategory: ForumThread[] = [];
-  currentCategoryName: string = "";
+  currentCategory: ForumCategory;
   categoryId:number = 0;
+  pinnedThreads: ForumThread[];
+  currentPage: number;
+  totalPages: number;
   constructor(private forumThreadsServices: ForumThreadsService, private activatedRoute:ActivatedRoute) { }
   ngOnInit(): void {
-
-    // this.categoryId = this.activatedRoute.snapshot.paramMap.get('id');
-    // this.service.threads.find()
-
-    // this.forumThreadsServices.getCategoryName().subscribe({
-    //   next:(categories) =>{
-    //     categories.forEach(function(name){
-    //       console.log(name);
-    //     });
-    //     console.log (categories);
-    //     // this.currentCategoryName = categories;
-    //   }
-    // })
-
     this.activatedRoute.params.subscribe(params => this.categoryId = +params['id']);
 
-    this.forumThreadsServices.getAllThreadsOfCategory(this.categoryId).subscribe({
-      next:(threads) => {
-        console.log(threads);
-        this.threadsInCategory = threads;
+    this.forumThreadsServices.getData(this.categoryId).subscribe({
+      next:(data) => {
+        this.currentCategory = data.forumCategory;
+        this.pinnedThreads = data.pinnedThreads;
+        this.threadsInCategory = data.forumThreads;
+        this.currentPage = data.currentPage;
+        this.totalPages = data.totalPages;
+
+        console.log(data);
       },
       error:(response) =>{
         console.log(response);
       }
     });
   }
-
-  protected readonly ForumCategoriesComponent = ForumCategoriesComponent;
-  protected readonly ForumCategoriesService = ForumCategoriesService;
-  protected readonly ForumThreadsService = ForumThreadsService;
 }
