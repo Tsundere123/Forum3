@@ -1,0 +1,23 @@
+<!--  var poster = UserManager.FindByIdAsync(lastPost.CreatorId).Result;-->
+<div style="font-size: 14px;">
+  <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
+     class="link-dark text-decoration-none">
+    <!--            @lastThread.Title-->
+  </a>
+</div>
+<div class="d-flex align-items-center gap-2" style="font-size: 12px;">
+  <a asp-action="Index" asp-controller="Profile" asp-route-displayName="@poster.DisplayName">
+    <img alt="@poster.DisplayName" class="rounded" height="32" src="~/avatars/@poster.Avatar" width="32"/>
+  </a>
+  <div style="font-size:12px;">
+    <div>
+      <a asp-action="Index" asp-controller="Profile" asp-route-displayName="@poster.DisplayName"
+         class="link-dark text-decoration-none">
+        <!--                @poster.DisplayName-->
+      </a>
+    </div>
+    <div>
+      <!--              @lastPost.CreatedAt.ToString("g")-->
+    </div>
+  </div>
+</div>
