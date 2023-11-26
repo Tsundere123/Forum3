@@ -57,15 +57,9 @@ public class ForumThreadController : Controller
             })
             .OrderByDescending(t => t.LastPost)
             .Select(t => t.ForumThread);
-
-
-        var lastPost = threadList
-            .Where(t => t.IsPinned == false)
-            .Select(t => new
-            {
-                ForumThread = t,
-                LastPost = t.Posts!.Any() ? t.Posts!.Max(p => p.CreatedAt) : t.CreatedAt
-            });
+        
+        //Newest thread
+        var latestThread = sortedThreads.LastOrDefault();
 
         // Prepare pagination
         const int perPage = 10;
@@ -78,6 +72,6 @@ public class ForumThreadController : Controller
         // Post counter
         
 
-        return Json(new{forumCategory = forumCategory, pinnedThreads = pinnedThreads, forumThreads = forumThreadsOfCategory, currentPage = currentPage, totalPages = totalPages, });
+        return Json(new{forumCategory = forumCategory, pinnedThreads = pinnedThreads, forumThreads = forumThreadsOfCategory, currentPage = currentPage, totalPages = totalPages, latestThread = latestThread});
     }
 }

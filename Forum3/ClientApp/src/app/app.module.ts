@@ -24,6 +24,9 @@ import { SearchPostsComponent } from "./search/search-posts/searchPosts.componen
 import { SearchMembersComponent } from "./search/search-members/searchMembers.component";
 import { SearchComponent } from "./search/search.component";
 import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
+import {
+    ForumCategoryListItemComponent
+} from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
 
 @NgModule({
   declarations: [
@@ -45,26 +48,27 @@ import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-ite
     SearchMembersComponent,
     ForumThreadListItemComponent,
   ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'categories', component: ForumCategoriesComponent},
-      {path: 'categories/:id', component: ForumThreadsComponent},
-      {path: 'threads/:id', component: ForumPostsComponent},
-      {path: 'search/:query', component: SearchComponent},
-      {path: 'search/threads/:query', component: SearchThreadsComponent},
-      {path: 'search/posts/:query', component: SearchPostsComponent},
-      {path: 'search/members/:query', component: SearchMembersComponent}
-      // {path: ''}
-      // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        ApiAuthorizationModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'categories', component: ForumCategoriesComponent},
+            {path: 'categories/:id', component: ForumThreadsComponent},
+            {path: 'threads/:id', component: ForumPostsComponent},
+            {path: 'search/:query', component: SearchComponent},
+            {path: 'search/threads/:query', component: SearchThreadsComponent},
+            {path: 'search/posts/:query', component: SearchPostsComponent},
+            {path: 'search/members/:query', component: SearchMembersComponent}
+            // {path: ''}
+            // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
-    ]),
-    ReactiveFormsModule
-  ],
+        ]),
+        ReactiveFormsModule,
+        ForumCategoryListItemComponent
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],

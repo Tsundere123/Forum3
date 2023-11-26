@@ -10,13 +10,8 @@ import {CategoryThreadCount} from "../models/forumCategoryThreadCount.model";
   providedIn: 'root'
 })
 export class ForumCategoriesService {
-
-  // baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
   getAllCategories():Observable<ForumCategory[]>{
     return this.http.get<ForumCategory[]>( "api/ForumCategory")
   }
-  // getNumberOfThreadsByCategoryId():Observable<CategoryThreadCount[]>{
-  //   return this.http.get<Category[]>("api/Category{id}")
-  // }
 }

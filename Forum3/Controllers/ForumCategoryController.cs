@@ -29,7 +29,7 @@ public class ForumCategoryController : Controller
     public async Task<IActionResult> GetAllCategories()
     {
         var categories = await _forumCategoryRepository.GetAll();
-     
+        
         return Ok(categories);
     }
 

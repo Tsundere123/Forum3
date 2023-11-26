@@ -36,6 +36,6 @@ export class ForumThreadListItemComponent {
       error:(response) =>{
         console.log(response);
       }
-    })
+    });
   }
 }

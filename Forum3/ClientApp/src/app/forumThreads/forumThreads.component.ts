@@ -23,9 +23,9 @@ export class ForumThreadsComponent implements OnInit{
   pinnedThreads: ForumThread[];
   currentPage: number;
   totalPages: number;
-  constructor(private forumThreadsServices: ForumThreadsService, private activatedRoute:ActivatedRoute) { }
+  constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute) { }
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.categoryId = +params['id']);
+    this.route.params.subscribe(params => this.categoryId = +params['id']);
 
     this.forumThreadsServices.getData(this.categoryId).subscribe({
       next:(data) => {
