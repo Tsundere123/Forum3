@@ -27,55 +27,6 @@ public class ForumThreadController : Controller
         _userManager = userManager;
         _forumPostRepository = forumPostRepository;
     }
-    
-
-    // [HttpGet("{forumCategoryId}/{page?}")]
-    // public async Task<IActionResult> ForumThreadsOfCategory1(int forumCategoryId, int? page)
-    // {
-    //     //The category of choice
-    //     var forumCategory = await _forumCategoryRepository.GetForumCategoryById(forumCategoryId);
-    //     if (forumCategory == null) return NotFound();
-    //     
-    //     //List of all threads in the category of choice
-    //     var forumThreads = await _forumThreadRepository.GetForumThreadsByCategoryId(forumCategoryId);
-    //     if (forumThreads == null) return NotFound();
-    //     
-    //     if (!User.IsInRole("Administrator"))
-    //     {
-    //         // Remove soft deleted threads
-    //         forumThreads = forumThreads.Where(x => x.IsSoftDeleted == false);
-    //     }
-    //     
-    //     // Pinned threads
-    //     var threadList = forumThreads.ToList();
-    //     var pinnedThreads = threadList.Where(t => t.IsPinned).ToList();
-    //     
-    //     // Sort threads by last post
-    //     var sortedThreads = threadList
-    //         .Where(t => t.IsPinned == false)
-    //         .Select(t => new
-    //         {
-    //             ForumThread = t,
-    //             LastPost = t.Posts!.Any() ? t.Posts!.Max(p => p.CreatedAt) : t.CreatedAt
-    //         })
-    //         .OrderByDescending(t => t.LastPost)
-    //         .Select(t => t.ForumThread);
-    //     
-    //     //Newest thread
-    //     var latestThread = sortedThreads.LastOrDefault();
-    //
-    //     // Prepare pagination
-    //     const int perPage = 10;
-    //     var pageList = sortedThreads.ToList();
-    //     var totalPages = (int)Math.Ceiling((double)pageList.Count / perPage);
-    //     var currentPage = page ?? 1;
-    //     
-    //     var forumThreadsOfCategory = pageList.Skip((currentPage - 1) * perPage).Take(perPage).ToList();
-    //     
-    //     // Post counter
-    //     
-    //     return Json(new{forumCategory = forumCategory, pinnedThreads = pinnedThreads, forumThreads = forumThreadsOfCategory, currentPage = currentPage, totalPages = totalPages, latestThread = latestThread});
-    // }
 
     [HttpGet("{forumCategoryId}/{page?}")]
     public async Task<IActionResult> ForumThreadsOfCategory(int forumCategoryId, int? page)
@@ -90,6 +41,7 @@ public class ForumThreadController : Controller
             Id = t.Id,
             Title = t.Title,
             PostCount = t.Posts.Count,
+            IsPinned = t.IsPinned,
             LatestPost = t.Posts.Any() ? new LookupPostDto()
             {
                 Id = t.Posts.LastOrDefault().Id,

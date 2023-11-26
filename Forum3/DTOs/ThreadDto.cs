@@ -14,5 +14,7 @@ public class ThreadDto
     
     public int? PostCount { get; set; }
     
+    public bool IsPinned { get; set; }
+    
 
 }

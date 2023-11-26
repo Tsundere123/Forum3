@@ -3,15 +3,15 @@
 <p>{{categoryDetails.description}}</p>
 
 <!--Pinned threads-->
-<div *ngIf="threadsInCategory.length > 0">
+<div *ngIf="pinnedThreadsInCategory.length > 0">
 <!--  fix pinned-->
-  <ul class="list-group list-group-flush" *ngFor="let pinnedThread of threadsInCategory">
+  <ul class="list-group list-group-flush" *ngFor="let pinnedThread of pinnedThreadsInCategory">
     <app-forum-thread-list-item [currentThread]="pinnedThread"></app-forum-thread-list-item>
   </ul>
   <hr style="height: 2px;" />
 </div>
 
-<ul class="list-group list-group-flush" *ngFor="let forumThread of threadsInCategory">
+<ul class="list-group list-group-flush" *ngFor="let forumThread of unpinnedThreadsInCategory">
   <app-forum-thread-list-item [currentThread]="forumThread"></app-forum-thread-list-item>
 </ul>
 

@@ -27,6 +27,15 @@ import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-ite
 import {
     ForumCategoryListItemComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
+import {
+  ForumThreadListNewestSoftDeletedComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-newest-soft-deleted/forum-thread-list-newest-soft-deleted.component";
+import {
+  ForumThreadListNormalIconsComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-normal-icons/forum-thread-list-normal-icons.component";
+import {
+  ForumThreadListNoPostsComponent
+} from "./forumThreads/forum-thread-list-item/forum-thread-list-no-posts/forum-thread-list-no-posts.component";
 
 @NgModule({
   declarations: [
@@ -48,27 +57,30 @@ import {
     SearchMembersComponent,
     ForumThreadListItemComponent,
   ],
-    imports: [
-        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-        HttpClientModule,
-        FormsModule,
-        ApiAuthorizationModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
-            {path: 'categories', component: ForumCategoriesComponent},
-            {path: 'categories/:id', component: ForumThreadsComponent},
-            {path: 'threads/:id', component: ForumPostsComponent},
-            {path: 'search/:query', component: SearchComponent},
-            {path: 'search/threads/:query', component: SearchThreadsComponent},
-            {path: 'search/posts/:query', component: SearchPostsComponent},
-            {path: 'search/members/:query', component: SearchMembersComponent}
-            // {path: ''}
-            // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+  imports: [
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    HttpClientModule,
+    FormsModule,
+    ApiAuthorizationModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'categories', component: ForumCategoriesComponent},
+      {path: 'categories/:id', component: ForumThreadsComponent},
+      {path: 'threads/:id', component: ForumPostsComponent},
+      {path: 'search/:query', component: SearchComponent},
+      {path: 'search/threads/:query', component: SearchThreadsComponent},
+      {path: 'search/posts/:query', component: SearchPostsComponent},
+      {path: 'search/members/:query', component: SearchMembersComponent}
+      // {path: ''}
+      // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
-        ]),
-        ReactiveFormsModule,
-        ForumCategoryListItemComponent
-    ],
+    ]),
+    ReactiveFormsModule,
+    ForumCategoryListItemComponent,
+    ForumThreadListNewestSoftDeletedComponent,
+    ForumThreadListNormalIconsComponent,
+    ForumThreadListNoPostsComponent
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],

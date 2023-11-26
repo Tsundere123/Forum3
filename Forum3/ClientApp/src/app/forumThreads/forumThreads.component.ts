@@ -19,6 +19,8 @@ import {ForumCategoryDetailsModel} from "../models/forumCategoryDetails.model";
 
 export class ForumThreadsComponent implements OnInit{
   threadsInCategory: ForumThread[] = [];
+  pinnedThreadsInCategory: ForumThread[] = [];
+  unpinnedThreadsInCategory: ForumThread[] = [];
   categoryDetails: ForumCategoryDetailsModel;
   categoryId:number = 0;
   constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute) { }
@@ -27,8 +29,25 @@ export class ForumThreadsComponent implements OnInit{
 
     this.forumThreadsServices.ForumThreadsOfCategory(this.categoryId).subscribe({
       next:(threads) => {
+        let pinnedThreads: ForumThread[] = [];
+        let unpinnedThreads: ForumThread[] = [];
+        threads.forEach(function(thread){
+          console.log("Testing thread...")
+          console.log(thread)
+          if(thread.isPinned){
+            pinnedThreads.push(thread);
+          }else{
+            unpinnedThreads.push(thread);
+          }
+        });
+        this.pinnedThreadsInCategory = pinnedThreads;
+        this.unpinnedThreadsInCategory = unpinnedThreads;
+        console.log("All threads")
         console.log(threads);
-        this.threadsInCategory = threads;
+        console.log("Pinned threads")
+        console.log(pinnedThreads);
+        console.log("Unpinned threads")
+        console.log(unpinnedThreads);
       },
       error:(response) =>{
         console.log(response);
