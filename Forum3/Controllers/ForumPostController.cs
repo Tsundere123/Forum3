@@ -1,4 +1,5 @@
 ﻿using Forum3.DAL;
+using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,5 +29,29 @@ public class ForumPostController : Controller
     {
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
         return Ok(forumPosts);
+    }
+    
+    [HttpPost("Create/{threadId}")]
+    public async Task<IActionResult> CreatePost(int threadId, [FromBody] CreateForumPostDto createForumForumThreadDto)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(createForumForumThreadDto.UserName);
+        if (user == null) return NotFound();
+        
+        var forumPost = new ForumPost
+        {
+            Content = createForumForumThreadDto.Content,
+            CreatorId = user.Id,
+            ThreadId = forumThread.Id,
+            IsSoftDeleted = false,
+            CreatedAt = DateTime.Now
+        };
+        var resultPost = await _forumPostRepository.CreateNewForumPost(forumPost);
+        
+        if (!resultPost) return BadRequest();
+        
+        return Ok();
     }
 }
