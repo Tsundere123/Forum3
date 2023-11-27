@@ -1,6 +1,6 @@
 <div class="d-md-flex justify-content-md-between align-items-md-center">
   <h1 class="h2 fw-normal">{{categoryDetails.name}}</h1>
-  <a class="btn btn-sm btn-dark" [routerLink]="['/threads', 'create', categoryDetails.id]">New Thread</a>
+  <a class="btn btn-sm btn-dark" [routerLink]="['/threads', 'create', categoryDetails.id]" *ngIf="isAuthenticated | async">New Thread</a>
 </div>
 <p class="lead">{{categoryDetails.description}}</p>
 

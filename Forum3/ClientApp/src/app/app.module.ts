@@ -65,7 +65,12 @@ import {NewForumPostComponent} from "./forumPosts/new-forum-post/new-forum-post.
     ForumThreadListItemComponent,
     MemberListComponent,
     NewForumThreadComponent,
-    NewForumPostComponent
+    NewForumPostComponent,
+    NewForumThreadComponent,
+    ForumThreadListNormalIconsComponent,
+    ForumThreadListNewestSoftDeletedComponent,
+    ForumCategoryListItemComponent,
+    ForumThreadListNoPostsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -89,13 +94,12 @@ import {NewForumPostComponent} from "./forumPosts/new-forum-post/new-forum-post.
 
     ]),
     ReactiveFormsModule,
-    ForumCategoryListItemComponent,
-    ForumThreadListNewestSoftDeletedComponent,
-    ForumThreadListNormalIconsComponent,
-    ForumThreadListNoPostsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+  ],
+  exports: [
+    ConvertToReadableDate
   ],
   bootstrap: [AppComponent]
 })

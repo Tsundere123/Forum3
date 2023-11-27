@@ -11,7 +11,7 @@
     </div>
     <div>
       <!--          Latest post date-->
-      {{currentThread.latestPost.createdAt}}
+      {{currentThread.latestPost.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}
     </div>
   </div>
 </div>

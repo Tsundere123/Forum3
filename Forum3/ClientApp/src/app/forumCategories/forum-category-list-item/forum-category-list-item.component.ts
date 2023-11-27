@@ -15,8 +15,6 @@ import {
 
 @Component({
   selector: 'app-forum-category-list-item',
-  standalone: true,
-  imports: [CommonModule, RouterLink, ForumCategoryListItemNoThreadsInCategoryComponent, ForumCategoryListItemNewestThreadComponent],
   templateUrl: './forum-category-list-item.component.html',
   styleUrl: './forum-category-list-item.component.css'
 })
