@@ -10,7 +10,7 @@
       Post deleted
     </div>
     <div>
-      {{currentThread.latestPost.createdAt}}
+      {{currentThread.latestPost.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}
     </div>
   </div>
 </div>

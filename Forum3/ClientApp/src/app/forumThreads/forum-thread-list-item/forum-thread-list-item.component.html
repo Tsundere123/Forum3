@@ -46,7 +46,7 @@
               {{currentThread.creator.userName}}
             </a>
 <!--            Date-->
-            on {{currentThread.createdAt}}
+            on {{currentThread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}
           </div>
         </div>
       </div>
