@@ -19,7 +19,7 @@ export class ForumThreadListItemComponent {
   constructor(private forumPostsServices: ForumPostsService) {  }
 
   ngOnInit(): void {
-    this.forumPostsServices.getAllPostsOfThread(this.currentThread.id).subscribe({
+    this.forumPostsServices.GetAllPostsOfThread(this.currentThread.id).subscribe({
       next:(posts) => {
         console.log(posts);
         let latestPost = null;
