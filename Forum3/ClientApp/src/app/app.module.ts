@@ -41,6 +41,8 @@ import {
 import { provideMarkdown } from 'ngx-markdown';
 import { MarkdownModule } from 'ngx-markdown';
 import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
+import {NewForumPostComponent} from "./forumPosts/new-forum-post/new-forum-post.component";
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
     SearchMembersComponent,
     ForumThreadListItemComponent,
     MemberListComponent,
-    NewForumThreadComponent
+    NewForumThreadComponent,
+    NewForumPostComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
