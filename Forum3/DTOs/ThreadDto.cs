@@ -16,6 +16,10 @@ public class ThreadDto
     
     public bool IsPinned { get; set; }
     
+    public bool IsLocked { get; set; }
+    
+    public bool IsSoftDeleted { get; set; }
+    
     public DateTime CreatedAt { get; set; }
     
 

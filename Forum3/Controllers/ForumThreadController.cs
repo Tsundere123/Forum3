@@ -42,6 +42,8 @@ public class ForumThreadController : Controller
             Title = t.Title,
             PostCount = t.Posts.Count,
             IsPinned = t.IsPinned,
+            IsLocked = t.IsLocked,
+            IsSoftDeleted = t.IsSoftDeleted,
             CreatedAt = t.CreatedAt,
             LatestPost = t.Posts.Any() ? new LookupPostDto()
             {
