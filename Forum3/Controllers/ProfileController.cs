@@ -174,4 +174,93 @@ public class ProfileController : Controller
         
         return Ok();
     }
+    
+    // Threads
+    [HttpGet("{userName}/threads")]
+    public async Task<IActionResult> GetThreads(string userName)
+    {
+        if (string.IsNullOrEmpty(userName)) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(userName);
+        if (user == null) return NotFound();
+
+        var threads = await _forumThreadRepository.GetForumThreadsByAccountId(user.Id);
+        var threadDto = new List<LookupThreadDto>();
+        if (threads != null)
+        {
+            var threadsList = threads.ToList();
+            threadDto = threadsList.Where(t => t.IsSoftDeleted == false)
+                .Select(t => new LookupThreadDto() 
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    CreatedAt = t.CreatedAt,
+                    Category = t.Category!.Name,
+                    Creator = new LookupUserDto()
+                    {
+                        UserName = _userManager.FindByIdAsync(t.CreatorId).Result.UserName,
+                        Avatar = _userManager.FindByIdAsync(t.CreatorId).Result.Avatar,
+                        CreatedAt = _userManager.FindByIdAsync(t.CreatorId).Result.CreatedAt
+                    }
+                }).ToList();
+        }
+
+        var profileThreadsDto = new ProfileThreadsDto()
+        {
+            User = new LookupUserDto()
+            {
+                UserName = user.UserName,
+                Avatar = user.Avatar,
+                CreatedAt = user.CreatedAt
+            },
+            Threads = threadDto
+        };
+
+        return Ok(profileThreadsDto);
+    }
+    
+    // Posts
+    [HttpGet("{userName}/posts")]
+    public async Task<IActionResult> GetPosts(string userName)
+    {
+        if (string.IsNullOrEmpty(userName)) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(userName);
+        if (user == null) return NotFound();
+
+        var posts = await _forumPostRepository.GetAllForumPostsByAccountId(user.Id);
+        var postDto = new List<LookupPostDto>();
+        if (posts != null)
+        {
+            var postsList = posts.ToList();
+            postDto = postsList.Where(p => p.IsSoftDeleted == false)
+                .Select(p => new LookupPostDto()
+                {
+                    Id = p.Id,
+                    Content = p.Content,
+                    CreatedAt = p.CreatedAt,
+                    ThreadTitle = p.Thread!.Title,
+                    ThreadId = p.ThreadId,
+                    Creator = new LookupUserDto()
+                    {
+                        UserName = _userManager.FindByIdAsync(p.CreatorId).Result.UserName,
+                        Avatar = _userManager.FindByIdAsync(p.CreatorId).Result.Avatar,
+                        CreatedAt = _userManager.FindByIdAsync(p.CreatorId).Result.CreatedAt
+                    }
+                }).ToList();
+        }
+
+        var profilePostsDto = new ProfilePostsDto()
+        {
+            User = new LookupUserDto()
+            {
+                UserName = user.UserName,
+                Avatar = user.Avatar,
+                CreatedAt = user.CreatedAt
+            },
+            Posts = postDto
+        };
+
+        return Ok(profilePostsDto);
+    }
 }
