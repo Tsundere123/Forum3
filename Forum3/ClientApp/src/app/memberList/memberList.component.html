@@ -1,0 +1,7 @@
+<h1 class="h2 fw-normal">Members</h1>
+
+<div class="row row-cols-2 row-cols-md-4">
+    <div class="p-2" *ngFor="let member of members">
+      <app-lookup-member [member]="member"></app-lookup-member>
+    </div>
+</div>

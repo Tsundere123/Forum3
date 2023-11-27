@@ -24,6 +24,7 @@ import { SearchPostsComponent } from "./search/search-posts/searchPosts.componen
 import { SearchMembersComponent } from "./search/search-members/searchMembers.component";
 import { SearchComponent } from "./search/search.component";
 import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
+import {MemberListComponent} from "./memberList/memberList.component";
 import {
     ForumCategoryListItemComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
@@ -58,9 +59,10 @@ import { MarkdownModule } from 'ngx-markdown';
     SearchPostsComponent,
     SearchMembersComponent,
     ForumThreadListItemComponent,
+    MemberListComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
@@ -73,7 +75,8 @@ import { MarkdownModule } from 'ngx-markdown';
       {path: 'search/:query', component: SearchComponent},
       {path: 'search/threads/:query', component: SearchThreadsComponent},
       {path: 'search/posts/:query', component: SearchPostsComponent},
-      {path: 'search/members/:query', component: SearchMembersComponent}
+      {path: 'search/members/:query', component: SearchMembersComponent},
+      {path: 'members', component: MemberListComponent},
       // {path: ''}
       // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 
@@ -90,4 +93,3 @@ import { MarkdownModule } from 'ngx-markdown';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
