@@ -53,7 +53,7 @@ public class ProfileControllerTests
         };
         wallPostRepositoryMock.Setup(m => m.GetAllByProfile(user.Id)).ReturnsAsync(wallPosts);
 
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, null);
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, null!);
 
         // Act
         var result = await controller.GetWallPosts(userName);
@@ -112,7 +112,7 @@ public class ProfileControllerTests
         userManagerMock.Setup(m => m.FindByIdAsync(user.Id)).ReturnsAsync(user);
         wallPostRepositoryMock.Setup(m => m.GetAllByProfile(user.Id)).ReturnsAsync((List<WallPost>?) null);
         
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, null);
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, null!);
         
         // Act
         var result = await controller.GetWallPosts(userName);
@@ -138,7 +138,7 @@ public class ProfileControllerTests
         var userName = "Alice";
         userManagerMock.Setup(m => m.FindByNameAsync(userName))!.ReturnsAsync((ApplicationUser?) null);
         
-        var controller = new ProfileController(userManagerMock.Object, null, null, null, null);
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, null!, null!);
         
         // Act
         var result = await controller.GetWallPosts(userName);
@@ -176,7 +176,7 @@ public class ProfileControllerTests
 
         wallPostRepositoryMock.Setup(m => m.Create(It.IsAny<WallPost>())).ReturnsAsync(true);
 
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, null)
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, null!)
         {
             ControllerContext = new ControllerContext
             {
@@ -221,7 +221,7 @@ public class ProfileControllerTests
 
         wallPostRepositoryMock.Setup(m => m.Delete(postId)).ReturnsAsync(true);
 
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, null);
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, null!);
 
         // Act
         var result = await controller.DeleteWallPost(userName, postId);
@@ -269,7 +269,7 @@ public class ProfileControllerTests
 
         wallPostReplyRepositoryMock.Setup(m => m.Create(It.IsAny<WallPostReply>())).ReturnsAsync(true);
 
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, wallPostReplyRepositoryMock.Object)
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, wallPostReplyRepositoryMock.Object)
         {
             ControllerContext = new ControllerContext
             {
@@ -324,7 +324,7 @@ public class ProfileControllerTests
 
         wallPostReplyRepositoryMock.Setup(m => m.Delete(replyId)).ReturnsAsync(true);
 
-        var controller = new ProfileController(userManagerMock.Object, null, null, wallPostRepositoryMock.Object, wallPostReplyRepositoryMock.Object);
+        var controller = new ProfileController(userManagerMock.Object, null!, null!, wallPostRepositoryMock.Object, wallPostReplyRepositoryMock.Object);
 
         // Act
         var result = await controller.DeleteWallPostReply(userName, postId, replyId);
