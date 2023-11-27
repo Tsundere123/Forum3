@@ -94,5 +94,39 @@ public class ForumThreadController : Controller
         return Ok(result);
     }
 
-    
+    [HttpPost("Create/{categoryId}")]
+    public async Task<IActionResult> CreateThread(int categoryId, [FromBody] CreateForumThreadDto createForumThreadDto)
+    {
+        var forumCategory = await _forumCategoryRepository.GetForumCategoryById(categoryId);
+        if (forumCategory == null) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(createForumThreadDto.UserName);
+        if (user == null) return NotFound();
+        
+        var forumThread = new ForumThread()
+        {
+            Title = createForumThreadDto.Title,
+            CreatorId = user.Id,
+            CategoryId = categoryId,
+            IsPinned = false,
+            IsLocked = false,
+            IsSoftDeleted = false,
+            CreatedAt = DateTime.Now
+        };
+        var resultThread = await _forumThreadRepository.CreateNewForumThread(forumThread);
+        
+        var forumPost = new ForumPost()
+        {
+            Content = createForumThreadDto.Content,
+            CreatorId = user.Id,
+            ThreadId = forumThread.Id,
+            IsSoftDeleted = false,
+            CreatedAt = DateTime.Now
+        };
+        var resultPost = await _forumPostRepository.CreateNewForumPost(forumPost);
+        
+        if (!resultThread || !resultPost) return BadRequest();
+        
+        return Ok();
+    }
 }
