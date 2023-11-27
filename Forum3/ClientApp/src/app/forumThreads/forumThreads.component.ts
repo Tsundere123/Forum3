@@ -10,6 +10,8 @@ import {ForumThread} from "../models/forumThread/forumThread.model";
 import {ForumPost} from "../models/forumPost.model";
 import {ForumPostsService} from "../services/forumPosts.service";
 import {ForumCategoryDetailsModel} from "../models/forumCategoryDetails.model";
+import {AuthorizeService} from "../../api-authorization/authorize.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-forumThreads-component',
@@ -18,13 +20,15 @@ import {ForumCategoryDetailsModel} from "../models/forumCategoryDetails.model";
 })
 
 export class ForumThreadsComponent implements OnInit{
+  public isAuthenticated?: Observable<boolean>;
   threadsInCategory: ForumThread[] = [];
   pinnedThreadsInCategory: ForumThread[] = [];
   unpinnedThreadsInCategory: ForumThread[] = [];
   categoryDetails: ForumCategoryDetailsModel;
   categoryId:number = 0;
-  constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute) { }
+  constructor(private forumThreadsServices: ForumThreadsService, private route:ActivatedRoute, private authorizeService: AuthorizeService) { }
   ngOnInit(): void {
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.route.params.subscribe(params => this.categoryId = +params['id']);
 
     this.forumThreadsServices.ForumThreadsOfCategory(this.categoryId).subscribe({
