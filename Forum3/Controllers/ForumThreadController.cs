@@ -47,31 +47,23 @@ public class ForumThreadController : Controller
             CreatedAt = t.CreatedAt,
             LatestPost = t.Posts.Any() ? new LookupPostDto()
             {
-                Id = t.Posts.LastOrDefault().Id,
-                Content = t.Posts.LastOrDefault().Content,
-                CreatedAt = t.Posts.LastOrDefault().CreatedAt,
+                Id = t.Posts.LastOrDefault()!.Id,
+                Content = t.Posts.LastOrDefault()!.Content,
+                CreatedAt = t.Posts.LastOrDefault()!.CreatedAt,
                 ThreadTitle = t.Title,
                 ThreadId = t.Id,
                 Creator = new LookupUserDto()
                 {
-                    // UserName = _userManager.Users.FirstOrDefault(u => u.Id == s.Posts.FirstOrDefault()!.CreatorId)?.UserName,
-                    // Avatar = _userManager.Users.FirstOrDefault(u => u.Id == s.Posts.FirstOrDefault()!.CreatorId)?.Avatar,
-                    // CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == s.Posts.FirstOrDefault()!.CreatorId)?.CreatedAt
-                    
-                    UserName = "test",
-                    Avatar = "default.png",
-                    CreatedAt = DateTime.Now
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.CreatedAt
                 }
             } : null,
             Creator = new LookupUserDto()
             {
-                // UserName = _userManager.Users.FirstOrDefault(u => u.Id == s.CreatorId)?.UserName,
-                // Avatar = _userManager.Users.FirstOrDefault(u => u.Id == s.CreatorId)?.Avatar,
-                // CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == s.CreatorId)?.CreatedAt
-                
-                UserName = "test",
-                Avatar = "default.png",
-                CreatedAt = DateTime.Now
+                UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
+                Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
+                CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
             }
             
         }).ToList();
