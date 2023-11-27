@@ -154,4 +154,24 @@ public class ProfileController : Controller
         
         return Ok();
     }
+    
+    [HttpDelete("{userName}/wall/{id}/{replyId}")]
+    public async Task<IActionResult> DeleteWallPostReply(string userName, int id, int replyId)
+    {
+        if (string.IsNullOrEmpty(userName)) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(userName);
+        if (user == null) return NotFound();
+
+        var wallPost = await _wallPostRepository.GetById(id);
+        if (wallPost == null) return NotFound();
+        
+        var wallPostReply = await _wallPostReplyRepository.GetById(replyId);
+        if (wallPostReply == null) return NotFound();
+        
+        var result = await _wallPostReplyRepository.Delete(replyId);
+        if (result == false) return BadRequest();
+        
+        return Ok();
+    }
 }
