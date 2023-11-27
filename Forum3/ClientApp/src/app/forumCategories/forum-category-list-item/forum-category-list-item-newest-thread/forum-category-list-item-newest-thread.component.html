@@ -1,7 +1,6 @@
 <!--  var poster = UserManager.FindByIdAsync(lastPost.CreatorId).Result;-->
 <div style="font-size: 14px;">
-  <a asp-action="ForumPostView" asp-controller="ForumPost" asp-route-forumThreadId="@lastThread.Id.ToString()"
-     class="link-dark text-decoration-none">
+  <a routerLink="/threads/{{latestThread.id}}" class="link-dark text-decoration-none">
       {{latestThread.title}}
   </a>
 </div>
@@ -11,13 +10,12 @@
   </a>
   <div style="font-size:12px;">
     <div>
-      <a asp-action="Index" asp-controller="Profile" asp-route-displayName="@poster.DisplayName"
-         class="link-dark text-decoration-none">
+      <a>
           {{latestThread.creator.userName}}
       </a>
     </div>
     <div>
-      {{latestThread.createdAt}}
+        {{latestThread.createdAt}}
     </div>
   </div>
 </div>
