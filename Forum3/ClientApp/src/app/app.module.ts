@@ -75,7 +75,7 @@ import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
       {path: 'categories', component: ForumCategoriesComponent},
       {path: 'categories/:id', component: ForumThreadsComponent},
       {path: 'threads/:id', component: ForumPostsComponent},
-      {path: 'threads/create/:id', component: NewForumThreadComponent},
+      {path: 'threads/create/:id', component: NewForumThreadComponent, canActivate: [AuthorizeGuard]},
       {path: 'search/:query', component: SearchComponent},
       {path: 'search/threads/:query', component: SearchThreadsComponent},
       {path: 'search/posts/:query', component: SearchPostsComponent},
