@@ -13,18 +13,18 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { ForumCategoriesComponent } from "./forumCategories/forumCategories.component";
 import { ForumThreadsComponent } from "./forumThreads/forumThreads.component";
 import { ForumPostsComponent } from "./forumPosts/forumPosts.component";
-import { ConvertToReadableDate } from "./shared/convertToReadableDate";
-import { LimitStringLength } from "./shared/limitStringLength";
+import { ConvertToReadableDate } from "./shared/convert-to-readable-date";
+import { LimitStringLength } from "./shared/limit-string-length";
 import { ForumPostCardComponent } from "./forumPosts/forum-post-card/forum-post-card.component";
-import { LookupMemberComponent } from "./shared/lookup/lookup-member/lookupMember.component";
-import { LookupThreadComponent } from "./shared/lookup/lookup-threads/lookupThread.component";
-import { LookupPostComponent } from "./shared/lookup/lookup-post/lookupPost.component";
-import { SearchThreadsComponent } from "./search/search-threads/searchThreads.component";
-import { SearchPostsComponent } from "./search/search-posts/searchPosts.component";
-import { SearchMembersComponent } from "./search/search-members/searchMembers.component";
+import { LookupMemberComponent } from "./shared/lookup/lookup-member/lookup-member.component";
+import { LookupThreadComponent } from "./shared/lookup/lookup-threads/lookup-thread.component";
+import { LookupPostComponent } from "./shared/lookup/lookup-post/lookup-post.component";
+import { SearchThreadsComponent } from "./search/search-threads/search-threads.component";
+import { SearchPostsComponent } from "./search/search-posts/search-posts.component";
+import { SearchMembersComponent } from "./search/search-members/search-members.component";
 import { SearchComponent } from "./search/search.component";
 import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
-import {MemberListComponent} from "./memberList/memberList.component";
+import {MemberListComponent} from "./member-list/member-list.component";
 import {
     ForumCategoryListItemComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
@@ -48,8 +48,8 @@ import {
 import {
   ForumCategoryListItemNewestThreadComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
-import {LoadingContentComponent} from "./shared/loadingContent/loadingContent.component";
-import {ErrorContentComponent} from "./shared/errorContent/errorContent.component";
+import {LoadingContentComponent} from "./shared/loading-content/loading-content.component";
+import {ErrorContentComponent} from "./shared/error-content/error-content.component";
 import {ProfileCardComponent} from "./shared/profile-card/profile-card.component";
 
 @NgModule({

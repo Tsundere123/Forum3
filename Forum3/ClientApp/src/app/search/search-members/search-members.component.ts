@@ -6,7 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: "app-search-members",
-  templateUrl: "./searchMembers.component.html"
+  templateUrl: "./search-members.component.html"
 })
 export class SearchMembersComponent {
   isLoading: boolean = true;

@@ -7,7 +7,7 @@ import {MemberService} from "../services/member.service";
 
 @Component({
   selector: 'app-member-list',
-  templateUrl: './memberList.component.html'
+  templateUrl: './member-list.component.html'
 })
 export class MemberListComponent implements OnInit {
   isLoading: boolean = true;
