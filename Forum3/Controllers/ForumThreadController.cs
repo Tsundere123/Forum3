@@ -37,8 +37,7 @@ public class ForumThreadController : Controller
         var threadsList = threads.ToList();
         
         // Sort threads by last post (or created at if no posts)
-        var sortedThreads = threadsList.Where(t => t.IsPinned == false)
-            .Select(t => new
+        var sortedThreads = threadsList.Select(t => new
             {
                 ForumThread = t,
                 LastPost = t.Posts!.Any() ? t.Posts!.Max(p => p.CreatedAt) : t.CreatedAt
