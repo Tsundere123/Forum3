@@ -36,21 +36,4 @@ public static class Constants
         new() { Id = 6, Content = "Post 6", CreatedAt = DateTime.Now, Thread = ForumThreads[0], CreatorId = "userId6" },
         new() { Id = 7, Content = "Post 7", CreatedAt = DateTime.Now, Thread = ForumThreads[0], CreatorId = "userId7" },
     };
-
-    public static readonly List<WallPostReply> WallPostReplies = new()
-    {
-        new() { Id = 1, Content = "Reply 1", CreatedAt = DateTime.Now, AuthorId = "userId1", WallPostId = 1 },
-        new() { Id = 2, Content = "Reply 2", CreatedAt = DateTime.Now, AuthorId = "userId1", WallPostId = 1 },
-        new() { Id = 3, Content = "Reply 3", CreatedAt = DateTime.Now, AuthorId = "userId1", WallPostId = 2 },
-        new() { Id = 4, Content = "Reply 4", CreatedAt = DateTime.Now, AuthorId = "userId1", WallPostId = 3 },
-    };
-
-    public static readonly List<WallPost> WallPosts = new()
-    {
-        new() { Id = 1, Content = "Post 1", CreatedAt = DateTime.Now, AuthorId = "userId1", ProfileId = "userId1" },
-        new() { Id = 2, Content = "Post 2", CreatedAt = DateTime.Now, AuthorId = "userId1", ProfileId = "userId1" },
-        new() { Id = 3, Content = "Post 3", CreatedAt = DateTime.Now, AuthorId = "userId1", ProfileId = "userId1" },
-        new() { Id = 4, Content = "Post 4", CreatedAt = DateTime.Now, AuthorId = "userId1", ProfileId = "userId1" },
-        new() { Id = 5, Content = "Post 5", CreatedAt = DateTime.Now, AuthorId = "userId1", ProfileId = "userId1" },
-    };
 }
