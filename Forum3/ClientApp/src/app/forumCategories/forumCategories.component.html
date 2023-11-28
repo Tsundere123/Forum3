@@ -3,7 +3,7 @@
 <app-loading-content [isLoading]="isLoading"></app-loading-content>
 <app-error-content [isError]="isError"></app-error-content>
 
-<ul class="list-group list-group-flush">
+<ul class="list-group list-group-flush" *ngIf="!isError && !isLoading">
   <li *ngFor="let category of categories" class="list-group-item px-0">
     <app-forum-category-list-item [currentCategory]="category"></app-forum-category-list-item>
   </li>
