@@ -1,7 +1,15 @@
 <h1 class="h2 fw-normal">Members</h1>
+<p class="lead">
+  These are all the members of the forum. You can filter by username.
+</p>
 
-<div class="row row-cols-2 row-cols-md-4">
-    <div class="p-2" *ngFor="let member of members">
+<div class="mb-3">
+  <label for="username" class="col-form-label">Filter by Username</label>
+  <input type="text" id="username" class="form-control" [(ngModel)]="filter">
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="p-2" *ngFor="let member of filteredMembers">
       <app-lookup-member [member]="member"></app-lookup-member>
     </div>
 </div>
