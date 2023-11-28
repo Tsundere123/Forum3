@@ -17,9 +17,13 @@
 
 
       <div id="postContent_{{currentPost.id}}" class="card-body py-2 d-flex flex-column justify-content-between">
-        <div class="post-content">
-          <markdown>{{currentPost.content}}</markdown>
-
+        <div class="post-content" >
+          <markdown *ngIf="display">{{currentPost.content}}</markdown>
+          <form *ngIf="!display" [formGroup]="editPostForm" (ngSubmit)="editCurrentPost()">
+            <textarea rows="8" class="form-control" formControlName="content" id="editForumPost"></textarea>
+            <button class="btn btn-sm btn-success" type="submit" [disabled]="editPostForm.invalid">Submit</button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="onClickEdit()">Cancel</button>
+          </form>
         </div>
 
         <!--        If edited-->
@@ -42,15 +46,16 @@
 
       <!--      [NESTED]If thread is not locked-->
       <div class="card-footer py-2 px-3">
-        <button class="btn btn-sm btn-dark d-inline" id="quoteThisPost_@Model.Id.ToString()">Quote Post</button>
+        <button class="btn btn-sm btn-dark d-inline" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote Post</button>
+
 
         <!--        if user is Admin or Mod or is User-->
         <!--        [NESTED] If thread is NOT locked-->
 
-        <a class="btn btn-sm btn-dark" asp-controller="ForumPost" asp-action="UpdateForumPostContent" asp-route-forumPostId="@Model.Id.ToString()">Edit Post</a>
+        <a class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit Post</a>
 
         <!--        if NOT soft deleted-->
-        <a class="btn btn-sm btn-danger" asp-controller="ForumPost" asp-action="DeleteSelectedForumPost" asp-route-forumPostId="@Model.Id.ToString()">Delete Post</a>
+        <a class="btn btn-sm btn-danger" asp-controller="ForumPost" asp-action="DeleteSelectedForumPost" asp-route-forumPostId="@Model.Id.ToString()" *ngIf="display">Delete Post</a>
       </div>
     </div>
   </div>
