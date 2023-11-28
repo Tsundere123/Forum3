@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthorizeService} from "../../../api-authorization/authorize.service";
-import {ForumPostsService} from "../../services/forumPosts.service";
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthorizeService } from "../../../api-authorization/authorize.service";
+import { ForumPostsService } from "../../services/forumPosts.service";
 
 @Component({
   selector: 'app-new-forum-post',
-  templateUrl: './new-forum-post.component.html',
-  styleUrl: './new-forum-post.component.css'
+  templateUrl: './new-forum-post.component.html'
 })
 export class NewForumPostComponent implements OnInit{
   newPostForm: FormGroup;
@@ -29,7 +26,6 @@ export class NewForumPostComponent implements OnInit{
     });
   }
   ngOnInit() {
-    // get username
     this.authorizeService.getUser().subscribe(user => this.userName = user.name)
     this.route.params.subscribe(params => this.threadId = +params['id']);
   }
@@ -45,5 +41,4 @@ export class NewForumPostComponent implements OnInit{
   onCancel() {
     this.router.navigate(['/threads', this.threadId], { relativeTo: this.route });
   }
-
 }

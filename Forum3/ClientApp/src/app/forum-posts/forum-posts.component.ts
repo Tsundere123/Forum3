@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumPost } from "../models/forum-post.model";
 import { ForumPostsService } from "../services/forumPosts.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthorizeService } from "../../api-authorization/authorize.service";
 import { ForumThreadsService } from "../services/forumThreads.service";
@@ -33,7 +33,8 @@ export class ForumPostsComponent implements OnInit{
     private forumThreadsServices: ForumThreadsService,
     private forumPostsServices: ForumPostsService,
     private activatedRoute: ActivatedRoute,
-    private authorizeService: AuthorizeService
+    private authorizeService: AuthorizeService,
+    private router: Router
   ) {
     this.editThreadForm = formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -85,7 +86,7 @@ export class ForumPostsComponent implements OnInit{
   }
   permaDeleteCurrentThread(){
     this.forumThreadsServices.PermaDeleteCurrentThread(this.threadId).subscribe(
-      () => location.reload(),
+      () => this.router.navigate(['/']),
       error => console.error(error)
     )
   }
@@ -127,5 +128,4 @@ export class ForumPostsComponent implements OnInit{
       error => console.error(error)
     )
   }
-
 }

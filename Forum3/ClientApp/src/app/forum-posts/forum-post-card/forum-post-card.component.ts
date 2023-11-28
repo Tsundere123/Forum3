@@ -1,19 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Input } from "@angular/core";
 import { ForumPost } from "../../models/forum-post.model";
-import {ForumPostsComponent} from "../forum-posts.component";
-import {ForumPostsService} from "../../services/forumPosts.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthorizeService} from "../../../api-authorization/authorize.service";
-import {Observable} from "rxjs";
+import { ForumPostsService } from "../../services/forumPosts.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { AuthorizeService } from "../../../api-authorization/authorize.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-forum-post-card',
-  templateUrl: './forum-post-card.component.html',
-  styleUrls: ['./forum-post-card.component.css']
+  templateUrl: './forum-post-card.component.html'
 })
-
 export class ForumPostCardComponent implements OnInit{
   @Input() currentPost: ForumPost;
   editPostForm: FormGroup;
@@ -28,7 +25,6 @@ export class ForumPostCardComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
     private authorizeService: AuthorizeService,
     private forumPostsService:ForumPostsService,)
