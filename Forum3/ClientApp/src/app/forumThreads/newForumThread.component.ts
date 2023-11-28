@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../../api-authorization/authorize.service";
 import { ForumThreadsService } from "../services/forumThreads.service";
@@ -21,11 +21,14 @@ export class NewForumThreadComponent implements OnInit{
     private threadService: ForumThreadsService
   ) {
     this.newThreadForm = formBuilder.group({
-      title: ['', Validators.required],
-      content: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      content: ['', [Validators.required, Validators.minLength(5)]],
       userName: ''
     });
   }
+
+  get title() { return this.newThreadForm.get('title'); }
+  get content() { return this.newThreadForm.get('content'); }
 
   ngOnInit() {
     this.authorizeService.getUser().subscribe(user => this.userName = user.name)
