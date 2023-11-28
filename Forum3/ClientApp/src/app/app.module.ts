@@ -41,6 +41,13 @@ import {
 import { provideMarkdown } from 'ngx-markdown';
 import { MarkdownModule } from 'ngx-markdown';
 import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
+import {
+  ForumCategoryListItemNoThreadsInCategoryComponent
+} from "./forumCategories/forum-category-list-item/forum-category-list-item-no-threads-in-category/forum-category-list-item-no-threads-in-category.component";
+ForumCategoryListItemNoThreadsInCategoryComponent
+import {
+  ForumCategoryListItemNewestThreadComponent
+} from "./forumCategories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
 
 @NgModule({
   declarations: [
@@ -66,7 +73,9 @@ import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
     ForumThreadListNormalIconsComponent,
     ForumThreadListNewestSoftDeletedComponent,
     ForumCategoryListItemComponent,
-    ForumThreadListNoPostsComponent
+    ForumThreadListNoPostsComponent,
+    ForumCategoryListItemNoThreadsInCategoryComponent,
+    ForumCategoryListItemNewestThreadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

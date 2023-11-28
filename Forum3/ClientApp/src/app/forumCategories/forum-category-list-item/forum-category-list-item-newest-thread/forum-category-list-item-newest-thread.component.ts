@@ -5,8 +5,6 @@ import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-forum-category-list-item-newest-thread',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
   templateUrl: './forum-category-list-item-newest-thread.component.html',
   styleUrl: './forum-category-list-item-newest-thread.component.css'
 })
