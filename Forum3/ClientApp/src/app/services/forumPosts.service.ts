@@ -22,6 +22,7 @@ export class ForumPostsService {
   }
 
   DeleteCurrentPost(postId: number){
-    return this.http.delete<any>("api/ForumPost/PermaDelete" + postId);
+    console.log("This is the delete service")
+    return this.http.delete<any>("api/ForumPost/PermaDelete/" + postId);
   }
 }

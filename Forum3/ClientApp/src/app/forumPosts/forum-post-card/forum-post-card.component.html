@@ -56,7 +56,7 @@
 
         <!--        if NOT soft deleted-->
 <!--        Delete post-->
-        <a class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="display">Delete Post</a>
+        <a class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="display && isAuthenticated | async">Delete Post</a>
       </div>
     </div>
   </div>

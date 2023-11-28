@@ -59,6 +59,7 @@ export class ForumPostCardComponent implements OnInit{
     );
   }
   deleteCurrentPost(){
-
+    console.log("Calling delete service")
+    this.forumPostsService.DeleteCurrentPost(this.currentPost.id);
   }
 }
