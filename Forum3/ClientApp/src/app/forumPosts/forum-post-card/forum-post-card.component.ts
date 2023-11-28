@@ -79,4 +79,10 @@ export class ForumPostCardComponent implements OnInit{
       error => console.error(error)
     );
   }
+  unDeletePost(){
+    this.forumPostsService.UnSoftDeleteCurrentPost(this.currentPost.id).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    )
+  }
 }
