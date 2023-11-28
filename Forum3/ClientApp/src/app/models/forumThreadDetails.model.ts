@@ -5,4 +5,5 @@ export interface ForumThreadDetailsModel{
   isPinned: boolean;
   isSoftDeleted: boolean;
   isLocked: boolean;
+  createdAt: Date;
 }

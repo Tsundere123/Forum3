@@ -107,10 +107,11 @@ public class ForumThreadController : Controller
         {
             Id = forumThread.Id,
             Title = forumThread.Title,
-            Creator = forumThread.CreatorId,
+            Creator = _userManager.FindByIdAsync(forumThread.CreatorId).Result.UserName,
             IsPinned = forumThread.IsPinned,
             IsLocked = forumThread.IsLocked,
-            IsSoftDeleted = forumThread.IsSoftDeleted
+            IsSoftDeleted = forumThread.IsSoftDeleted,
+            CreatedAt = forumThread.CreatedAt
         };
         return Ok(result);
     }
