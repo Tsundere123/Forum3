@@ -50,6 +50,7 @@ import {
 } from "./forumCategories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
 import {LoadingContentComponent} from "./shared/loadingContent/loadingContent.component";
 import {ErrorContentComponent} from "./shared/errorContent/errorContent.component";
+import {ProfileCardComponent} from "./shared/profile-card/profile-card.component";
 
 @NgModule({
   declarations: [
@@ -91,7 +92,9 @@ import {ErrorContentComponent} from "./shared/errorContent/errorContent.componen
     ForumCategoryListItemNewestThreadComponent,
 
     LoadingContentComponent,
-    ErrorContentComponent
+    ErrorContentComponent,
+
+    ProfileCardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
