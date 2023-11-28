@@ -60,6 +60,9 @@ export class ForumPostCardComponent implements OnInit{
   }
   deleteCurrentPost(){
     console.log("Calling delete service")
-    this.forumPostsService.DeleteCurrentPost(this.currentPost.id);
+    this.forumPostsService.DeleteCurrentPost(this.currentPost.id).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    );
   }
 }
