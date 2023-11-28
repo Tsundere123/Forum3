@@ -73,4 +73,27 @@ public class ForumPostController : Controller
         if (result) return Ok();
         return BadRequest();
     }
+
+    [HttpDelete("PermaDelete/{postId}")]
+    public async Task<IActionResult> PermaDeleteSelectedForumPost(int postId)
+    {
+        var forumPost = await _forumPostRepository.GetForumPostById(postId);
+        if (forumPost != null)
+        {
+            var result = await _forumPostRepository.DeleteForumPost(forumPost.Id);
+            if (result) return Ok();
+        }
+        return BadRequest();
+    }
+
+    [HttpDelete("SoftDelete/{postId}")]
+    public async Task<IActionResult> SoftDeleteSelectedForumPost(int postId)
+    {
+        var forumPost = await _forumPostRepository.GetForumPostById(postId);
+        if (forumPost == null) return BadRequest();
+
+        forumPost.IsSoftDeleted = true;
+        await _forumPostRepository.UpdateForumPost(forumPost);
+        return Ok();
+    }
 }

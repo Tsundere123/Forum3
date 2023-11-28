@@ -6,6 +6,7 @@ import {ForumPostsService} from "../../services/forumPosts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthorizeService} from "../../../api-authorization/authorize.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-forum-post-card',
@@ -20,7 +21,10 @@ export class ForumPostCardComponent implements OnInit{
   userName?: string;
   postId: number;
   display:boolean;
+  displayDelete:boolean;
   oldContent: string;
+
+  isAuthenticated?: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +40,7 @@ export class ForumPostCardComponent implements OnInit{
   }
 
   ngOnInit():void{
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.display = true;
     // get username
     this.authorizeService.getUser().subscribe(user => this.userName = user.name)
@@ -47,9 +52,28 @@ export class ForumPostCardComponent implements OnInit{
     else this.display = true;
     this.editPostForm.patchValue({ content: this.currentPost.content })
   }
+  deleteCurrentPostOptions(){
+    if(this.displayDelete == true)this.displayDelete = false;
+    else this.displayDelete = true;
+
+  }
   editCurrentPost(){
     this.editPostForm.patchValue({ userName: this.userName })
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    );
+  }
+
+  deleteCurrentPost(){
+    console.log("Calling delete service")
+    this.forumPostsService.DeleteCurrentPost(this.currentPost.id).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    );
+  }
+  softDeleteCurrentPost(){
+    this.forumPostsService.SoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
       error => console.error(error)
     );
