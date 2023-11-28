@@ -28,7 +28,31 @@ public class ForumPostController : Controller
     public async Task<IActionResult> ForumPostView(int forumThreadId, int? page)
     {
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
-        return Ok(forumPosts);
+        
+        var forumPostsList = forumPosts.ToList();
+        
+        var forumPostsDto = forumPostsList.Select(forumPost => new PostDto
+        {
+            Id = forumPost.Id,
+            Content = forumPost.Content,
+            IsSoftDeleted = forumPost.IsSoftDeleted,
+            CreatedAt = forumPost.CreatedAt,
+            Creator = new LookupUserDto
+            {
+                UserName = _userManager.FindByIdAsync(forumPost.CreatorId).Result.UserName,
+                Avatar = _userManager.FindByIdAsync(forumPost.CreatorId).Result.Avatar,
+                CreatedAt = _userManager.FindByIdAsync(forumPost.CreatorId).Result.CreatedAt
+            },
+            EditedBy = forumPost.EditedBy != string.Empty ? new LookupUserDto
+            {
+                UserName = _userManager.FindByIdAsync(forumPost.EditedBy).Result.UserName,
+                Avatar = _userManager.FindByIdAsync(forumPost.EditedBy).Result.Avatar,
+                CreatedAt = _userManager.FindByIdAsync(forumPost.EditedBy).Result.CreatedAt
+            } : null,
+            EditedAt = forumPost.EditedAt != DateTime.MinValue ? forumPost.EditedAt : null
+        }).ToList();
+        
+        return Ok(forumPostsDto);
     }
     
     [HttpPost("Create/{threadId}")]
