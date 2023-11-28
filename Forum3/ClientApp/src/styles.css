@@ -14,3 +14,15 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-content blockquote {
+  color: #666666;
+  border-left: 3px solid #d0d0d0;
+  padding-left: 10px;
+  margin-left: 10px;
+}
