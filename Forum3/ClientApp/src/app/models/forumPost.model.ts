@@ -1,10 +1,11 @@
+import {LookupMember} from "./lookup/lookupMember.model";
+
 export interface ForumPost{
   id: number;
-  threadId: number
-  creatorId: string
-  content: string
-  createdAt: Date
-  editedAt: Date
-  isSoftDeleted: boolean
-  editedBy:string
+  content: string;
+  isSoftDeleted: boolean;
+  createdAt: Date;
+  creator: LookupMember;
+  editedBy: LookupMember;
+  editedAt: Date;
 }

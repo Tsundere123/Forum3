@@ -21,8 +21,8 @@ export class NewForumThreadComponent implements OnInit{
     private threadService: ForumThreadsService
   ) {
     this.newThreadForm = formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      content: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      content: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]],
       userName: ''
     });
   }
