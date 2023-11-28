@@ -4,8 +4,7 @@ import { ForumCategory } from "../models/forumCategory.model";
 
 @Component({
   selector: 'app-forumCategories-component',
-  templateUrl: './forumCategories.component.html',
-  styleUrls: ['./forumCategories.component.css']
+  templateUrl: './forumCategories.component.html'
 })
 
 export class ForumCategoriesComponent implements OnInit{
