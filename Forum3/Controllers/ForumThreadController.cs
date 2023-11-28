@@ -6,6 +6,7 @@ using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using NuGet.Protocol;
 
 namespace Forum3.Controllers;
@@ -160,6 +161,24 @@ public class ForumThreadController : Controller
             var result = await _forumThreadRepository.DeleteForumThread(threadId);
             if (result) return Ok();
         }
+        return BadRequest();
+    }
+
+    [HttpPost("EditThread/{threadId}")]
+    public async Task<IActionResult> EditThread(int threadId, [FromBody] EditThreadTitleDto editForumThreadDto)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+        
+        var user = await _userManager.FindByNameAsync(editForumThreadDto.UserName);
+        if (user == null) return NotFound();
+
+        forumThread.Title = editForumThreadDto.Title;
+        forumThread.EditedAt = DateTime.Now;
+        forumThread.EditedBy = user.Id;
+
+        var result = await _forumThreadRepository.UpdateForumThread(forumThread);
+        if (result) return Ok();
         return BadRequest();
     }
     

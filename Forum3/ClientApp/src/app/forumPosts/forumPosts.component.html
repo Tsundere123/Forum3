@@ -1,4 +1,10 @@
-<h1>{{threadDetails.title}}</h1>
+<h1 *ngIf="display">{{threadDetails.title}}</h1>
+<form *ngIf="!display" [formGroup]="editThreadForm" (ngSubmit)="editCurrentThread()">
+  <label for="title" >New title</label>
+  <input type="text" class="form-control" formControlName="title" id="title">
+  <button class="btn btn-sm btn-success" type="submit" [disabled]="editThreadForm.invalid">Edit title</button>
+  <button class="btn btn-sm btn-danger" (click)="toggleEdit()">Cancel</button>
+</form>
 
 <div class="d-flex flex-column flex-md-row gap-2 align-items-md-center justify-content-md-between">
   <div class="d-inline-flex gap-2" style="font-size:14px;">
@@ -21,9 +27,9 @@
   </div>
 
 <!--  EDIT THREAD-->
-  <a class="btn btn-sm btn-dark" asp-controller="ForumThread" asp-action="UpdateForumThreadTitle" asp-route-forumThreadId="@Model.CurrentForumThread.Id.ToString()">
+  <button class="btn btn-sm btn-dark" (click)="toggleEdit()" *ngIf="display">
     Edit Thread
-  </a>
+  </button>
 
 <!--  Toggle delete buttons-->
   <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete && isAuthenticated | async">Delete thread</button>

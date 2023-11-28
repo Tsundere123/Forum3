@@ -7,6 +7,7 @@ import {AuthorizeService} from "../../api-authorization/authorize.service";
 import {ForumThread} from "../models/forumThread/forumThread.model";
 import {ForumThreadsService} from "../services/forumThreads.service";
 import {ForumThreadDetailsModel} from "../models/forumThreadDetails.model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-forum-posts',
@@ -17,25 +18,37 @@ export class ForumPostsComponent implements OnInit{
   isLoading: boolean = true;
   isError: boolean = false;
 
+  editThreadForm: FormGroup;
+
+  userName?: string;
   isAuthenticated?: Observable<boolean>;
+
+  display: boolean = true;
+
   postsInThread: ForumPost[] = [];
   threadId:number;
   displayDelete:boolean;
   threadDetails: ForumThreadDetailsModel;
 
   constructor(
+    private formBuilder: FormBuilder,
     private forumThreadsServices: ForumThreadsService,
     private forumPostsServices: ForumPostsService,
     private activatedRoute: ActivatedRoute,
     private authorizeService: AuthorizeService
-  ) {  }
+  ) {
+    this.editThreadForm = formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+      userName: ''
+    });
+  }
   ngOnInit(): void {
 
     this.displayDelete = false;
 
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.activatedRoute.params.subscribe(params => this.threadId = +params['id']);
-
+    this.authorizeService.getUser().subscribe(user => this.userName = user.name)
     this.forumPostsServices.GetAllPostsOfThread(this.threadId).subscribe({
       next:(posts) => {
         console.log(posts);
@@ -55,6 +68,18 @@ export class ForumPostsComponent implements OnInit{
         console.log(response);
       }
     });
+  }
+  editCurrentThread(){
+    this.editThreadForm.patchValue({userName: this.userName});
+    this.forumThreadsServices.EditCurrentThread(this.threadId, this.editThreadForm.value).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    );
+  }
+  toggleEdit(){
+    if(this.display) this.display = false;
+    else this.display = true;
+    this.editThreadForm.patchValue({ title: this.threadDetails.title })
   }
   deleteToggle(){
     if(this.displayDelete == true) this.displayDelete = false;

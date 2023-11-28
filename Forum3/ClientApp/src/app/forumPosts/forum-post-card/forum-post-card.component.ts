@@ -60,7 +60,7 @@ export class ForumPostCardComponent implements OnInit{
 
   }
   editCurrentPost(){
-    this.editPostForm.patchValue({ userName: this.userName })
+    this.editPostForm.patchValue({ userName: this.userName });
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => location.reload(),
       error => console.error(error)

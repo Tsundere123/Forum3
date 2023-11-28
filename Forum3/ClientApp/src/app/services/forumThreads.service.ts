@@ -27,12 +27,18 @@ export class ForumThreadsService {
     return this.http.post<any>("api/ForumThread/Create/" + categoryId, newThread);
   }
 
+  EditCurrentThread(threadId: number, newTitle: any){
+    return this.http.post<any>("api/ForumThread/EditThread/" + threadId, newTitle);
+  }
+
   PermaDeleteCurrentThread(threadId: number){
     return this.http.delete<any>("api/ForumThread/PermaDelete/" + threadId);
   }
+
   SoftDeleteCurrentThread(threadId: number){
     return this.http.delete<any>("api/ForumThread/SoftDelete/" + threadId);
   }
+
   UnSoftDeleteCurrentThread(threadId: number){
     return this.http.delete<any>("api/ForumThread/UnSoftDelete/" + threadId);
   }
@@ -48,6 +54,7 @@ export class ForumThreadsService {
   lockCurrentThread(threadId: number){
     return this.http.get<any>("api/ForumThread/LockThread/" + threadId);
   }
+
   unlockCurrentThread(threadId: number){
     return this.http.get<any>("api/ForumThread/UnLockThread/" + threadId);
   }
