@@ -1,4 +1,4 @@
-<h1>Posts</h1>
+<h1>{{threadDetails.title}}</h1>
 
 <div class="d-flex flex-column flex-md-row gap-2 align-items-md-center justify-content-md-between">
   <div class="d-inline-flex gap-2" style="font-size:14px;">
@@ -8,7 +8,7 @@
         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
       </svg>
 <!--      Name of OP-->
-      {{postsInThread[0].creatorId}}
+      {{postsInThread[0].creator.userName}}
     </div>
     <div class="d-flex gap-2 align-items-center">
 <!--      Clock icon-->
@@ -27,28 +27,34 @@
 
 <!--  Toggle delete buttons-->
   <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete && isAuthenticated | async">Delete thread</button>
+
 <!--  IF NOT DELETED: DELETE-->
   <button class="btn btn-sm btn-success" *ngIf="displayDelete && isAuthenticated | async" (click)="deleteToggle()">Cancel Delete</button>
+<!--  PERMA DELETE OPTION-->
   <button class="btn btn-sm btn-danger" (click)="permaDeleteCurrentThread()" *ngIf="displayDelete">
     Perma delete
   </button>
+<!--  SOFT DELETE OPTION-->
+  <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentThread()" *ngIf="displayDelete && !threadDetails.isSoftDeleted">
+    Soft delete
+  </button>
 
 <!--  IF DELETED: UNDELETE-->
-  <a class="btn btn-sm btn-danger" asp-controller="ForumThread" asp-action="UnDeleteSelectedForumThread" asp-route-forumThreadId="@Model.CurrentForumThread.Id.ToString()">
+  <button class="btn btn-sm btn-danger" (click)="unSoftDeleteCurrentThread()" *ngIf="threadDetails.isSoftDeleted">
     Undelete Thread
-  </a>
+  </button>
 
 <!--  IF NOT PINNED: PIN-->
-  <button class="btn btn-sm btn-dark">pin</button>
+  <button class="btn btn-sm btn-dark" (click)="pinCurrentThread()" *ngIf="!threadDetails.isPinned">Pin thread</button>
 
 <!--  IF PINNED: UNPIN-->
-  <button class="btn btn-sm btn-dark">unpin</button>
+  <button class="btn btn-sm btn-dark" (click)="unpinCurrentThread()" *ngIf="threadDetails.isPinned">Unpin thread</button>
 
 <!--  IF NOT LOCKED: LOCK-->
-  <button class="btn btn-sm btn-dark">lock</button>
+  <button class="btn btn-sm btn-dark" (click)="lockCurrentThread()" *ngIf="!threadDetails.isLocked">Lock thread</button>
 
 <!--  IF LOCKED: UNLOCK-->
-  <button class="btn btn-sm btn-dark">lock</button>
+  <button class="btn btn-sm btn-dark" (click)="unlockCurrentThread()" *ngIf="threadDetails.isLocked">Unlock thread</button>
 
 </div>
 

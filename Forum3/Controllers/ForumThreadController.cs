@@ -96,6 +96,24 @@ public class ForumThreadController : Controller
         return Ok(result);
     }
 
+    [HttpGet("ThreadDetails/{threadId}")]
+    public async Task<IActionResult> GetThreadDetails(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+
+        var result = new ThreadDetailsDto()
+        {
+            Id = forumThread.Id,
+            Title = forumThread.Title,
+            Creator = forumThread.CreatorId,
+            IsPinned = forumThread.IsPinned,
+            IsLocked = forumThread.IsLocked,
+            IsSoftDeleted = forumThread.IsSoftDeleted
+        };
+        return Ok(result);
+    }
+
     [HttpPost("Create/{categoryId}")]
     public async Task<IActionResult> CreateThread(int categoryId, [FromBody] CreateForumThreadDto createForumThreadDto)
     {
@@ -135,6 +153,7 @@ public class ForumThreadController : Controller
     [HttpDelete("PermaDelete/{threadId}")]
     public async Task<IActionResult> PermaDeleteSelectedForumThread(int threadId)
     {
+        
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread != null)
         {
@@ -145,14 +164,97 @@ public class ForumThreadController : Controller
     }
     
     [HttpDelete("SoftDelete/{threadId}")]
-    
     public async Task<IActionResult> SoftDeleteSelectedForumThread(int threadId)
     {
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return BadRequest();
-
+        
+        
         forumThread.IsSoftDeleted = true;
         await _forumThreadRepository.UpdateForumThread(forumThread);
+        
+        //Mark all posts as soft deleted
+        var forumPosts = _forumPostRepository.GetAllForumPostsByThreadId(threadId).Result;
+        foreach (var forumPost in forumPosts)
+        {
+            forumPost.IsSoftDeleted = true;
+            
+            // Not checking if soft deleting post is successful. Just continue to next post.
+            await _forumPostRepository.UpdateForumPost(forumPost);
+        }
+        
         return Ok();
+    }
+    
+    
+    [HttpDelete("UnSoftDelete/{threadId}")]
+    public async Task<IActionResult> UnSoftDeleteSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return BadRequest();
+        
+        
+        forumThread.IsSoftDeleted = false;
+        await _forumThreadRepository.UpdateForumThread(forumThread);
+        
+        //Mark all posts as soft deleted
+        var forumPosts = _forumPostRepository.GetAllForumPostsByThreadId(threadId).Result;
+        foreach (var forumPost in forumPosts)
+        {
+            forumPost.IsSoftDeleted = false;
+            
+            // Not checking if soft deleting post is successful. Just continue to next post.
+            await _forumPostRepository.UpdateForumPost(forumPost);
+        }
+        return Ok();
+    }
+
+    [HttpGet("PinThread/{threadId}")]
+    public async Task<IActionResult> PinSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+
+        forumThread.IsPinned = true;
+        var result = await _forumThreadRepository.UpdateForumThread(forumThread);
+        if (result) return Ok();
+        return BadRequest();
+    }
+    
+    [HttpGet("UnPinThread/{threadId}")]
+    public async Task<IActionResult> UnPinSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+
+        forumThread.IsPinned = false;
+        var result = await _forumThreadRepository.UpdateForumThread(forumThread);
+        if (result) return Ok();
+        return BadRequest();
+    }
+    
+    
+    [HttpGet("LockThread/{threadId}")]
+    public async Task<IActionResult> LockSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+
+        forumThread.IsLocked = true;
+        var result = await _forumThreadRepository.UpdateForumThread(forumThread);
+        if (result) return Ok();
+        return BadRequest();
+    }
+    
+    [HttpGet("UnLockThread/{threadId}")]
+    public async Task<IActionResult> UnLockSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return NotFound();
+
+        forumThread.IsLocked = false;
+        var result = await _forumThreadRepository.UpdateForumThread(forumThread);
+        if (result) return Ok();
+        return BadRequest();
     }
 }
