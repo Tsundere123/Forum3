@@ -3,7 +3,7 @@ import {LookupMember} from "../../../models/lookup/lookupMember.model";
 
 @Component({
   selector: 'app-lookup-member',
-  templateUrl: './lookupMember.component.html',
+  templateUrl: './lookup-member.component.html',
 })
 export class LookupMemberComponent {
   @Input() member: LookupMember;

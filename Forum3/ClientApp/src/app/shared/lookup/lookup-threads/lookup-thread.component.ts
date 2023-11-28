@@ -3,7 +3,7 @@ import {LookupThread} from "../../../models/lookup/lookupThread.model";
 
 @Component({
   selector: 'app-lookup-thread',
-  templateUrl: './lookupThread.component.html',
+  templateUrl: './lookup-thread.component.html',
 })
 export class LookupThreadComponent {
   @Input() thread: LookupThread;

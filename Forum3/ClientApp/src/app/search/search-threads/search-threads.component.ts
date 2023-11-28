@@ -6,7 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: "app-search-threads",
-  templateUrl: "./searchThreads.component.html"
+  templateUrl: "./search-threads.component.html"
 })
 export class SearchThreadsComponent {
   isLoading: boolean = true;
