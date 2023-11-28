@@ -15,7 +15,7 @@
       </a>
     </div>
     <div>
-        {{latestThread.createdAt}}
+        {{latestThread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}
     </div>
   </div>
 </div>
