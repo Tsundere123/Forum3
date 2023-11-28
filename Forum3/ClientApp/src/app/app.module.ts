@@ -40,8 +40,8 @@ import {
 
 import { provideMarkdown } from 'ngx-markdown';
 import { MarkdownModule } from 'ngx-markdown';
-import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
-import {NewForumPostComponent} from "./forumPosts/new-forum-post/new-forum-post.component";
+import { NewForumThreadComponent } from "./forumThreads/newForumThread.component";
+import { NewForumPostComponent } from "./forumPosts/new-forum-post/new-forum-post.component";
 import {
   ForumCategoryListItemNoThreadsInCategoryComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item-no-threads-in-category/forum-category-list-item-no-threads-in-category.component";
@@ -63,7 +63,6 @@ import {ErrorContentComponent} from "./shared/errorContent/errorContent.componen
 
     ConvertToReadableDate,
     LimitStringLength,
-
 
     ForumPostCardComponent,
 
