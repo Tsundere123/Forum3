@@ -22,4 +22,11 @@ export class ForumThreadsService {
   CreateThread(categoryId: number, newThread: any){
     return this.http.post<any>("api/ForumThread/Create/" + categoryId, newThread);
   }
+
+  PermaDeleteCurrentThread(threadId: number){
+    return this.http.delete<any>("api/ForumThread/PermaDelete/" + threadId);
+  }
+  SoftDeleteCurrentThread(threadId: number){
+    return this.http.delete<any>("api/ForumThread/SoftDelete/" + threadId);
+  }
 }

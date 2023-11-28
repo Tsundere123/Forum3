@@ -131,4 +131,28 @@ public class ForumThreadController : Controller
         
         return Ok();
     }
+
+    [HttpDelete("PermaDelete/{threadId}")]
+    public async Task<IActionResult> PermaDeleteSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread != null)
+        {
+            var result = await _forumThreadRepository.DeleteForumThread(threadId);
+            if (result) return Ok();
+        }
+        return BadRequest();
+    }
+    
+    [HttpDelete("SoftDelete/{threadId}")]
+    
+    public async Task<IActionResult> SoftDeleteSelectedForumThread(int threadId)
+    {
+        var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
+        if (forumThread == null) return BadRequest();
+
+        forumThread.IsSoftDeleted = true;
+        await _forumThreadRepository.UpdateForumThread(forumThread);
+        return Ok();
+    }
 }
