@@ -1,6 +1,6 @@
-import {ForumCategory} from "../forumCategory.model";
-import {LookupMember} from "../lookup/lookupMember.model";
-import {LookupPost} from "../lookup/lookupPost.model";
+import {ForumCategory} from "../forum-category.model";
+import {LookupMember} from "../lookup/lookup-member.model";
+import {LookupPost} from "../lookup/lookup-post.model";
 
 export interface ForumThread {
   id: number;

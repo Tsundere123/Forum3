@@ -1,18 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ForumPost} from "../models/forumPost.model";
+import {ForumPost} from "../models/forum-post.model";
 import {ForumPostsService} from "../services/forumPosts.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {AuthorizeService} from "../../api-authorization/authorize.service";
-import {ForumThread} from "../models/forumThread/forumThread.model";
+import {ForumThread} from "../models/forum-thread/forum-thread.model";
 import {ForumThreadsService} from "../services/forumThreads.service";
-import {ForumThreadDetailsModel} from "../models/forumThreadDetails.model";
+import {ForumThreadDetailsModel} from "../models/forum-thread-details.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-forum-posts',
-  templateUrl: './forumPosts.component.html',
-  styleUrls: ['./forumPosts.component.css']
+  templateUrl: './forum-posts.component.html',
 })
 export class ForumPostsComponent implements OnInit{
   isLoading: boolean = true;

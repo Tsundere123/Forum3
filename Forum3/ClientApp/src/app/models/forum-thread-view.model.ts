@@ -1,6 +1,6 @@
-import {ForumThread} from "./forumThread/forumThread.model";
-import {ForumCategory} from "./forumCategory.model";
-import {ForumPost} from "./forumPost.model";
+import {ForumThread} from "./forum-thread/forum-thread.model";
+import {ForumCategory} from "./forum-category.model";
+import {ForumPost} from "./forum-post.model";
 
 export interface ForumThreadViewModel{
   forumCategory: ForumCategory;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ForumThread } from "../../../models/forumThread/forumThread.model";
+import { ForumThread } from "../../../models/forum-thread/forum-thread.model";
 
 @Component({
   selector: 'app-forum-thread-list-newest-soft-deleted',

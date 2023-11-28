@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Input } from "@angular/core";
-import { ForumPost } from "../../models/forumPost.model";
-import {ForumPostsComponent} from "../forumPosts.component";
+import { ForumPost } from "../../models/forum-post.model";
+import {ForumPostsComponent} from "../forum-posts.component";
 import {ForumPostsService} from "../../services/forumPosts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";

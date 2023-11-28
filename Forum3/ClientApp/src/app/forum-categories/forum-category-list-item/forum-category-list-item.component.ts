@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ForumCategory} from "../../models/forumCategory.model";
+import {ForumCategory} from "../../models/forum-category.model";
 
 @Component({
   selector: 'app-forum-category-list-item',

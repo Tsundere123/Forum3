@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewForumThreadComponent } from "./newForumThread.component";
+import { NewForumThreadComponent } from "./new-forum-thread.component";
 
 describe('NewForumThreadComponent', () => {
   let component: NewForumThreadComponent;

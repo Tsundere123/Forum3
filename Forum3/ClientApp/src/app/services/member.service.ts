@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Home} from "../models/home.model";
-import {LookupMember} from "../models/lookup/lookupMember.model";
+import {LookupMember} from "../models/lookup/lookup-member.model";
 
 @Injectable({
   providedIn: 'root'

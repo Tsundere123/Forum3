@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ForumThreadsService } from "../services/forumThreads.service";
 import { ActivatedRoute } from "@angular/router";
-import { ForumThread } from "../models/forumThread/forumThread.model";
-import { ForumCategoryDetailsModel } from "../models/forumCategoryDetails.model";
+import { ForumThread } from "../models/forum-thread/forum-thread.model";
+import { ForumCategoryDetailsModel } from "../models/forum-category-details.model";
 import { AuthorizeService } from "../../api-authorization/authorize.service";
 import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-forumThreads-component',
-  templateUrl: './forumThreads.component.html'
+  selector: 'app-forum-threads-component',
+  templateUrl: './forum-threads.component.html'
 })
 
 export class ForumThreadsComponent implements OnInit{

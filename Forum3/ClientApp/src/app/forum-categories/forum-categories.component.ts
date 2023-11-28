@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ForumCategoriesService } from "../services/forumCategories.service";
-import { ForumCategory } from "../models/forumCategory.model";
+import { ForumCategory } from "../models/forum-category.model";
 
 @Component({
-  selector: 'app-forumCategories-component',
-  templateUrl: './forumCategories.component.html'
+  selector: 'app-forum-categories-component',
+  templateUrl: './forum-categories.component.html'
 })
 
 export class ForumCategoriesComponent implements OnInit{

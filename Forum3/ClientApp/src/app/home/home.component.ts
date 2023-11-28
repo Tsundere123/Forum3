@@ -10,9 +10,9 @@ import {Observable} from "rxjs";
 import {AuthorizeService} from "../../api-authorization/authorize.service";
 import KeenSlider, {KeenSliderInstance} from "keen-slider";
 import {HomeService} from "../services/home.service";
-import {LookupMember} from "../models/lookup/lookupMember.model";
-import {LookupThread} from "../models/lookup/lookupThread.model";
-import {LookupPost} from "../models/lookup/lookupPost.model";
+import {LookupMember} from "../models/lookup/lookup-member.model";
+import {LookupThread} from "../models/lookup/lookup-thread.model";
+import {LookupPost} from "../models/lookup/lookup-post.model";
 
 @Component({
   selector: 'app-home',

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {LookupPost} from "../../models/lookup/lookupPost.model";
+import {LookupPost} from "../../models/lookup/lookup-post.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SearchService} from "../../services/search.service";
 import {ActivatedRoute} from "@angular/router";

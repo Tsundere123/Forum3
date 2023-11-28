@@ -1,5 +1,5 @@
-import {LookupMember} from "../lookup/lookupMember.model";
-import {LookupThread} from "../lookup/lookupThread.model";
+import {LookupMember} from "../lookup/lookup-member.model";
+import {LookupThread} from "../lookup/lookup-thread.model";
 
 export interface ProfileThreadsModel {
   user: LookupMember;

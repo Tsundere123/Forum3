@@ -6,7 +6,7 @@ import { ForumThreadsService } from "../services/forumThreads.service";
 
 @Component({
   selector: 'app-new-forum-thread-component',
-  templateUrl: './newForumThread.component.html'
+  templateUrl: './new-forum-thread.component.html'
 })
 export class NewForumThreadComponent implements OnInit{
   newThreadForm: FormGroup;

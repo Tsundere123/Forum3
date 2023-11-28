@@ -1,4 +1,4 @@
-import {LookupMember} from "./lookup/lookupMember.model";
+import {LookupMember} from "./lookup/lookup-member.model";
 
 export interface ForumPost{
   id: number;
