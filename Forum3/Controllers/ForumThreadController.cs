@@ -31,12 +31,22 @@ public class ForumThreadController : Controller
     [HttpGet("{forumCategoryId}/{page?}")]
     public async Task<IActionResult> ForumThreadsOfCategory(int forumCategoryId, int? page)
     {
-        //All threads in category
         var threads = await _forumThreadRepository.GetForumThreadsByCategoryId(forumCategoryId);
         if (threads == null) return NotFound();
         
         var threadsList = threads.ToList();
-        var result = threadsList.Select(t => new ThreadDto()
+        
+        // Sort threads by last post (or created at if no posts)
+        var sortedThreads = threadsList.Where(t => t.IsPinned == false)
+            .Select(t => new
+            {
+                ForumThread = t,
+                LastPost = t.Posts!.Any() ? t.Posts!.Max(p => p.CreatedAt) : t.CreatedAt
+            })
+            .OrderByDescending(t => t.LastPost)
+            .Select(t => t.ForumThread);
+        
+        var result = sortedThreads.Select(t => new ThreadDto()
         {
             Id = t.Id,
             Title = t.Title,
@@ -57,7 +67,8 @@ public class ForumThreadController : Controller
                     UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.UserName,
                     Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.Avatar,
                     CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.CreatedAt
-                }
+                },
+                IsSoftDeleted = t.Posts.LastOrDefault()!.IsSoftDeleted
             } : null,
             Creator = new LookupUserDto()
             {

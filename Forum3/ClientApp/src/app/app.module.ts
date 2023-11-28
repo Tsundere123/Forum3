@@ -48,7 +48,8 @@ import {
 import {
   ForumCategoryListItemNewestThreadComponent
 } from "./forumCategories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
-
+import {LoadingContentComponent} from "./shared/loadingContent/loadingContent.component";
+import {ErrorContentComponent} from "./shared/errorContent/errorContent.component";
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import {
     ForumCategoryListItemNoThreadsInCategoryComponent,
     ForumCategoryListItemNewestThreadComponent,
 
-
+    LoadingContentComponent,
+    ErrorContentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

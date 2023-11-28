@@ -5,7 +5,7 @@ export interface ForumCategory {
   id: number;
   name: string;
   description: string;
-  latestThread: LookupThread;
+  latestThread?: LookupThread;
   threadCount: number;
   postCount: number;
 }

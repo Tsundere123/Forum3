@@ -8,4 +8,5 @@ public class LookupPostDto
     public string ThreadTitle { get; set; }
     public int ThreadId { get; set; }
     public LookupUserDto Creator { get; set; }
+    public bool IsSoftDeleted { get; set; }
 }

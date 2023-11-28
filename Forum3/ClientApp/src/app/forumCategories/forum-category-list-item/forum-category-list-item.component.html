@@ -1,38 +1,33 @@
 <div class="row">
   <div class="col-md-7">
     <div class="d-flex align-items-center gap-2">
-      <div class="bg-dark text-light rounded d-flex justify-content-center align-items-center"
-           style="width: 36px; height: 36px;">
-        <svg class="bi bi-chat-right-text-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
-             width="16" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+      <div class="bg-dark text-light rounded d-flex justify-content-center align-items-center" style="width: 36px; height: 36px;">
+        <svg class="bi bi-chat-right-text-fill" fill="currentColor" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353V2zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1zm0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
         </svg>
       </div>
       <div>
         <div>
-          <a routerLink="/categories/{{currentCategory.id}}" class="fw-bold link-dark text-decoration-none">
-            {{currentCategory.name}}
+          <a routerLink="/categories/{{ currentCategory.id }}" class="fw-bold link-dark text-decoration-none">
+            {{ currentCategory.name }}
           </a>
         </div>
         <div style="font-size: 14px;">
-          {{currentCategory.description}}
+          {{ currentCategory.description }}
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-2">
-    <!--        Number of non soft deleted threads in category-->
     <div style="font-size: 14px;">
-      <span class="fw-bold">{{currentCategory.threadCount}}</span> Threads
+      <span class="fw-bold">{{ currentCategory.threadCount }}</span> Threads
     </div>
     <div style="font-size: 14px;">
-      <span class="fw-bold">{{currentCategory.postCount}}</span> Posts
+      <span class="fw-bold">{{ currentCategory.postCount }}</span> Posts
     </div>
   </div>
   <div class="col-md-3">
-<!--Last thread is null-->
-    @if(currentCategory.latestThread.id == null){
+    @if(currentCategory.latestThread == null){
       <app-forum-category-list-item-no-threads-in-category></app-forum-category-list-item-no-threads-in-category>
     }@else{
       <app-forum-category-list-item-newest-thread [latestThread]="currentCategory.latestThread"></app-forum-category-list-item-newest-thread>
