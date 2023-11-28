@@ -6,6 +6,7 @@ import {ForumPostsService} from "../../services/forumPosts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthorizeService} from "../../../api-authorization/authorize.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-forum-post-card',
@@ -22,6 +23,8 @@ export class ForumPostCardComponent implements OnInit{
   display:boolean;
   oldContent: string;
 
+  isAuthenticated?: Observable<boolean>;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -36,6 +39,7 @@ export class ForumPostCardComponent implements OnInit{
   }
 
   ngOnInit():void{
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.display = true;
     // get username
     this.authorizeService.getUser().subscribe(user => this.userName = user.name)

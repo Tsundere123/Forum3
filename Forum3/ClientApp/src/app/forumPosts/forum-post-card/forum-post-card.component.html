@@ -46,13 +46,13 @@
 
       <!--      [NESTED]If thread is not locked-->
       <div class="card-footer py-2 px-3">
-        <button class="btn btn-sm btn-dark d-inline" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote Post</button>
+        <button class="btn btn-sm btn-dark d-inline" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display && isAuthenticated | async">Quote Post</button>
 
 
         <!--        if user is Admin or Mod or is User-->
         <!--        [NESTED] If thread is NOT locked-->
 
-        <a class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit Post</a>
+        <a class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display && isAuthenticated | async">Edit Post</a>
 
         <!--        if NOT soft deleted-->
 <!--        Delete post-->
