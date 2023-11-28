@@ -10,7 +10,11 @@ export class ForumPostsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPostsOfThread(id:number):Observable<ForumPost[]>{
+  GetAllPostsOfThread(id:number):Observable<ForumPost[]>{
     return this.http.get<ForumPost[]>("api/ForumPost/" + id)
+  }
+
+  CreatePost(threadId: number, newPost: any){
+    return this.http.post<any>("api/ForuMPost/Create/" + threadId, newPost);
   }
 }

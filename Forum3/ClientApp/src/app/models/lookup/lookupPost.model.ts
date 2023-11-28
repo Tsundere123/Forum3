@@ -5,6 +5,6 @@ export interface LookupPost {
   threadId: number;
   threadTitle: string;
   content: string;
-  createdAt: string;
+  createdAt: Date;
   creator: LookupMember;
 }

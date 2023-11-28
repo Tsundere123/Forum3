@@ -3,3 +3,4 @@
 <div *ngFor="let forumPost of postsInThread">
 <app-forum-post-card [currentPost]="forumPost"></app-forum-post-card>
 </div>
+<a class="btn btn-sm btn-dark" [routerLink]="['/posts', 'create', threadId]" *ngIf="isAuthenticated | async">New Post</a>
