@@ -7,4 +7,5 @@ export interface LookupPost {
   content: string;
   createdAt: Date;
   creator: LookupMember;
+  isSoftDeleted: boolean;
 }

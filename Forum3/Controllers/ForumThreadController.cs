@@ -57,7 +57,8 @@ public class ForumThreadController : Controller
                     UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.UserName,
                     Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.Avatar,
                     CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.CreatedAt
-                }
+                },
+                IsSoftDeleted = t.Posts.LastOrDefault()!.IsSoftDeleted
             } : null,
             Creator = new LookupUserDto()
             {
