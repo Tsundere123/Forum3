@@ -34,10 +34,12 @@ export class ForumPostCardComponent implements OnInit{
     private forumPostsService:ForumPostsService,)
   {
     this.editPostForm = formBuilder.group({
-      content: ['', Validators.required],
+      content: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]],
       userName: ''
     });
   }
+
+  get content() { return this.editPostForm.get('content'); }
 
   ngOnInit():void{
     this.isAuthenticated = this.authorizeService.isAuthenticated();
