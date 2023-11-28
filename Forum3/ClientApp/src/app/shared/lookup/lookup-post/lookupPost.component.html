@@ -2,7 +2,7 @@
   <img src="avatars/{{post.creator.avatar}}" alt="{{post.creator.userName}}" class="rounded me-2" height="48" width="48" />
   <div>
     <div class="d-block">
-      <a routerLink="/threads/{{post.threadId}}">
+      <a routerLink="/threads/{{post.threadId}}" class="link-dark text-decoration-none">
         {{post.threadTitle | limitStringLength: 30}}
       </a>
     </div>
