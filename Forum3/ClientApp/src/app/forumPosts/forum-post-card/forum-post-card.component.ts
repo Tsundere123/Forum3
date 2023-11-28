@@ -21,6 +21,7 @@ export class ForumPostCardComponent implements OnInit{
   userName?: string;
   postId: number;
   display:boolean;
+  displayDelete:boolean;
   oldContent: string;
 
   isAuthenticated?: Observable<boolean>;
@@ -51,6 +52,11 @@ export class ForumPostCardComponent implements OnInit{
     else this.display = true;
     this.editPostForm.patchValue({ content: this.currentPost.content })
   }
+  deleteCurrentPostOptions(){
+    if(this.displayDelete == true)this.displayDelete = false;
+    else this.displayDelete = true;
+
+  }
   editCurrentPost(){
     this.editPostForm.patchValue({ userName: this.userName })
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
@@ -58,9 +64,16 @@ export class ForumPostCardComponent implements OnInit{
       error => console.error(error)
     );
   }
+
   deleteCurrentPost(){
     console.log("Calling delete service")
     this.forumPostsService.DeleteCurrentPost(this.currentPost.id).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    );
+  }
+  softDeleteCurrentPost(){
+    this.forumPostsService.SoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
       error => console.error(error)
     );

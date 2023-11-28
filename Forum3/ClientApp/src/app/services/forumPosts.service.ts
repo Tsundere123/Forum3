@@ -25,4 +25,7 @@ export class ForumPostsService {
     console.log("This is the delete service")
     return this.http.delete<any>("api/ForumPost/PermaDelete/" + postId);
   }
+  SoftDeleteCurrentPost(postId: number){
+    return this.http.delete<any>("api/ForumPOst/SoftDelete/" + postId);
+  }
 }
