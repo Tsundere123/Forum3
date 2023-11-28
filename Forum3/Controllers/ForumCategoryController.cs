@@ -1,10 +1,8 @@
 ﻿using Forum3.DAL;
-using Forum3.Data;
 using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Forum3.Controllers;
 
@@ -44,7 +42,7 @@ public class ForumCategoryController : Controller
             Id = c.Id,
             Name = c.Name,
             Description = c.Description,
-            LatestThread = new LookupThreadDto()
+            LatestThread = c.Threads.Any() ? new LookupThreadDto()
             {
                 Id = c.Threads.LastOrDefault()?.Id,
                 Title = c.Threads.LastOrDefault()?.Title,
@@ -52,15 +50,11 @@ public class ForumCategoryController : Controller
                 Category = c.Threads.LastOrDefault()?.Category.Name,
                 Creator = new LookupUserDto()
                 {
-                    // UserName = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.UserName,
-                    // Avatar = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.Avatar,
-                    // CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault().CreatorId)?.CreatedAt
-                    
-                    UserName = "test",
-                    Avatar = "default.png",
-                    CreatedAt = DateTime.Now
+                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.UserName,
+                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.Avatar,
+                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.CreatedAt
                 }
-            },
+            } : null,
             ThreadCount = c.Threads.Count,
             PostCount = c.Threads.Sum(t => t.Posts.Count)
         }).ToList();

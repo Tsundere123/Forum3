@@ -32,7 +32,7 @@
   </div>
   <div class="col-md-3">
 <!--Last thread is null-->
-    @if(currentCategory.latestThread.id == null){
+    @if(currentCategory.latestThread == null){
       <app-forum-category-list-item-no-threads-in-category></app-forum-category-list-item-no-threads-in-category>
     }@else{
       <app-forum-category-list-item-newest-thread [latestThread]="currentCategory.latestThread"></app-forum-category-list-item-newest-thread>
