@@ -54,13 +54,13 @@ export class ForumPostCardComponent implements OnInit{
     else this.display = true;
     this.editPostForm.patchValue({ content: this.currentPost.content })
   }
-  deleteCurrentPostOptions(){
+  deleteToggle(){
     if(this.displayDelete == true)this.displayDelete = false;
     else this.displayDelete = true;
 
   }
   editCurrentPost(){
-    this.editPostForm.patchValue({ userName: this.userName })
+    this.editPostForm.patchValue({ userName: this.userName });
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => location.reload(),
       error => console.error(error)
@@ -68,8 +68,7 @@ export class ForumPostCardComponent implements OnInit{
   }
 
   deleteCurrentPost(){
-    console.log("Calling delete service")
-    this.forumPostsService.DeleteCurrentPost(this.currentPost.id).subscribe(
+    this.forumPostsService.PermaDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
       error => console.error(error)
     );
@@ -79,5 +78,11 @@ export class ForumPostCardComponent implements OnInit{
       () => location.reload(),
       error => console.error(error)
     );
+  }
+  unDeletePost(){
+    this.forumPostsService.UnSoftDeleteCurrentPost(this.currentPost.id).subscribe(
+      () => location.reload(),
+      error => console.error(error)
+    )
   }
 }

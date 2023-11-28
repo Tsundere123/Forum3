@@ -120,4 +120,16 @@ public class ForumPostController : Controller
         await _forumPostRepository.UpdateForumPost(forumPost);
         return Ok();
     }
+    
+    
+    [HttpDelete("UnSoftDelete/{postId}")]
+    public async Task<IActionResult> UnSoftDeleteSelectedForumPost(int postId)
+    {
+        var forumPost = await _forumPostRepository.GetForumPostById(postId);
+        if (forumPost == null) return BadRequest();
+
+        forumPost.IsSoftDeleted = false;
+        await _forumPostRepository.UpdateForumPost(forumPost);
+        return Ok();
+    }
 }

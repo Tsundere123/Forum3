@@ -21,11 +21,13 @@ export class ForumPostsService {
     return this.http.post<any>("api/ForumPost/Edit/" + postId, newContent);
   }
 
-  DeleteCurrentPost(postId: number){
-    console.log("This is the delete service")
+  PermaDeleteCurrentPost(postId: number){
     return this.http.delete<any>("api/ForumPost/PermaDelete/" + postId);
   }
   SoftDeleteCurrentPost(postId: number){
-    return this.http.delete<any>("api/ForumPOst/SoftDelete/" + postId);
+    return this.http.delete<any>("api/ForumPost/SoftDelete/" + postId);
+  }
+  UnSoftDeleteCurrentPost(postId: number){
+    return this.http.delete<any>("api/ForumPost/UnSoftDelete/" + postId);
   }
 }
