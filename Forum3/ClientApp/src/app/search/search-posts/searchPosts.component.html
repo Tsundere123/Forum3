@@ -9,10 +9,15 @@
 
 <hr class="my-4" />
 
-<p *ngIf="posts.length < 1">No posts matching the search query.</p>
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
-<ul class="list-group mb-2" *ngIf="posts.length > 0">
-  <li class="list-group-item" *ngFor="let post of posts">
-    <app-lookup-post [post]="post"></app-lookup-post>
-  </li>
-</ul>
+<div *ngIf="!isLoading && !isError">
+  <p *ngIf="posts.length < 1">No posts matching the search query.</p>
+
+  <ul class="list-group mb-2" *ngIf="posts.length > 0">
+    <li class="list-group-item" *ngFor="let post of posts">
+      <app-lookup-post [post]="post"></app-lookup-post>
+    </li>
+  </ul>
+</div>

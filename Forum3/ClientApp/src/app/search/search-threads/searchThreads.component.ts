@@ -9,6 +9,9 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: "./searchThreads.component.html"
 })
 export class SearchThreadsComponent {
+  isLoading: boolean = true;
+  isError: boolean = false;
+
   threads: LookupThread[] = [];
   searchForm: FormGroup;
 
@@ -46,9 +49,12 @@ export class SearchThreadsComponent {
       this.searchService.searchThreads(this.query).subscribe({
         next: (results) => {
           this.threads = results;
+          this.isLoading = false;
         },
         error: (response) => {
           console.log(response);
+          this.isError = true;
+          this.isLoading = false;
         }
       })
     }

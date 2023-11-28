@@ -9,10 +9,15 @@
 
 <hr class="my-4" />
 
-<p *ngIf="threads.length < 1">No threads matching the search query.</p>
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
-<ul class="list-group mb-2" *ngIf="threads.length > 0">
-  <li class="list-group-item" *ngFor="let thread of threads">
-    <app-lookup-thread [thread]="thread"></app-lookup-thread>
-  </li>
-</ul>
+<div *ngIf="!isLoading && !isError">
+  <p *ngIf="threads.length < 1">No threads matching the search query.</p>
+
+  <ul class="list-group mb-2" *ngIf="threads.length > 0">
+    <li class="list-group-item" *ngFor="let thread of threads">
+      <app-lookup-thread [thread]="thread"></app-lookup-thread>
+    </li>
+  </ul>
+</div>

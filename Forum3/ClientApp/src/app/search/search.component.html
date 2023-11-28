@@ -9,7 +9,10 @@
 
 <hr class="my-4" />
 
-<div class="row">
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
+
+<div class="row" *ngIf="!isLoading && !isError">
   <div class="col-md-4 mb-4 mb-md-0">
     <h2 class="h2 fw-normal">Threads</h2>
     <p *ngIf="threads.length < 1">No threads matching the search query.</p>
