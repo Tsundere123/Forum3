@@ -1,7 +1,8 @@
-<div class="row mb-4">
+<div class="row mb-2">
   <div class="col-lg-3 mb-2 mb-lg-0">
     <app-profile-card [member]="currentPost.creator"></app-profile-card>
   </div>
+
   <div class="col-lg-9">
     <div class="card h-100">
       <div class="card-header alert-danger d-flex justify-content-between align-items-center" *ngIf="currentPost.isSoftDeleted">
@@ -9,9 +10,9 @@
         <button class="btn btn-sm btn-danger" (click)="unDeletePost()">Undelete</button>
       </div>
 
-      <div id="postContent_{{currentPost.id}}" class="card-body py-2 d-flex flex-column justify-content-between">
-        <div class="post-content" >
-          <markdown *ngIf="display">{{currentPost.content}}</markdown>
+      <div class="card-body py-2 d-flex flex-column justify-content-between">
+        <div class="post-content">
+          <markdown *ngIf="display">{{ currentPost.content }}</markdown>
 
           <form *ngIf="!display" [formGroup]="editPostForm" (ngSubmit)="editCurrentPost()">
             <textarea rows="5" class="form-control" formControlName="content" id="content"></textarea>
@@ -41,16 +42,15 @@
 
       <div class="card-footer py-2 px-3" *ngIf="isAuthenticated | async">
         <div class="d-flex gap-2">
-        <button class="btn btn-sm btn-dark" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote Post</button>
-        <button class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit Post</button>
+          <button class="btn btn-sm btn-dark" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote</button>
+          <button class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit</button>
 
-<!--        Delete post-->
-        <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete">Delete Post</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete">Delete</button>
 
-<!--        Delete toggle-->
-        <button class="btn btn-sm btn-success" (click)="deleteToggle()" *ngIf="displayDelete">Cancel delete</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="displayDelete">Perma delete</button>
-        <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete">Soft delete</button>
+          <button class="btn btn-sm btn-success" (click)="deleteToggle()" *ngIf="displayDelete">Cancel</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="displayDelete">Permanent Delete</button>
+          <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete">Soft Delete</button>
+        </div>
       </div>
     </div>
   </div>
