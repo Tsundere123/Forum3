@@ -10,7 +10,6 @@ import { Observable } from "rxjs";
   selector: 'app-forum-threads-component',
   templateUrl: './forum-threads.component.html'
 })
-
 export class ForumThreadsComponent implements OnInit{
   isLoading: boolean = true;
   isError: boolean = false;

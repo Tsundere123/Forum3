@@ -5,7 +5,6 @@ import { ForumThread } from "../../models/forum-thread/forum-thread.model";
   selector: 'app-forum-thread-list-item',
   templateUrl: './forum-thread-list-item.component.html'
 })
-
 export class ForumThreadListItemComponent {
   @Input() currentThread: ForumThread;
 }
