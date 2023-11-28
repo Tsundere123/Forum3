@@ -55,7 +55,8 @@
         <a class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit Post</a>
 
         <!--        if NOT soft deleted-->
-        <a class="btn btn-sm btn-danger" asp-controller="ForumPost" asp-action="DeleteSelectedForumPost" asp-route-forumPostId="@Model.Id.ToString()" *ngIf="display">Delete Post</a>
+<!--        Delete post-->
+        <a class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="display">Delete Post</a>
       </div>
     </div>
   </div>

@@ -54,4 +54,7 @@ export class ForumPostCardComponent implements OnInit{
       error => console.error(error)
     );
   }
+  deleteCurrentPost(){
+
+  }
 }

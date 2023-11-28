@@ -20,4 +20,8 @@ export class ForumPostsService {
   EditCurrentPost(postId: number, newContent :any){
     return this.http.post<any>("api/ForumPost/Edit/" + postId, newContent);
   }
+
+  DeleteCurrentPost(postId: number){
+    return this.http.delete<any>("api/ForumPost/PermaDelete" + postId);
+  }
 }

@@ -73,4 +73,17 @@ public class ForumPostController : Controller
         if (result) return Ok();
         return BadRequest();
     }
+
+    [HttpDelete("PermaDelete/postId")]
+    public async Task<IActionResult> PermaDeleteSelectedForumPost(int postId)
+    {
+        var forumPost = await _forumPostRepository.GetForumPostById(postId);
+        if (forumPost != null)
+        {
+            var result = await _forumPostRepository.DeleteForumPost(forumPost.Id);
+            if (result) return Ok();
+        }
+
+        return BadRequest();
+    }
 }
