@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ForumPost} from "../models/forum-post.model";
-import {ForumPostsService} from "../services/forumPosts.service";
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
-import {AuthorizeService} from "../../api-authorization/authorize.service";
-import {ForumThread} from "../models/forum-thread/forum-thread.model";
-import {ForumThreadsService} from "../services/forumThreads.service";
-import {ForumThreadDetailsModel} from "../models/forum-thread-details.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { ForumPost } from "../models/forum-post.model";
+import { ForumPostsService } from "../services/forumPosts.service";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { AuthorizeService } from "../../api-authorization/authorize.service";
+import { ForumThreadsService } from "../services/forumThreads.service";
+import { ForumThreadDetailsModel } from "../models/forum-thread-details.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-forum-posts',
@@ -25,8 +24,8 @@ export class ForumPostsComponent implements OnInit{
   display: boolean = true;
 
   postsInThread: ForumPost[] = [];
-  threadId:number;
-  displayDelete:boolean;
+  threadId: number;
+  displayDelete: boolean = false;
   threadDetails: ForumThreadDetailsModel;
 
   constructor(
@@ -41,29 +40,31 @@ export class ForumPostsComponent implements OnInit{
       userName: ''
     });
   }
+
+  get title() { return this.editThreadForm.get('title'); }
   ngOnInit(): void {
-
-    this.displayDelete = false;
-
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.activatedRoute.params.subscribe(params => this.threadId = +params['id']);
     this.authorizeService.getUser().subscribe(user => this.userName = user.name)
     this.forumPostsServices.GetAllPostsOfThread(this.threadId).subscribe({
       next:(posts) => {
-        console.log(posts);
         this.postsInThread = posts;
       },
       error:(response) =>{
         console.log(response);
+        this.isError = true;
+        this.isLoading = false;
       }
     });
 
     this.forumThreadsServices.GetThreadDetails(this.threadId).subscribe({
       next:(thread) =>{
         this.threadDetails = thread;
+        this.isLoading = false;
       },
       error:(response) =>{
         this.isError = true;
+        this.isLoading = false;
         console.log(response);
       }
     });
@@ -76,13 +77,11 @@ export class ForumPostsComponent implements OnInit{
     );
   }
   toggleEdit(){
-    if(this.display) this.display = false;
-    else this.display = true;
+    this.display = !this.display;
     this.editThreadForm.patchValue({ title: this.threadDetails.title })
   }
   deleteToggle(){
-    if(this.displayDelete == true) this.displayDelete = false;
-    else this.displayDelete = true;
+    this.displayDelete = this.displayDelete != true;
   }
   permaDeleteCurrentThread(){
     this.forumThreadsServices.PermaDeleteCurrentThread(this.threadId).subscribe(

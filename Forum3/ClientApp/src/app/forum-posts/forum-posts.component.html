@@ -1,71 +1,81 @@
-<h1 *ngIf="display">{{threadDetails.title}}</h1>
-<form *ngIf="!display" [formGroup]="editThreadForm" (ngSubmit)="editCurrentThread()">
-  <label for="title" >New title</label>
-  <input type="text" class="form-control" formControlName="title" id="title">
-  <button class="btn btn-sm btn-success" type="submit" [disabled]="editThreadForm.invalid">Edit title</button>
-  <button class="btn btn-sm btn-danger" (click)="toggleEdit()">Cancel</button>
-</form>
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
-<div class="d-flex flex-column flex-md-row gap-2 align-items-md-center justify-content-md-between">
-  <div class="d-inline-flex gap-2" style="font-size:14px;">
-    <div class="d-flex gap-2 align-items-center">
-<!--      Person icon-->
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+<div *ngIf="!isLoading && !isError">
+  <div class="d-flex gap-2 align-items-center" *ngIf="display">
+    <span *ngIf="threadDetails.isPinned">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pin-angle-fill text-secondary" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="right" title="Pinned">
+        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
       </svg>
-<!--      Name of OP-->
-      {{threadDetails.creator}}
+    </span>
+    <span *ngIf="threadDetails.isLocked">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock-fill text-secondary" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="right" title="Locked">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+      </svg>
+    </span>
+    <span *ngIf="threadDetails.isSoftDeleted">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill text-danger" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="right" title="Soft Deleted">
+        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+      </svg>
+    </span>
+    <h1 class="h2 fw-normal">{{ threadDetails.title }}</h1>
+  </div>
+
+  <form *ngIf="!display" [formGroup]="editThreadForm" (ngSubmit)="editCurrentThread()" class="mb-2">
+    <div class="input-group">
+      <input type="text" class="form-control form-control-lg" formControlName="title" id="title">
+      <button class="btn btn-sm btn-success" type="submit" [disabled]="editThreadForm.invalid">Confirm</button>
+      <button class="btn btn-sm btn-danger" (click)="toggleEdit()">Cancel</button>
     </div>
-    <div class="d-flex gap-2 align-items-center">
-<!--      Clock icon-->
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-      </svg>
-      {{threadDetails.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}
+    <div class="text-danger mt-2" *ngIf="title && title.errors && (title.dirty || title.touched)">
+      <div *ngIf="title.errors.required">Title is required.</div>
+      <div *ngIf="title.errors.minlength">Title must be at least 5 characters long.</div>
+      <div *ngIf="title.errors.maxlength">Title must be no longer than 120 characters.</div>
+    </div>
+  </form>
+
+  <div class="d-flex flex-column flex-md-row gap-2 align-items-md-center justify-content-md-between mb-2">
+    <div class="d-inline-flex gap-2" style="font-size:14px;">
+      <div class="d-flex gap-2 align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+        </svg>
+        {{ threadDetails.creator }}
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+          <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+        </svg>
+        {{ threadDetails.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss" }}
+      </div>
+    </div>
+
+    <div class="d-flex gap-2" *ngIf="isAuthenticated | async">
+      <button class="btn btn-sm btn-dark" (click)="toggleEdit()" *ngIf="display">Edit</button>
+
+      <button class="btn btn-sm btn-danger" (click)="permaDeleteCurrentThread()" *ngIf="displayDelete">Permanent Delete</button>
+      <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentThread()" *ngIf="displayDelete && !threadDetails.isSoftDeleted">Soft Delete</button>
+
+      <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete">Delete</button>
+      <button class="btn btn-sm btn-success" (click)="deleteToggle()" *ngIf="displayDelete">Cancel</button>
+
+      <button class="btn btn-sm btn-danger" (click)="unSoftDeleteCurrentThread()" *ngIf="threadDetails.isSoftDeleted">Undelete</button>
+
+      <button class="btn btn-sm btn-dark" (click)="pinCurrentThread()" *ngIf="!threadDetails.isPinned">Pin</button>
+      <button class="btn btn-sm btn-dark" (click)="unpinCurrentThread()" *ngIf="threadDetails.isPinned">Unpin</button>
+
+      <button class="btn btn-sm btn-dark" (click)="lockCurrentThread()" *ngIf="!threadDetails.isLocked">Lock</button>
+      <button class="btn btn-sm btn-dark" (click)="unlockCurrentThread()" *ngIf="threadDetails.isLocked">Unlock</button>
     </div>
   </div>
 
-<!--  EDIT THREAD-->
-  <button class="btn btn-sm btn-dark" (click)="toggleEdit()" *ngIf="display">
-    Edit Thread
-  </button>
+  <div *ngFor="let forumPost of postsInThread">
+    <app-forum-post-card [currentPost]="forumPost"></app-forum-post-card>
+  </div>
 
-<!--  Toggle delete buttons-->
-  <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete && isAuthenticated | async">Delete thread</button>
-
-<!--  IF NOT DELETED: DELETE-->
-  <button class="btn btn-sm btn-success" *ngIf="displayDelete && isAuthenticated | async" (click)="deleteToggle()">Cancel Delete</button>
-<!--  PERMA DELETE OPTION-->
-  <button class="btn btn-sm btn-danger" (click)="permaDeleteCurrentThread()" *ngIf="displayDelete">
-    Perma delete
-  </button>
-<!--  SOFT DELETE OPTION-->
-  <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentThread()" *ngIf="displayDelete && !threadDetails.isSoftDeleted">
-    Soft delete
-  </button>
-
-<!--  IF DELETED: UNDELETE-->
-  <button class="btn btn-sm btn-danger" (click)="unSoftDeleteCurrentThread()" *ngIf="threadDetails.isSoftDeleted">
-    Undelete Thread
-  </button>
-
-<!--  IF NOT PINNED: PIN-->
-  <button class="btn btn-sm btn-dark" (click)="pinCurrentThread()" *ngIf="!threadDetails.isPinned">Pin thread</button>
-
-<!--  IF PINNED: UNPIN-->
-  <button class="btn btn-sm btn-dark" (click)="unpinCurrentThread()" *ngIf="threadDetails.isPinned">Unpin thread</button>
-
-<!--  IF NOT LOCKED: LOCK-->
-  <button class="btn btn-sm btn-dark" (click)="lockCurrentThread()" *ngIf="!threadDetails.isLocked">Lock thread</button>
-
-<!--  IF LOCKED: UNLOCK-->
-  <button class="btn btn-sm btn-dark" (click)="unlockCurrentThread()" *ngIf="threadDetails.isLocked">Unlock thread</button>
-
+  <div class="d-flex justify-content-end" *ngIf="!threadDetails.isLocked && isAuthenticated | async">
+    <a class="btn btn-sm btn-dark" [routerLink]="['/posts', 'create', threadId]">New Post</a>
+  </div>
 </div>
-
-<!--Render forum posts-->
-<div *ngFor="let forumPost of postsInThread">
-<app-forum-post-card [currentPost]="forumPost"></app-forum-post-card>
-</div>
-<a class="btn btn-sm btn-dark" [routerLink]="['/posts', 'create', threadId]" *ngIf="isAuthenticated | async">New Post</a>
