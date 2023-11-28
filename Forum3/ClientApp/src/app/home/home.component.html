@@ -7,9 +7,12 @@
       now and start exploring
     </p>
   </div>
-  <a class="btn btn-primary btn-lg me-2">Register</a>
-  <a class="btn btn-outline-dark btn-lg">Login</a>
+  <a class="btn btn-primary btn-lg me-2" [routerLink]='["/authentication/register"]'>Register</a>
+  <a class="btn btn-outline-dark btn-lg" [routerLink]='["/authentication/login"]'>Login</a>
 </div>
+
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
 <h2 class="h2 fw-normal">Latest Threads</h2>
 <div class="navigation-wrapper mb-2">

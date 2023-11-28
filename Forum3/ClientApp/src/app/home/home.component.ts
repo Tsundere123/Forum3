@@ -27,19 +27,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   posts: LookupPost[] = [];
   members: LookupMember[] = [];
 
+  isLoading: boolean = true;
+  isError: boolean = false;
+
   @ViewChild("threadsRef") threadsRef: ElementRef<HTMLElement>;
   @ViewChild("postsRef") postsRef: ElementRef<HTMLElement>;
   @ViewChild("membersRef") membersRef: ElementRef<HTMLElement>;
 
   public isAuthenticated?: Observable<boolean>;
 
-  threadsCurrentSlide: number = 1;
   threadsSlider: KeenSliderInstance = null;
-
-  postsCurrentSlide: number = 1;
   postsSlider: KeenSliderInstance = null;
-
-  membersCurrentSlide: number = 1;
   membersSlider: KeenSliderInstance = null;
   constructor(private authorizeService: AuthorizeService, private homeService: HomeService) { }
 
@@ -59,9 +57,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             this.membersSlider?.update(undefined, 0);
           }, 1);
         }
+
+        this.isLoading = false;
       },
       error:(response) =>{
         console.log(response);
+        this.isError = true;
+        this.isLoading = false;
       }
     })
   }
