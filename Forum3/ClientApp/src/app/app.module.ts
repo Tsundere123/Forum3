@@ -40,6 +40,10 @@ import {
 
 import { provideMarkdown } from 'ngx-markdown';
 import { MarkdownModule } from 'ngx-markdown';
+import {NewForumThreadComponent} from "./forumThreads/newForumThread.component";
+import {NewForumPostComponent} from "./forumPosts/new-forum-post/new-forum-post.component";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +63,9 @@ import { MarkdownModule } from 'ngx-markdown';
     SearchPostsComponent,
     SearchMembersComponent,
     ForumThreadListItemComponent,
-    MemberListComponent
+    MemberListComponent,
+    NewForumThreadComponent,
+    NewForumPostComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -72,6 +78,7 @@ import { MarkdownModule } from 'ngx-markdown';
       {path: 'categories', component: ForumCategoriesComponent},
       {path: 'categories/:id', component: ForumThreadsComponent},
       {path: 'threads/:id', component: ForumPostsComponent},
+      {path: 'threads/create/:id', component: NewForumThreadComponent, canActivate: [AuthorizeGuard]},
       {path: 'search/:query', component: SearchComponent},
       {path: 'search/threads/:query', component: SearchThreadsComponent},
       {path: 'search/posts/:query', component: SearchPostsComponent},

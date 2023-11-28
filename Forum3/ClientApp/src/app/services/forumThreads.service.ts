@@ -18,4 +18,8 @@ export class ForumThreadsService {
   GetCategoryDetails(id:number){
     return this.http.get<ForumCategoryDetailsModel>("api/ForumThread/CategoryDetails/" + id)
   }
+
+  CreateThread(categoryId: number, newThread: any){
+    return this.http.post<any>("api/ForumThread/Create/" + categoryId, newThread);
+  }
 }
