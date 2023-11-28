@@ -14,7 +14,7 @@
           <markdown *ngIf="display">{{currentPost.content}}</markdown>
 
           <form *ngIf="!display" [formGroup]="editPostForm" (ngSubmit)="editCurrentPost()">
-            <textarea rows="8" class="form-control" formControlName="content" id="content"></textarea>
+            <textarea rows="5" class="form-control" formControlName="content" id="content"></textarea>
             <div class="text-danger mt-2" *ngIf="content && content.errors && (content.dirty || content.touched)">
               <div *ngIf="content.errors.required">Content is required.</div>
               <div *ngIf="content.errors.minlength">Content must be at least 5 characters long.</div>
