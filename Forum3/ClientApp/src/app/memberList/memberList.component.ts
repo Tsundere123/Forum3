@@ -10,6 +10,9 @@ import {MemberService} from "../services/member.service";
   templateUrl: './memberList.component.html'
 })
 export class MemberListComponent implements OnInit {
+  isLoading: boolean = true;
+  isError: boolean = false;
+
   members: LookupMember[] = [];
   filteredMembers: LookupMember[] = [];
 
@@ -36,9 +39,13 @@ export class MemberListComponent implements OnInit {
       next:(data) => {
         this.members = data;
         this.filteredMembers = this.members;
+
+        this.isLoading = false;
       },
       error:(response) =>{
         console.log(response);
+        this.isError = true;
+        this.isLoading = false;
       }
     })
   }

@@ -12,6 +12,9 @@ import {LookupMember} from "../models/lookup/lookupMember.model";
     templateUrl: "./search.component.html"
   })
 export class SearchComponent implements OnInit {
+  isLoading: boolean = true;
+  isError: boolean = false;
+
   threads: LookupThread[] = [];
   posts: LookupPost[] = [];
   members: LookupMember[] = [];
@@ -54,9 +57,13 @@ export class SearchComponent implements OnInit {
           this.threads = results.threads;
           this.posts = results.posts;
           this.members = results.members;
+
+          this.isLoading = false;
         },
         error: (response) => {
           console.log(response);
+          this.isError = true;
+          this.isLoading = false;
         }
       })
     }

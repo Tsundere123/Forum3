@@ -9,10 +9,15 @@
 
 <hr class="my-4" />
 
-<p *ngIf="members.length < 1">No members matching the search query.</p>
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
-<ul class="list-group mb-2" *ngIf="members.length > 0">
-  <li class="list-group-item" *ngFor="let member of members">
-    <app-lookup-member [member]="member"></app-lookup-member>
-  </li>
-</ul>
+<div *ngIf="!isLoading && !isError">
+  <p *ngIf="members.length < 1">No members matching the search query.</p>
+
+  <ul class="list-group mb-2" *ngIf="members.length > 0">
+    <li class="list-group-item" *ngFor="let member of members">
+      <app-lookup-member [member]="member"></app-lookup-member>
+    </li>
+  </ul>
+</div>

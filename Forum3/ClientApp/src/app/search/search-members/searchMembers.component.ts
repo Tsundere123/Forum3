@@ -9,6 +9,9 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: "./searchMembers.component.html"
 })
 export class SearchMembersComponent {
+  isLoading: boolean = true;
+  isError: boolean = false;
+
   members: LookupMember[] = [];
   searchForm: FormGroup;
 
@@ -46,9 +49,12 @@ export class SearchMembersComponent {
       this.searchService.searchMembers(this.query).subscribe({
         next: (results) => {
           this.members = results;
+          this.isLoading = false;
         },
         error: (response) => {
           console.log(response);
+          this.isError = true;
+          this.isLoading = false;
         }
       })
     }

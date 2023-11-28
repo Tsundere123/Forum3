@@ -3,13 +3,18 @@
   These are all the members of the forum. You can filter by username.
 </p>
 
-<div class="mb-3">
-  <label for="username" class="col-form-label">Filter by Username</label>
-  <input type="text" id="username" class="form-control" [(ngModel)]="filter">
-</div>
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-    <div class="p-2" *ngFor="let member of filteredMembers">
-      <app-lookup-member [member]="member"></app-lookup-member>
-    </div>
+<div *ngIf="!isLoading && !isError">
+  <div class="mb-3">
+    <label for="username" class="col-form-label">Filter by Username</label>
+    <input type="text" id="username" class="form-control" [(ngModel)]="filter">
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+      <div class="p-2" *ngFor="let member of filteredMembers">
+        <app-lookup-member [member]="member"></app-lookup-member>
+      </div>
+  </div>
 </div>
