@@ -37,18 +37,8 @@ public class ForumPostController : Controller
             Content = forumPost.Content,
             IsSoftDeleted = forumPost.IsSoftDeleted,
             CreatedAt = forumPost.CreatedAt,
-            Creator = new LookupUserDto
-            {
-                UserName = _userManager.FindByIdAsync(forumPost.CreatorId).Result.UserName,
-                Avatar = _userManager.FindByIdAsync(forumPost.CreatorId).Result.Avatar,
-                CreatedAt = _userManager.FindByIdAsync(forumPost.CreatorId).Result.CreatedAt
-            },
-            EditedBy = forumPost.EditedBy != string.Empty ? new LookupUserDto
-            {
-                UserName = _userManager.FindByIdAsync(forumPost.EditedBy).Result.UserName,
-                Avatar = _userManager.FindByIdAsync(forumPost.EditedBy).Result.Avatar,
-                CreatedAt = _userManager.FindByIdAsync(forumPost.EditedBy).Result.CreatedAt
-            } : null,
+            Creator = GetUserDto(_userManager.FindByIdAsync(forumPost.CreatorId).Result),
+            EditedBy = forumPost.EditedBy != string.Empty ? GetUserDto(_userManager.FindByIdAsync(forumPost.EditedBy).Result) : null,
             EditedAt = forumPost.EditedAt != DateTime.MinValue ? forumPost.EditedAt : null
         }).ToList();
         
@@ -131,5 +121,15 @@ public class ForumPostController : Controller
         forumPost.IsSoftDeleted = false;
         await _forumPostRepository.UpdateForumPost(forumPost);
         return Ok();
+    }
+    
+    private LookupUserDto GetUserDto(ApplicationUser user)
+    {
+        return new LookupUserDto
+        {
+            UserName = user.UserName,
+            Avatar = user.Avatar,
+            CreatedAt = user.CreatedAt
+        };
     }
 }
