@@ -1,4 +1,5 @@
-﻿using Forum3.DAL;
+﻿using Duende.IdentityServer.Extensions;
+using Forum3.DAL;
 using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
@@ -25,8 +26,10 @@ public class ForumPostController : Controller
     [HttpGet("{forumThreadId}")]
     public async Task<IActionResult> ForumPostView(int forumThreadId)
     {
-        var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
+        // Posts may return empty, which is fine.
+        // A thread may exist without any posts.
         
+        var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
         var forumPostsList = forumPosts.ToList();
         
         var forumPostsDto = forumPostsList.Select(forumPost => new PostDto
@@ -48,6 +51,9 @@ public class ForumPostController : Controller
     {
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return NotFound();
+        
+        if (createForumForumDto.Content.IsNullOrEmpty()) return BadRequest();
+        if (createForumForumDto.UserName.IsNullOrEmpty()) return BadRequest();
         
         var user = await _userManager.FindByNameAsync(createForumForumDto.UserName);
         if (user == null) return NotFound();
