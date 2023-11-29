@@ -3,6 +3,7 @@ using Forum3.DTOs.ForumCategory;
 using Forum3.DTOs.ForumThread;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,21 +63,10 @@ public class ForumThreadController : Controller
                 CreatedAt = t.Posts.LastOrDefault()!.CreatedAt,
                 ThreadTitle = t.Title,
                 ThreadId = t.Id,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)?.CreatedAt
-                },
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.Posts.LastOrDefault()!.CreatorId)!),
                 IsSoftDeleted = t.Posts.LastOrDefault()!.IsSoftDeleted
             } : null,
-            Creator = new LookupUserDto()
-            {
-                UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
-                CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
-            }
-            
+            Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
         }).ToList();
         return Ok(result);
     }
@@ -85,7 +75,6 @@ public class ForumThreadController : Controller
     public async Task<IActionResult> GetCategoryDetails(int categoryId)
     {
         var forumCategory = await _forumCategoryRepository.GetForumCategoryById(categoryId);
-        
         if (forumCategory == null) return NotFound();
         
         var result = new ForumCategoryDetailsDto()
@@ -189,7 +178,6 @@ public class ForumThreadController : Controller
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return BadRequest();
         
-        
         forumThread.IsSoftDeleted = true;
         await _forumThreadRepository.UpdateForumThread(forumThread);
         
@@ -211,7 +199,6 @@ public class ForumThreadController : Controller
     {
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return BadRequest();
-        
         
         forumThread.IsSoftDeleted = false;
         await _forumThreadRepository.UpdateForumThread(forumThread);

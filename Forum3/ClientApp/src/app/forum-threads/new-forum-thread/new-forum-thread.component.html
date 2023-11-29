@@ -1,5 +1,7 @@
 <h1 class="h2 fw-normal">New Thread</h1>
 
+<app-error-content [isError]="isError"></app-error-content>
+
 <form [formGroup]="newThreadForm" (ngSubmit)="onSubmit()">
   <div class="form-group mb-2">
     <label for="title">Title</label>

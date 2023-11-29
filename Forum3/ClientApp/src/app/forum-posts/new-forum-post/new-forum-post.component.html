@@ -1,5 +1,7 @@
 <h1 class="h2 fw-normal">New Post</h1>
 
+<app-error-content [isError]="isError"></app-error-content>
+
 <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
   <div class="form-group mb-2">
     <label for="content">Content</label>
