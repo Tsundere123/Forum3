@@ -35,16 +35,16 @@ public class ForumCategoryController : Controller
             Id = c.Id,
             Name = c.Name,
             Description = c.Description,
-            LatestThread = c.Threads.Any() ? new LookupThreadDto()
+            LatestThread = c.Threads!.Any() ? new LookupThreadDto()
             {
-                Id = c.Threads.LastOrDefault()?.Id,
-                Title = c.Threads.LastOrDefault()?.Title,
-                CreatedAt = c.Threads.LastOrDefault()?.CreatedAt,
-                Category = c.Threads.LastOrDefault()?.Category.Name,
-                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)!)
+                Id = c.Threads!.LastOrDefault()?.Id,
+                Title = c.Threads!.LastOrDefault()?.Title,
+                CreatedAt = c.Threads!.LastOrDefault()?.CreatedAt,
+                Category = c.Threads!.LastOrDefault()?.Category!.Name,
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == c.Threads!.LastOrDefault()!.CreatorId)!)
             } : null,
-            ThreadCount = c.Threads.Count,
-            PostCount = c.Threads.Sum(t => t.Posts.Count)
+            ThreadCount = c.Threads!.Count,
+            PostCount = c.Threads.Sum(t => t.Posts!.Count)
         }).ToList();
      
         return Ok(categoriesResult);

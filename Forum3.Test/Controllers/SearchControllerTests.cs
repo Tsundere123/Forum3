@@ -36,9 +36,9 @@ public class SearchControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result);
         var model = Assert.IsAssignableFrom<SearchDto>(okResult.Value);
         
-        Assert.Equal(6, model.threads.Count);
-        Assert.Equal(6, model.members.Count);
-        Assert.Empty(model.posts);
+        Assert.Equal(6, model.Threads.Count);
+        Assert.Equal(6, model.Members.Count);
+        Assert.Empty(model.Posts);
     }
 
     [Fact]

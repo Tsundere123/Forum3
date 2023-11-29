@@ -41,7 +41,7 @@ public class HomeController : Controller
                 Id = t.Id,
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
-                Category = t.Category.Name,
+                Category = t.Category!.Name,
                 Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();
@@ -71,9 +71,9 @@ public class HomeController : Controller
 
         var dto = new HomeDto
         {
-            threads = latestThreads,
-            posts = latestPosts,
-            members = members
+            Threads = latestThreads,
+            Posts = latestPosts,
+            Members = members
         };
 
         return Ok(dto);
