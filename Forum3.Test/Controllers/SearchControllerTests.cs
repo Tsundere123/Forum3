@@ -55,6 +55,7 @@ public class SearchControllerTests
             forumThreadRepositoryMock.Object,
             forumPostRepositoryMock.Object);
 
+        userManagerMock.Setup(manager => manager.Users).Returns(Constants.Users.AsQueryable());
         forumThreadRepositoryMock.Setup(repo => repo.GetAll()).ReturnsAsync(Constants.ForumThreads);
         
         // Act
@@ -81,6 +82,7 @@ public class SearchControllerTests
             forumThreadRepositoryMock.Object,
             forumPostRepositoryMock.Object);
 
+        userManagerMock.Setup(manager => manager.Users).Returns(Constants.Users.AsQueryable());
         forumPostRepositoryMock.Setup(repo => repo.GetAll()).ReturnsAsync(Constants.ForumPosts);
         
         // Act
