@@ -50,7 +50,7 @@
 
           <button class="btn btn-sm btn-success" (click)="deleteToggle()" *ngIf="displayDelete">Cancel</button>
           <button class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="displayDelete">Permanent Delete</button>
-          <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete">Soft Delete</button>
+          <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete && !currentPost.isSoftDeleted">Soft Delete</button>
         </div>
       </div>
     </div>
