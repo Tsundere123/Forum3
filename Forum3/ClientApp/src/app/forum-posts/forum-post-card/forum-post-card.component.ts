@@ -41,9 +41,7 @@ export class ForumPostCardComponent implements OnInit{
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.display = true;
     // get username
-    if(this.isAuthenticated){
-      this.authorizeService.getUser().subscribe(user => this.userName = user.name)
-    }
+    this.authorizeService.getUser().subscribe(user => user ? this.userName = user.name : null);
     this.route.params.subscribe(params => this.postId = +params['id']);
   }
   onClickEdit(){
