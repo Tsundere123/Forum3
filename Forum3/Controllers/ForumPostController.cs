@@ -1,6 +1,5 @@
 ﻿using Duende.IdentityServer.Extensions;
 using Forum3.DAL;
-using Forum3.DTOs;
 using Forum3.DTOs.ForumPost;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
@@ -37,7 +36,7 @@ public class ForumPostController : Controller
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
         var forumPostsList = forumPosts.ToList();
         
-        var forumPostsDto = forumPostsList.Select(forumPost => new PostDto
+        var forumPostsDto = forumPostsList.Select(forumPost => new ForumPostDto
         {
             Id = forumPost.Id,
             Content = forumPost.Content,

@@ -1,8 +1,8 @@
 using Forum3.DTOs.Lookup;
 
-namespace Forum3.DTOs.Category;
+namespace Forum3.DTOs.ForumCategory;
 
-public class CategoryDto
+public class ForumCategoryDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

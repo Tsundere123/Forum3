@@ -2,7 +2,7 @@ using Forum3.DTOs.Lookup;
 
 namespace Forum3.DTOs.ForumPost;
 
-public class PostDto
+public class ForumPostDto
 {
     public int? Id { get; set; }
     public string? Content { get; set; }

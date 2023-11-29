@@ -2,7 +2,7 @@
 
 namespace Forum3.DTOs.ForumThread;
 
-public class ThreadDto
+public class ForumThreadDto
 {
     public int? Id { get; set; }
     

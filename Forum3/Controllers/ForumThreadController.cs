@@ -1,6 +1,5 @@
 ﻿using Forum3.DAL;
-using Forum3.DTOs;
-using Forum3.DTOs.Category;
+using Forum3.DTOs.ForumCategory;
 using Forum3.DTOs.ForumThread;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
@@ -47,7 +46,7 @@ public class ForumThreadController : Controller
             .OrderByDescending(t => t.LastPost)
             .Select(t => t.ForumThread);
         
-        var result = sortedThreads.Select(t => new ThreadDto()
+        var result = sortedThreads.Select(t => new ForumThreadDto()
         {
             Id = t.Id,
             Title = t.Title,
@@ -89,7 +88,7 @@ public class ForumThreadController : Controller
         
         if (forumCategory == null) return NotFound();
         
-        var result = new CategoryDetailsDto()
+        var result = new ForumCategoryDetailsDto()
         {
             Id = forumCategory.Id,
             Name = forumCategory.Name,
@@ -104,7 +103,7 @@ public class ForumThreadController : Controller
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return NotFound();
 
-        var result = new ThreadDetailsDto()
+        var result = new ForumThreadDetailsDto()
         {
             Id = forumThread.Id,
             Title = forumThread.Title,
@@ -167,15 +166,15 @@ public class ForumThreadController : Controller
     }
 
     [HttpPost("EditThread/{threadId}")]
-    public async Task<IActionResult> EditThread(int threadId, [FromBody] EditThreadTitleDto editForumThreadDto)
+    public async Task<IActionResult> EditThread(int threadId, [FromBody] EditForumThreadTitleDto editForumForumThreadDto)
     {
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return NotFound();
         
-        var user = await _userManager.FindByNameAsync(editForumThreadDto.UserName);
+        var user = await _userManager.FindByNameAsync(editForumForumThreadDto.UserName);
         if (user == null) return NotFound();
 
-        forumThread.Title = editForumThreadDto.Title;
+        forumThread.Title = editForumForumThreadDto.Title;
         forumThread.EditedAt = DateTime.Now;
         forumThread.EditedBy = user.Id;
 

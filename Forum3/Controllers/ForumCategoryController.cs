@@ -1,6 +1,5 @@
 ﻿using Forum3.DAL;
-using Forum3.DTOs;
-using Forum3.DTOs.Category;
+using Forum3.DTOs.ForumCategory;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
@@ -28,7 +27,7 @@ public class ForumCategoryController : Controller
     {
         var categories = await _forumCategoryRepository.GetAll();
         var categoriesList = categories.ToList();
-        var categoriesResult = categoriesList.Select(c => new CategoryDto()
+        var categoriesResult = categoriesList.Select(c => new ForumCategoryDto()
         {
             Id = c.Id,
             Name = c.Name,
