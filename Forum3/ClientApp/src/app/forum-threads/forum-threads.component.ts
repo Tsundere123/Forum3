@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ForumThreadsService } from "../services/forumThreads.service";
+import { ForumThreadsService } from "../services/forum-threads.service";
 import { ActivatedRoute } from "@angular/router";
 import { ForumThread } from "../models/forum-thread/forum-thread.model";
 import { ForumCategoryDetailsModel } from "../models/forum-category-details.model";

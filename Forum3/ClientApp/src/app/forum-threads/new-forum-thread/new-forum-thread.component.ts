@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthorizeService } from "../../api-authorization/authorize.service";
-import { ForumThreadsService } from "../services/forumThreads.service";
+import { AuthorizeService } from "../../../api-authorization/authorize.service";
+import { ForumThreadsService } from "../../services/forum-threads.service";
 
 @Component({
   selector: 'app-new-forum-thread-component',

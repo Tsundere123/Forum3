@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from "@angular/core";
 import { ForumPost } from "../../models/forum-post.model";
-import { ForumPostsService } from "../../services/forumPosts.service";
+import { ForumPostsService } from "../../services/forum-posts.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";

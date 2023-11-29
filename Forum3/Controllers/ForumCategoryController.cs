@@ -11,26 +11,15 @@ namespace Forum3.Controllers;
 public class ForumCategoryController : Controller
 {
     private readonly IForumCategoryRepository _forumCategoryRepository;
-    private readonly IForumThreadRepository _forumThreadRepository;
-    private readonly IForumPostRepository _forumPostRepository;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public ForumCategoryController(IForumCategoryRepository forumCategoryRepository, IForumThreadRepository forumThreadRepository,
-        IForumPostRepository forumPostRepository, UserManager<ApplicationUser> userManager)
+    public ForumCategoryController(
+        IForumCategoryRepository forumCategoryRepository, 
+        UserManager<ApplicationUser> userManager)
     {
         _forumCategoryRepository = forumCategoryRepository;
-        _forumThreadRepository = forumThreadRepository;
         _userManager = userManager;
-        _forumPostRepository = forumPostRepository;
     }
-    
-    // [HttpGet]
-    // public async Task<IActionResult> GetAllCategories()
-    // {
-    //     var categories = await _forumCategoryRepository.GetAll();
-    //     
-    //     return Ok(categories);
-    // }
     
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
@@ -61,5 +50,4 @@ public class ForumCategoryController : Controller
      
         return Ok(categoriesResult);
     }
-
 }
