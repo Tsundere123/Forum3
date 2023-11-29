@@ -39,20 +39,16 @@ export class ForumPostCardComponent implements OnInit{
 
   ngOnInit():void{
     this.isAuthenticated = this.authorizeService.isAuthenticated();
-    this.display = true;
-    // get username
     this.authorizeService.getUser().subscribe(user => user ? this.userName = user.name : null);
     this.route.params.subscribe(params => this.postId = +params['id']);
+    this.display = true;
   }
   onClickEdit(){
-    // Toggles display of items
-    if(this.display == true)this.display = false;
-    else this.display = true;
+    this.display = this.display != true;
     this.editPostForm.patchValue({ content: this.currentPost.content })
   }
   deleteToggle(){
-    if(this.displayDelete == true)this.displayDelete = false;
-    else this.displayDelete = true;
+    this.displayDelete = this.displayDelete != true;
 
   }
   editCurrentPost(){
