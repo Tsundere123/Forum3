@@ -22,6 +22,7 @@ export class ForumPostCardComponent implements OnInit{
   oldContent: string;
 
   isAuthenticated?: Observable<boolean>;
+  isError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,26 +56,38 @@ export class ForumPostCardComponent implements OnInit{
     this.editPostForm.patchValue({ userName: this.userName });
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
 
   deleteCurrentPost(){
     this.forumPostsService.PermaDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
   softDeleteCurrentPost(){
     this.forumPostsService.SoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
   unDeletePost(){
     this.forumPostsService.UnSoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 }

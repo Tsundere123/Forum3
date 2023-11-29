@@ -88,45 +88,66 @@ export class ForumPostsComponent implements OnInit{
   permaDeleteCurrentThread(){
     this.forumThreadsServices.PermaDeleteCurrentThread(this.threadId).subscribe(
       () => this.router.navigate(['/']),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   softDeleteCurrentThread(){
     this.forumThreadsServices.SoftDeleteCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unSoftDeleteCurrentThread(){
     this.forumThreadsServices.UnSoftDeleteCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 
   pinCurrentThread(){
     this.forumThreadsServices.pinCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unpinCurrentThread(){
     this.forumThreadsServices.unpinCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 
   lockCurrentThread(){
     this.forumThreadsServices.lockCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unlockCurrentThread(){
     this.forumThreadsServices.unlockCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 }

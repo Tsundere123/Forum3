@@ -14,6 +14,7 @@ export class NewForumThreadComponent implements OnInit{
   categoryId: number = 0;
   userName?: string
   isAuthenticated?: Observable<boolean>;
+  isError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +45,10 @@ export class NewForumThreadComponent implements OnInit{
     this.newThreadForm.patchValue({ userName: this.userName })
     this.threadService.CreateThread(this.categoryId, this.newThreadForm.value).subscribe(
       () => this.router.navigate(['/categories', this.categoryId], { relativeTo: this.route }),
-      error => console.error(error)
+      error => {
+        console.log(error);
+        this.isError = true;
+      }
     );
   }
 

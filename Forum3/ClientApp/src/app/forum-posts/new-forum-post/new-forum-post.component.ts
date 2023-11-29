@@ -14,6 +14,7 @@ export class NewForumPostComponent implements OnInit{
   threadId: number;
   userName?: string
   isAuthenticated?: Observable<boolean>;
+  isError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +40,10 @@ export class NewForumPostComponent implements OnInit{
     this.newPostForm.patchValue({ userName: this.userName })
     this.postService.CreatePost(this.threadId, this.newPostForm.value).subscribe(
       () => this.router.navigate(['/threads', this.threadId], { relativeTo: this.route }),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
 
