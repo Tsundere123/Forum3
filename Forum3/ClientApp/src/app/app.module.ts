@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {ApplicationConfig, NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -10,12 +11,12 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { ForumCategoriesComponent } from "./forumCategories/forumCategories.component";
-import { ForumThreadsComponent } from "./forumThreads/forumThreads.component";
-import { ForumPostsComponent } from "./forumPosts/forumPosts.component";
+import { ForumCategoriesComponent } from "./forum-categories/forum-categories.component";
+import { ForumThreadsComponent } from "./forum-threads/forum-threads.component";
+import { ForumPostsComponent } from "./forum-posts/forum-posts.component";
 import { ConvertToReadableDate } from "./shared/convert-to-readable-date";
 import { LimitStringLength } from "./shared/limit-string-length";
-import { ForumPostCardComponent } from "./forumPosts/forum-post-card/forum-post-card.component";
+import { ForumPostCardComponent } from "./forum-posts/forum-post-card/forum-post-card.component";
 import { LookupMemberComponent } from "./shared/lookup/lookup-member/lookup-member.component";
 import { LookupThreadComponent } from "./shared/lookup/lookup-threads/lookup-thread.component";
 import { LookupPostComponent } from "./shared/lookup/lookup-post/lookup-post.component";
@@ -23,34 +24,19 @@ import { SearchThreadsComponent } from "./search/search-threads/search-threads.c
 import { SearchPostsComponent } from "./search/search-posts/search-posts.component";
 import { SearchMembersComponent } from "./search/search-members/search-members.component";
 import { SearchComponent } from "./search/search.component";
-import {ForumThreadListItemComponent} from "./forumThreads/forum-thread-list-item/forum-thread-list-item.component";
-import {MemberListComponent} from "./member-list/member-list.component";
-import {
-    ForumCategoryListItemComponent
-} from "./forumCategories/forum-category-list-item/forum-category-list-item.component";
-import {
-  ForumThreadListNewestSoftDeletedComponent
-} from "./forumThreads/forum-thread-list-item/forum-thread-list-newest-soft-deleted/forum-thread-list-newest-soft-deleted.component";
-import {
-  ForumThreadListNormalIconsComponent
-} from "./forumThreads/forum-thread-list-item/forum-thread-list-normal-icons/forum-thread-list-normal-icons.component";
-import {
-  ForumThreadListNoPostsComponent
-} from "./forumThreads/forum-thread-list-item/forum-thread-list-no-posts/forum-thread-list-no-posts.component";
-
-import { provideMarkdown } from 'ngx-markdown';
-import { MarkdownModule } from 'ngx-markdown';
-import { NewForumThreadComponent } from "./forumThreads/newForumThread.component";
-import { NewForumPostComponent } from "./forumPosts/new-forum-post/new-forum-post.component";
-import {
-  ForumCategoryListItemNoThreadsInCategoryComponent
-} from "./forumCategories/forum-category-list-item/forum-category-list-item-no-threads-in-category/forum-category-list-item-no-threads-in-category.component";
-import {
-  ForumCategoryListItemNewestThreadComponent
-} from "./forumCategories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
-import {LoadingContentComponent} from "./shared/loading-content/loading-content.component";
-import {ErrorContentComponent} from "./shared/error-content/error-content.component";
-import {ProfileCardComponent} from "./shared/profile-card/profile-card.component";
+import { ForumThreadListItemComponent } from "./forum-threads/forum-thread-list-item/forum-thread-list-item.component";
+import { MemberListComponent } from "./member-list/member-list.component";
+import { ForumCategoryListItemComponent } from "./forum-categories/forum-category-list-item/forum-category-list-item.component";
+import { ForumThreadListNewestSoftDeletedComponent } from "./forum-threads/forum-thread-list-item/forum-thread-list-newest-soft-deleted/forum-thread-list-newest-soft-deleted.component";
+import { ForumThreadListNormalIconsComponent } from "./forum-threads/forum-thread-list-item/forum-thread-list-normal-icons/forum-thread-list-normal-icons.component";
+import { ForumThreadListNoPostsComponent } from "./forum-threads/forum-thread-list-item/forum-thread-list-no-posts/forum-thread-list-no-posts.component";
+import { NewForumThreadComponent } from "./forum-threads/new-forum-thread.component";
+import { NewForumPostComponent } from "./forum-posts/new-forum-post/new-forum-post.component";
+import { ForumCategoryListItemNoThreadsInCategoryComponent } from "./forum-categories/forum-category-list-item/forum-category-list-item-no-threads-in-category/forum-category-list-item-no-threads-in-category.component";
+import { ForumCategoryListItemNewestThreadComponent } from "./forum-categories/forum-category-list-item/forum-category-list-item-newest-thread/forum-category-list-item-newest-thread.component";
+import { LoadingContentComponent } from "./shared/loading-content/loading-content.component";
+import { ErrorContentComponent } from "./shared/error-content/error-content.component";
+import { ProfileCardComponent } from "./shared/profile-card/profile-card.component";
 
 @NgModule({
   declarations: [
@@ -114,9 +100,6 @@ import {ProfileCardComponent} from "./shared/profile-card/profile-card.component
       {path: 'search/members/:query', component: SearchMembersComponent},
       {path: 'members', component: MemberListComponent},
       {path: 'posts/create/:id', component: NewForumPostComponent, canActivate: [AuthorizeGuard]},
-      // {path: ''}
-      // { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-
     ]),
     ReactiveFormsModule,
   ],

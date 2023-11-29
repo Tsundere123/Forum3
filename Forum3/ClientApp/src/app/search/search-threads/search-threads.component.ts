@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {LookupThread} from "../../models/lookup/lookupThread.model";
+import {LookupThread} from "../../models/lookup/lookup-thread.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SearchService} from "../../services/search.service";
 import {ActivatedRoute} from "@angular/router";

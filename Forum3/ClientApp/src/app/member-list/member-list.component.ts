@@ -1,9 +1,6 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {LookupMember} from "../models/lookup/lookupMember.model";
-import {MemberService} from "../services/member.service";
+import { Component, OnInit } from '@angular/core';
+import { LookupMember } from "../models/lookup/lookup-member.model";
+import { MemberService } from "../services/member.service";
 
 @Component({
   selector: 'app-member-list',
