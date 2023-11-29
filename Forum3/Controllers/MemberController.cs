@@ -1,8 +1,9 @@
 using Forum3.DTOs;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Forum3.Controllers;
 
@@ -18,7 +19,7 @@ public class MemberController : Controller
     }
     
     [HttpGet]
-public async Task<IActionResult> Index()
+    public Task<IActionResult> Index()
     {
         var userLookup = _userManager.Users
             .Select(u => new LookupUserDto()
@@ -29,6 +30,6 @@ public async Task<IActionResult> Index()
             })
             .ToList();
 
-        return Ok(userLookup);
+        return Task.FromResult<IActionResult>(Ok(userLookup));
     }
 }

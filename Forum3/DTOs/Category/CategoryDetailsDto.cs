@@ -1,4 +1,4 @@
-﻿namespace Forum3.DTOs;
+﻿namespace Forum3.DTOs.Category;
 
 public class CategoryDetailsDto
 {

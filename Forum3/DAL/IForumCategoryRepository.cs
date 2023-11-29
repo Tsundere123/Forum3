@@ -6,7 +6,4 @@ public interface IForumCategoryRepository
 {
   Task<List<ForumCategory>?> GetAll();
   Task<ForumCategory?> GetForumCategoryById(int id);
-  Task<bool> CreateForumCategory(ForumCategory forumCategory);
-  Task<bool> UpdateForumCategory(ForumCategory forumCategory);
-  Task<bool> DeleteForumCategory(ForumCategory forumCategory);
 }

@@ -1,5 +1,7 @@
 ﻿using Forum3.DAL;
 using Forum3.DTOs;
+using Forum3.DTOs.Category;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

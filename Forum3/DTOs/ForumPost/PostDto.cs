@@ -1,4 +1,6 @@
-namespace Forum3.DTOs;
+using Forum3.DTOs.Lookup;
+
+namespace Forum3.DTOs.ForumPost;
 
 public class PostDto
 {

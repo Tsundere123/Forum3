@@ -1,9 +1,9 @@
 using Forum3.DAL;
 using Forum3.DTOs;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Forum3.Controllers;
 
@@ -15,7 +15,10 @@ public class SearchController : Controller
     private readonly IForumThreadRepository _forumThreadRepository;
     private readonly IForumPostRepository _forumPostRepository;
 
-    public SearchController(UserManager<ApplicationUser> userManager, IForumThreadRepository forumThreadRepository, IForumPostRepository forumPostRepository)
+    public SearchController(
+        UserManager<ApplicationUser> userManager, 
+        IForumThreadRepository forumThreadRepository, 
+        IForumPostRepository forumPostRepository)
     {
         _userManager = userManager;
         _forumThreadRepository = forumThreadRepository;
@@ -25,10 +28,7 @@ public class SearchController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(string? query)
     {
-        if (query == null)
-        {
-            return BadRequest();
-        }
+        if (query == null) return BadRequest();
         
         var threads = await _forumThreadRepository.GetAll();
         var threadList = threads.ToList();
@@ -100,10 +100,7 @@ public class SearchController : Controller
     [HttpGet("Threads")]
     public async Task<IActionResult> SearchThreads(string? query)
     {
-        if (query == null)
-        {
-            return BadRequest();
-        }
+        if (query == null) return BadRequest();
         
         var threads = await _forumThreadRepository.GetAll();
         var threadList = threads.ToList();
@@ -132,10 +129,7 @@ public class SearchController : Controller
     [HttpGet("Posts")]
     public async Task<IActionResult> SearchPosts(string? query)
     {
-        if (query == null)
-        {
-            return BadRequest();
-        }
+        if (query == null) return BadRequest();
         
         var posts = await _forumPostRepository.GetAll();
         var postList = posts.ToList();
@@ -163,12 +157,9 @@ public class SearchController : Controller
     }
     
     [HttpGet("Members")]
-    public async Task<IActionResult> SearchMembers(string? query)
+    public Task<IActionResult> SearchMembers(string? query)
     {
-        if (query == null)
-        {
-            return BadRequest();
-        }
+        if (query == null) return Task.FromResult<IActionResult>(BadRequest());
         
         var membersResults = _userManager.Users
             .Where(u => u.UserName.ToUpper().Contains(query.ToUpper()))
@@ -181,6 +172,6 @@ public class SearchController : Controller
             })
             .ToList();
 
-        return Ok(membersResults);
+        return Task.FromResult<IActionResult>(Ok(membersResults));
     }
 }

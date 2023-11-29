@@ -1,5 +1,8 @@
 ﻿using Forum3.DAL;
 using Forum3.DTOs;
+using Forum3.DTOs.Category;
+using Forum3.DTOs.ForumThread;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +18,11 @@ public class ForumThreadController : Controller
     private readonly IForumPostRepository _forumPostRepository;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public ForumThreadController(IForumCategoryRepository forumCategoryRepository, IForumThreadRepository forumThreadRepository,
-        IForumPostRepository forumPostRepository, UserManager<ApplicationUser> userManager)
+    public ForumThreadController(
+        IForumCategoryRepository forumCategoryRepository, 
+        IForumThreadRepository forumThreadRepository,
+        IForumPostRepository forumPostRepository, 
+        UserManager<ApplicationUser> userManager)
     {
         _forumCategoryRepository = forumCategoryRepository;
         _forumThreadRepository = forumThreadRepository;
@@ -24,8 +30,8 @@ public class ForumThreadController : Controller
         _forumPostRepository = forumPostRepository;
     }
 
-    [HttpGet("{forumCategoryId}/{page?}")]
-    public async Task<IActionResult> ForumThreadsOfCategory(int forumCategoryId, int? page)
+    [HttpGet("{forumCategoryId}")]
+    public async Task<IActionResult> ForumThreadsOfCategory(int forumCategoryId)
     {
         var threads = await _forumThreadRepository.GetForumThreadsByCategoryId(forumCategoryId);
         if (threads == null) return NotFound();
@@ -201,7 +207,6 @@ public class ForumThreadController : Controller
         return Ok();
     }
     
-    
     [HttpDelete("UnSoftDelete/{threadId}")]
     public async Task<IActionResult> UnSoftDeleteSelectedForumThread(int threadId)
     {
@@ -247,7 +252,6 @@ public class ForumThreadController : Controller
         if (result) return Ok();
         return BadRequest();
     }
-    
     
     [HttpGet("LockThread/{threadId}")]
     public async Task<IActionResult> LockSelectedForumThread(int threadId)

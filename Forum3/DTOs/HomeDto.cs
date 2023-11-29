@@ -1,3 +1,5 @@
+using Forum3.DTOs.Lookup;
+
 namespace Forum3.DTOs;
 
 public class HomeDto
