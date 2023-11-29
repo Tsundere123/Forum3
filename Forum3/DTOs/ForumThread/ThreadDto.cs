@@ -1,6 +1,6 @@
-﻿using Forum3.Models;
+﻿using Forum3.DTOs.Lookup;
 
-namespace Forum3.DTOs;
+namespace Forum3.DTOs.ForumThread;
 
 public class ThreadDto
 {

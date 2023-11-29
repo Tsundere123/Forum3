@@ -1,6 +1,4 @@
-﻿using NuGet.Common;
-
-namespace Forum3.DTOs;
+﻿namespace Forum3.DTOs.ForumThread;
 
 public class ThreadDetailsDto
 {
