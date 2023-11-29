@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";
 import { ForumPostsService } from "../../services/forum-posts.service";
 import {Observable} from "rxjs";
@@ -10,44 +9,40 @@ import {Observable} from "rxjs";
   templateUrl: './new-forum-post.component.html'
 })
 export class NewForumPostComponent implements OnInit{
+  @Input() threadId: number;
   newPostForm: FormGroup;
-  threadId: number;
   userName?: string
   isAuthenticated?: Observable<boolean>;
   isError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
     private authorizeService: AuthorizeService,
     private postService: ForumPostsService
   ) {
     this.newPostForm = formBuilder.group({
-      content: ['', Validators.required],
+      content: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]],
       userName: ''
     });
   }
+
+  get content() { return this.newPostForm.get('content'); }
+
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     if(this.isAuthenticated){
       this.authorizeService.getUser().subscribe(user => this.userName = user.name)
     }
-    this.route.params.subscribe(params => this.threadId = +params['id']);
   }
 
   onSubmit() {
     this.newPostForm.patchValue({ userName: this.userName })
     this.postService.CreatePost(this.threadId, this.newPostForm.value).subscribe(
-      () => this.router.navigate(['/threads', this.threadId], { relativeTo: this.route }),
+      () => location.reload(),
       error => {
         console.error(error);
         this.isError = true;
       }
     );
-  }
-
-  onCancel() {
-    this.router.navigate(['/threads', this.threadId], { relativeTo: this.route });
   }
 }

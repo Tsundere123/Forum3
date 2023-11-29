@@ -75,7 +75,9 @@
     <app-forum-post-card [currentPost]="forumPost"></app-forum-post-card>
   </div>
 
-  <div class="d-flex justify-content-end" *ngIf="!threadDetails.isLocked && isAuthenticated | async">
-    <a class="btn btn-sm btn-dark" [routerLink]="['/posts', 'create', threadId]">New Post</a>
+  <div class="d-flex justify-content-end mb-2" *ngIf="!threadDetails.isLocked && isAuthenticated | async">
+    <button class="btn btn-sm {{ displayNewPost ? 'btn-danger' : 'btn-dark' }}" (click)="toggleNewPost()">{{ displayNewPost ? "Cancel New Post" : "New Post" }}</button>
   </div>
+
+  <app-new-forum-post [threadId]="threadId" *ngIf="displayNewPost && isAuthenticated | async"></app-new-forum-post>
 </div>

@@ -22,6 +22,7 @@ export class ForumPostsComponent implements OnInit{
   isAuthenticated?: Observable<boolean>;
 
   display: boolean = true;
+  displayNewPost: boolean = false;
 
   postsInThread: ForumPost[] = [];
   threadId: number;
@@ -78,6 +79,11 @@ export class ForumPostsComponent implements OnInit{
       error => console.error(error)
     );
   }
+
+  toggleNewPost(){
+    this.displayNewPost = !this.displayNewPost;
+  }
+
   toggleEdit(){
     this.display = !this.display;
     this.editThreadForm.patchValue({ title: this.threadDetails.title })
