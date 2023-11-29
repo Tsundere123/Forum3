@@ -2,6 +2,7 @@
 using Forum3.DTOs.ForumCategory;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,12 +39,7 @@ public class ForumCategoryController : Controller
                 Title = c.Threads.LastOrDefault()?.Title,
                 CreatedAt = c.Threads.LastOrDefault()?.CreatedAt,
                 Category = c.Threads.LastOrDefault()?.Category.Name,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == c.Threads.LastOrDefault()!.CreatorId)!)
             } : null,
             ThreadCount = c.Threads.Count,
             PostCount = c.Threads.Sum(t => t.Posts.Count)

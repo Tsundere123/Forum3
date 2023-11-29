@@ -2,6 +2,7 @@ using Forum3.DAL;
 using Forum3.DTOs;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,12 +44,7 @@ public class SearchController : Controller
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
                 Category = t.Category.Name,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();
         
@@ -66,12 +62,7 @@ public class SearchController : Controller
                 CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)!)
             })
             .ToList();
         
@@ -79,12 +70,7 @@ public class SearchController : Controller
             .Where(u => u.UserName.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)
-            .Select(u => new LookupUserDto()
-            {
-                UserName = u.UserName,
-                Avatar = u.Avatar,
-                CreatedAt = u.CreatedAt
-            })
+            .Select(u => DtoUtilities.GetUserDto(u))
             .ToList();
 
         var dto = new SearchDto()
@@ -114,12 +100,7 @@ public class SearchController : Controller
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
                 Category = t.Category.Name,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();
 
@@ -144,12 +125,7 @@ public class SearchController : Controller
                 CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)!)
             })
             .ToList();
 
@@ -164,12 +140,7 @@ public class SearchController : Controller
         var membersResults = _userManager.Users
             .Where(u => u.UserName.ToUpper().Contains(query.ToUpper()))
             .OrderByDescending(u => u.CreatedAt)
-            .Select(u => new LookupUserDto()
-            {
-                UserName = u.UserName,
-                Avatar = u.Avatar,
-                CreatedAt = u.CreatedAt
-            })
+            .Select(u => DtoUtilities.GetUserDto(u))
             .ToList();
 
         return Task.FromResult<IActionResult>(Ok(membersResults));

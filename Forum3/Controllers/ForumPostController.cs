@@ -3,6 +3,7 @@ using Forum3.DAL;
 using Forum3.DTOs.ForumPost;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,8 +43,8 @@ public class ForumPostController : Controller
             Content = forumPost.Content,
             IsSoftDeleted = forumPost.IsSoftDeleted,
             CreatedAt = forumPost.CreatedAt,
-            Creator = GetUserDto(_userManager.FindByIdAsync(forumPost.CreatorId).Result),
-            EditedBy = forumPost.EditedBy != string.Empty ? GetUserDto(_userManager.FindByIdAsync(forumPost.EditedBy).Result) : null,
+            Creator = DtoUtilities.GetUserDto(_userManager.FindByIdAsync(forumPost.CreatorId).Result),
+            EditedBy = forumPost.EditedBy != string.Empty ? DtoUtilities.GetUserDto(_userManager.FindByIdAsync(forumPost.EditedBy).Result) : null,
             EditedAt = forumPost.EditedAt != DateTime.MinValue ? forumPost.EditedAt : null
         }).ToList();
         
@@ -129,15 +130,5 @@ public class ForumPostController : Controller
         forumPost.IsSoftDeleted = false;
         await _forumPostRepository.UpdateForumPost(forumPost);
         return Ok();
-    }
-    
-    private LookupUserDto GetUserDto(ApplicationUser user)
-    {
-        return new LookupUserDto
-        {
-            UserName = user.UserName,
-            Avatar = user.Avatar,
-            CreatedAt = user.CreatedAt
-        };
     }
 }

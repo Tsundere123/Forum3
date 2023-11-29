@@ -1,5 +1,6 @@
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,12 +22,7 @@ public class MemberController : Controller
     public Task<IActionResult> Index()
     {
         var userLookup = _userManager.Users
-            .Select(u => new LookupUserDto()
-            {
-                UserName = u.UserName,
-                Avatar = u.Avatar,
-                CreatedAt = u.CreatedAt
-            })
+            .Select(u => DtoUtilities.GetUserDto(u))
             .ToList();
 
         return Task.FromResult<IActionResult>(Ok(userLookup));
