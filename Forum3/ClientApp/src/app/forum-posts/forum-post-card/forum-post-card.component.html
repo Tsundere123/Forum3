@@ -5,7 +5,7 @@
 
   <div class="col-lg-9">
     <div class="card h-100">
-      <div class="card-header alert-danger d-flex justify-content-between align-items-center" *ngIf="currentPost.isSoftDeleted">
+      <div class="card-header bg-danger bg-opacity-25 d-flex justify-content-between align-items-center" *ngIf="currentPost.isSoftDeleted">
         <span>This post is soft deleted.</span>
         <button class="btn btn-sm btn-danger" (click)="unDeletePost()"  *ngIf="isAuthenticated | async">Undelete</button>
       </div>
