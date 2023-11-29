@@ -1,7 +1,5 @@
-﻿using Forum3.DAL;
-using Forum3.Data;
+﻿using Forum3.Data;
 using Forum3.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Forum3.DAL;
@@ -47,16 +45,7 @@ public class ForumPostRepository : IForumPostRepository
     {
         try
         {
-            var postList = await _db.ForumPost.ToListAsync();
-            List<ForumPost> returnList = new List<ForumPost>();
-            foreach (var forumPost in postList)
-            {
-                if (forumPost.ThreadId == threadId)
-                {
-                    returnList.Add(forumPost);
-                }
-            }
-            return returnList;
+            return await _db.ForumPost.Where(t => t.ThreadId == threadId).ToListAsync();
         }
         catch (Exception e)
         {
@@ -69,16 +58,7 @@ public class ForumPostRepository : IForumPostRepository
     {
         try
         {
-            var postList = await _db.ForumPost.ToListAsync();
-            var latestPost = new ForumPost();
-            foreach (var forumPost in postList)
-            {
-                if (forumPost.ThreadId == threadId)
-                {
-                    if (forumPost.CreatedAt > latestPost.CreatedAt) latestPost = forumPost;
-                }
-            }
-            return latestPost;
+            return await _db.ForumPost.Where(t => t.ThreadId == threadId).LastOrDefaultAsync();
         }
         catch (Exception e)
         {
@@ -90,16 +70,7 @@ public class ForumPostRepository : IForumPostRepository
     public async Task<IEnumerable<ForumPost>?> GetAllForumPostsByAccountId(string accountId)
     {
         try {
-            var postList = await _db.ForumPost.ToListAsync();
-            List<ForumPost> returnList = new List<ForumPost>();
-            foreach (var forumPost in postList)
-            {
-                if (forumPost.CreatorId == accountId)
-                {
-                    returnList.Add(forumPost);
-                }
-            }
-            return returnList;
+            return await _db.ForumPost.Where(p => p.CreatorId == accountId).ToListAsync();
         }
         catch (Exception e)
         {

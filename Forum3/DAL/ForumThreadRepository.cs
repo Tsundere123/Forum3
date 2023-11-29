@@ -1,5 +1,4 @@
-﻿using Forum3.DAL;
-using Forum3.Data;
+﻿using Forum3.Data;
 using Forum3.Models;
 using Microsoft.EntityFrameworkCore;
 

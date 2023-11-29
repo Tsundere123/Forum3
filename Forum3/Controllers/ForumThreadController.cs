@@ -1,13 +1,8 @@
-﻿using System.Diagnostics;
-using Duende.IdentityServer.Events;
-using Forum3.DAL;
-using Forum3.Data;
+﻿using Forum3.DAL;
 using Forum3.DTOs;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Common;
-using NuGet.Protocol;
 
 namespace Forum3.Controllers;
 
