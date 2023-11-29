@@ -75,7 +75,6 @@ public class ForumThreadController : Controller
     public async Task<IActionResult> GetCategoryDetails(int categoryId)
     {
         var forumCategory = await _forumCategoryRepository.GetForumCategoryById(categoryId);
-        
         if (forumCategory == null) return NotFound();
         
         var result = new ForumCategoryDetailsDto()
@@ -179,7 +178,6 @@ public class ForumThreadController : Controller
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return BadRequest();
         
-        
         forumThread.IsSoftDeleted = true;
         await _forumThreadRepository.UpdateForumThread(forumThread);
         
@@ -201,7 +199,6 @@ public class ForumThreadController : Controller
     {
         var forumThread = await _forumThreadRepository.GetForumThreadById(threadId);
         if (forumThread == null) return BadRequest();
-        
         
         forumThread.IsSoftDeleted = false;
         await _forumThreadRepository.UpdateForumThread(forumThread);
