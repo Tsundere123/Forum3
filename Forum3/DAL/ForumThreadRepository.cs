@@ -63,28 +63,6 @@ public class ForumThreadRepository : IForumThreadRepository
         }
     }
 
-    public async Task<IEnumerable<ForumThread>?> GetForumThreadsByAccountId(string accountId)
-    {
-        try
-        {
-            var threadList = await _db.ForumThread.ToListAsync();
-            List<ForumThread> returnList = new List<ForumThread>();
-            foreach(var forumThread in threadList)
-            {
-                if (forumThread.CreatorId == accountId)
-                {
-                    returnList.Add(forumThread);
-                }
-            }
-            return returnList;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "[ForumThreadRepository] ForumThread GetForumThreadsByAccountId failed, error message: {E}", e.Message);
-            return null;
-        }
-    }
-
     public async Task<bool> CreateNewForumThread(ForumThread forumThread)
     {
         try
