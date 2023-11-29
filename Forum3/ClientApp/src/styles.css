@@ -26,3 +26,15 @@ code {
   padding-left: 10px;
   margin-left: 10px;
 }
+
+.post-content table,
+.post-content th,
+.post-content td {
+  border: 1px solid #dfe2e5;
+  padding: 0.25rem;
+}
+
+.post-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
