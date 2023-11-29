@@ -22,10 +22,8 @@ public class ForumPostController : Controller
         _userManager = userManager;
     }
     
-    private const int PageSize = 10;
-
-    [HttpGet("{forumThreadId}/{page?}")]
-    public async Task<IActionResult> ForumPostView(int forumThreadId, int? page)
+    [HttpGet("{forumThreadId}")]
+    public async Task<IActionResult> ForumPostView(int forumThreadId)
     {
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
         
