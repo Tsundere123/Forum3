@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.posts = data.posts;
         this.members = data.members;
 
+        //Rerender sliders after data load
         if (this.threadsSlider || this.postsSlider || this.membersSlider) {
           setTimeout(() => {
             this.threadsSlider?.update(undefined, 0);

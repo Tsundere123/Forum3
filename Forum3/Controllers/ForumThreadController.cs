@@ -51,7 +51,7 @@ public class ForumThreadController : Controller
         {
             Id = t.Id,
             Title = t.Title,
-            PostCount = t.Posts.Count,
+            PostCount = t.Posts!.Count,
             IsPinned = t.IsPinned,
             IsLocked = t.IsLocked,
             IsSoftDeleted = t.IsSoftDeleted,
@@ -183,7 +183,7 @@ public class ForumThreadController : Controller
         
         //Mark all posts as soft deleted
         var forumPosts = _forumPostRepository.GetAllForumPostsByThreadId(threadId).Result;
-        foreach (var forumPost in forumPosts)
+        foreach (var forumPost in forumPosts!)
         {
             forumPost.IsSoftDeleted = true;
             
@@ -205,7 +205,7 @@ public class ForumThreadController : Controller
         
         //Mark all posts as soft deleted
         var forumPosts = _forumPostRepository.GetAllForumPostsByThreadId(threadId).Result;
-        foreach (var forumPost in forumPosts)
+        foreach (var forumPost in forumPosts!)
         {
             forumPost.IsSoftDeleted = false;
             

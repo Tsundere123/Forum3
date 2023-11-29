@@ -1,7 +1,6 @@
 ﻿using Duende.IdentityServer.Extensions;
 using Forum3.DAL;
 using Forum3.DTOs.ForumPost;
-using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +34,7 @@ public class ForumPostController : Controller
         // A thread may exist without any posts.
         
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
-        var forumPostsList = forumPosts.ToList();
+        var forumPostsList = forumPosts!.ToList();
         
         var forumPostsDto = forumPostsList.Select(forumPost => new ForumPostDto
         {

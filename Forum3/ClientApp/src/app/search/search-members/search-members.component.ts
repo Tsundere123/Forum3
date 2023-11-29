@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {LookupMember} from "../../models/lookup/lookup-member.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SearchService} from "../../services/search.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component } from "@angular/core";
+import { LookupMember } from "../../models/lookup/lookup-member.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SearchService } from "../../services/search.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-search-members",
@@ -56,7 +56,7 @@ export class SearchMembersComponent {
           this.isError = true;
           this.isLoading = false;
         }
-      })
+      });
     }
   }
 }

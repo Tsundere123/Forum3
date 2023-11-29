@@ -1,5 +1,4 @@
-import {LookupThread} from "./lookup/lookup-thread.model";
-import {LookupPost} from "./lookup/lookup-post.model";
+import { LookupThread } from "./lookup/lookup-thread.model";
 
 export interface ForumCategory {
   id: number;

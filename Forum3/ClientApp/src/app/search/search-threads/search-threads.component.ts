@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {LookupThread} from "../../models/lookup/lookup-thread.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SearchService} from "../../services/search.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component } from "@angular/core";
+import { LookupThread } from "../../models/lookup/lookup-thread.model";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SearchService } from "../../services/search.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-search-threads",
@@ -56,7 +56,7 @@ export class SearchThreadsComponent {
           this.isError = true;
           this.isLoading = false;
         }
-      })
+      });
     }
   }
 }

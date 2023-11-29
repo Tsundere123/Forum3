@@ -1,11 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {Search} from "../models/search.model";
-import {SearchService} from "../services/search.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LookupThread} from "../models/lookup/lookup-thread.model";
-import {LookupPost} from "../models/lookup/lookup-post.model";
-import {LookupMember} from "../models/lookup/lookup-member.model";
+import { Component, OnInit } from "@angular/core";
+import { SearchService } from "../services/search.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { LookupThread } from "../models/lookup/lookup-thread.model";
+import { LookupPost } from "../models/lookup/lookup-post.model";
+import { LookupMember } from "../models/lookup/lookup-member.model";
 
 @Component({
     selector: "app-search",

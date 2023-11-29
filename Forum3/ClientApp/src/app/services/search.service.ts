@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Search} from "../models/search.model";
-import {LookupThread} from "../models/lookup/lookup-thread.model";
-import {LookupPost} from "../models/lookup/lookup-post.model";
-import {LookupMember} from "../models/lookup/lookup-member.model";
+import { HttpClient } from "@angular/common/http";
+import { Search } from "../models/search.model";
+import { LookupThread } from "../models/lookup/lookup-thread.model";
+import { LookupPost } from "../models/lookup/lookup-post.model";
+import { LookupMember } from "../models/lookup/lookup-member.model";
 
 @Injectable({
   providedIn: 'root'

@@ -43,7 +43,7 @@ public class SearchController : Controller
                 Id = t.Id,
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
-                Category = t.Category.Name,
+                Category = t.Category!.Name,
                 Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();
@@ -75,9 +75,9 @@ public class SearchController : Controller
 
         var dto = new SearchDto()
         {
-            threads = threadResults,
-            posts = postResults,
-            members = membersResults
+            Threads = threadResults,
+            Posts = postResults,
+            Members = membersResults
         };
 
         return Ok(dto);
@@ -99,7 +99,7 @@ public class SearchController : Controller
                 Id = t.Id,
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
-                Category = t.Category.Name,
+                Category = t.Category!.Name,
                 Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();

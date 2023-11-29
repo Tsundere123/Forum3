@@ -5,7 +5,6 @@ import { LookupThread } from "../../../models/lookup/lookup-thread.model";
   selector: 'app-forum-category-list-item-newest-thread',
   templateUrl: './forum-category-list-item-newest-thread.component.html'
 })
-
 export class ForumCategoryListItemNewestThreadComponent {
   @Input() latestThread: LookupThread;
 }
