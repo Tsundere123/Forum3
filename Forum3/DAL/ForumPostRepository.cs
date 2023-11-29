@@ -1,7 +1,5 @@
-﻿using Forum3.DAL;
-using Forum3.Data;
+﻿using Forum3.Data;
 using Forum3.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Forum3.DAL;
