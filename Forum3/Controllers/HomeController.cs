@@ -29,7 +29,8 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var threads = await _forumThreadRepository.GetAll();
+        var threads = await _forumThreadRepository.GetAll() ?? new List<ForumThread>();
+
         var threadList = threads.ToList();
         var latestThreads = threadList
             .Where(t => t.IsSoftDeleted == false)
@@ -45,7 +46,7 @@ public class HomeController : Controller
             })
             .ToList();
         
-        var posts = await _forumPostRepository.GetAll();
+        var posts = await _forumPostRepository.GetAll() ?? new List<ForumPost>();
         var postList = posts.ToList();
         var latestPosts = postList
             .Where(p => p.IsSoftDeleted == false)
@@ -62,7 +63,6 @@ public class HomeController : Controller
             })
             .ToList();
         
-        // Get username and avatar of latest 6 members
         var members = _userManager.Users
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)

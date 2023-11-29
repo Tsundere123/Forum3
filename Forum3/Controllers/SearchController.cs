@@ -31,7 +31,7 @@ public class SearchController : Controller
     {
         if (query == null) return BadRequest();
         
-        var threads = await _forumThreadRepository.GetAll();
+        var threads = await _forumThreadRepository.GetAll() ?? new List<ForumThread>();
         var threadList = threads.ToList();
         var threadResults = threadList
             .Where(t => t.IsSoftDeleted == false)
@@ -48,7 +48,7 @@ public class SearchController : Controller
             })
             .ToList();
         
-        var posts = await _forumPostRepository.GetAll();
+        var posts = await _forumPostRepository.GetAll() ?? new List<ForumPost>();
         var postList = posts.ToList();
         var postResults = postList
             .Where(p => p.IsSoftDeleted == false)
@@ -88,7 +88,7 @@ public class SearchController : Controller
     {
         if (query == null) return BadRequest();
         
-        var threads = await _forumThreadRepository.GetAll();
+        var threads = await _forumThreadRepository.GetAll() ?? new List<ForumThread>();
         var threadList = threads.ToList();
         var threadResults = threadList
             .Where(t => t.IsSoftDeleted == false)
@@ -112,7 +112,7 @@ public class SearchController : Controller
     {
         if (query == null) return BadRequest();
         
-        var posts = await _forumPostRepository.GetAll();
+        var posts = await _forumPostRepository.GetAll() ?? new List<ForumPost>();
         var postList = posts.ToList();
         var postResults = postList
             .Where(p => p.IsSoftDeleted == false)
