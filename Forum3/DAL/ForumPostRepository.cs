@@ -53,20 +53,7 @@ public class ForumPostRepository : IForumPostRepository
             return null;
         }
     }
-
-    public async Task<ForumPost?> GetLatestPostInThread(int threadId)
-    {
-        try
-        {
-            return await _db.ForumPost.Where(t => t.ThreadId == threadId).LastOrDefaultAsync();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "[ForumPostRepository] ForumPost GetAllForumPostsByThreadId failed, error message: {E}", e.Message);
-            return null;
-        }
-    }
-
+    
     public async Task<IEnumerable<ForumPost>?> GetAllForumPostsByAccountId(string accountId)
     {
         try {

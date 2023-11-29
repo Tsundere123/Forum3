@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ForumThreadsService } from './forumThreads.service';
+import { ForumThreadsService } from './forum-threads.service';
 
 describe('ThreadsService', () => {
   let service: ForumThreadsService;

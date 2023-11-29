@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer.Extensions;
 using Forum3.DAL;
-using Forum3.DTOs;
+using Forum3.DTOs.ForumPost;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,10 @@ public class ForumPostController : Controller
     private readonly IForumPostRepository _forumPostRepository;
     private readonly UserManager<ApplicationUser> _userManager;   
     
-    public ForumPostController(IForumThreadRepository forumThreadRepository,IForumPostRepository forumPostRepository, UserManager<ApplicationUser> userManager)
+    public ForumPostController(
+        IForumThreadRepository forumThreadRepository,
+        IForumPostRepository forumPostRepository, 
+        UserManager<ApplicationUser> userManager)
     {
         _forumThreadRepository = forumThreadRepository;
         _forumPostRepository = forumPostRepository;
@@ -32,7 +36,7 @@ public class ForumPostController : Controller
         var forumPosts = await _forumPostRepository.GetAllForumPostsByThreadId(forumThreadId);
         var forumPostsList = forumPosts.ToList();
         
-        var forumPostsDto = forumPostsList.Select(forumPost => new PostDto
+        var forumPostsDto = forumPostsList.Select(forumPost => new ForumPostDto
         {
             Id = forumPost.Id,
             Content = forumPost.Content,

@@ -1,6 +1,8 @@
-namespace Forum3.DTOs;
+using Forum3.DTOs.Lookup;
 
-public class PostDto
+namespace Forum3.DTOs.ForumPost;
+
+public class ForumPostDto
 {
     public int? Id { get; set; }
     public string? Content { get; set; }

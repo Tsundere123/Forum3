@@ -1,8 +1,6 @@
-﻿using NuGet.Common;
+﻿namespace Forum3.DTOs.ForumThread;
 
-namespace Forum3.DTOs;
-
-public class ThreadDetailsDto
+public class ForumThreadDetailsDto
 {
     public int? Id { get; set; }
     public string Title { get; set; }

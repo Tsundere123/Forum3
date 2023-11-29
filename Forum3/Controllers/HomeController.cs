@@ -1,9 +1,9 @@
 using Forum3.DAL;
 using Forum3.DTOs;
+using Forum3.DTOs.Lookup;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Forum3.Controllers;
 
@@ -15,7 +15,10 @@ public class HomeController : Controller
     private readonly IForumThreadRepository _forumThreadRepository;
     private readonly IForumPostRepository _forumPostRepository;
 
-    public HomeController(UserManager<ApplicationUser> userManager, IForumThreadRepository forumThreadRepository, IForumPostRepository forumPostRepository)
+    public HomeController(
+        UserManager<ApplicationUser> userManager, 
+        IForumThreadRepository forumThreadRepository, 
+        IForumPostRepository forumPostRepository)
     {
         _userManager = userManager;
         _forumThreadRepository = forumThreadRepository;

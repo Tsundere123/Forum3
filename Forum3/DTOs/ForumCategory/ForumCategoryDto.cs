@@ -1,6 +1,8 @@
-namespace Forum3.DTOs;
+using Forum3.DTOs.Lookup;
 
-public class CategoryDto
+namespace Forum3.DTOs.ForumCategory;
+
+public class ForumCategoryDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

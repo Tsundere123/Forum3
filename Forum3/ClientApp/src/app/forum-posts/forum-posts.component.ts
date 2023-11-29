@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumPost } from "../models/forum-post.model";
-import { ForumPostsService } from "../services/forumPosts.service";
+import { ForumPostsService } from "../services/forum-posts.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthorizeService } from "../../api-authorization/authorize.service";
-import { ForumThreadsService } from "../services/forumThreads.service";
+import { ForumThreadsService } from "../services/forum-threads.service";
 import { ForumThreadDetailsModel } from "../models/forum-thread-details.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 

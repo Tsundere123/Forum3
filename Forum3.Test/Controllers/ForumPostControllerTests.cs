@@ -1,6 +1,7 @@
 using Forum3.Controllers;
 using Forum3.DAL;
 using Forum3.DTOs;
+using Forum3.DTOs.ForumPost;
 using Forum3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -277,7 +278,7 @@ public class ForumPostControllerTests
         
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var model = Assert.IsAssignableFrom<IEnumerable<PostDto>>(okResult.Value);
+        var model = Assert.IsAssignableFrom<IEnumerable<ForumPostDto>>(okResult.Value);
 
         var postDtos = model.ToList();
         Assert.Equal(2, postDtos.Count);
@@ -326,7 +327,7 @@ public class ForumPostControllerTests
         
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var model = Assert.IsAssignableFrom<IEnumerable<PostDto>>(okResult.Value);
+        var model = Assert.IsAssignableFrom<IEnumerable<ForumPostDto>>(okResult.Value);
         
         var postDtos = model.ToList();
         Assert.Empty(postDtos);
