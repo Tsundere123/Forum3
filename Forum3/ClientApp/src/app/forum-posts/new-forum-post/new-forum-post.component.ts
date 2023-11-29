@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";
 import { ForumPostsService } from "../../services/forum-posts.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-new-forum-post',
@@ -12,6 +13,7 @@ export class NewForumPostComponent implements OnInit{
   newPostForm: FormGroup;
   threadId: number;
   userName?: string
+  isAuthenticated?: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +28,10 @@ export class NewForumPostComponent implements OnInit{
     });
   }
   ngOnInit() {
-    this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
+    if(this.isAuthenticated){
+      this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    }
     this.route.params.subscribe(params => this.threadId = +params['id']);
   }
 

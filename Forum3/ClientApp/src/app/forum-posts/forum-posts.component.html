@@ -25,7 +25,7 @@
   <form *ngIf="!display" [formGroup]="editThreadForm" (ngSubmit)="editCurrentThread()" class="mb-2">
     <div class="input-group">
       <input type="text" class="form-control form-control-lg" formControlName="title" id="title">
-      <button class="btn btn-sm btn-success" type="submit" [disabled]="editThreadForm.invalid">Confirm</button>
+      <button class="btn btn-sm btn-success" type="submit" [disabled]="editThreadForm.invalid">Submit</button>
       <button class="btn btn-sm btn-danger" (click)="toggleEdit()">Cancel</button>
     </div>
     <div class="text-danger mt-2" *ngIf="title && title.errors && (title.dirty || title.touched)">
