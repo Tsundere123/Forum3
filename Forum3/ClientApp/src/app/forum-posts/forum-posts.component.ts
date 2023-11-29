@@ -46,9 +46,11 @@ export class ForumPostsComponent implements OnInit{
   ngOnInit(): void {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.activatedRoute.params.subscribe(params => this.threadId = +params['id']);
-    if(this.isAuthenticated){
-      this.authorizeService.getUser().subscribe(user => this.userName = user.name)
-    }
+    this.isAuthenticated.subscribe(auth => {
+      if(auth){
+        this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+      }
+    });
     this.forumPostsServices.GetAllPostsOfThread(this.threadId).subscribe({
       next:(posts) => {
         this.postsInThread = posts;
