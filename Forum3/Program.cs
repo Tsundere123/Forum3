@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Forum3.Data;
 using Forum3.Models;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +41,18 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// Logger
+var loggerConfiguration = new LoggerConfiguration()
+    .MinimumLevel.Information().WriteTo
+    .File($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
+
+loggerConfiguration.Filter.ByExcluding(e =>
+    e.Properties.TryGetValue("SourceContext", out var value) && 
+    e.Level == LogEventLevel.Information &&
+    e.MessageTemplate.Text.Contains("Executed DbCommand"));
+
+builder.Logging.AddSerilog(loggerConfiguration.CreateLogger());
 
 var app = builder.Build();
 
