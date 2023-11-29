@@ -105,7 +105,6 @@ import { ErrorContentComponent } from "./shared/error-content/error-content.comp
       { path: 'search/posts/:query', component: SearchPostsComponent },
       { path: 'search/members/:query', component: SearchMembersComponent },
       { path: 'members', component: MemberListComponent },
-      { path: 'posts/create/:id', component: NewForumPostComponent, canActivate: [AuthorizeGuard] },
     ]),
     ReactiveFormsModule,
   ],
