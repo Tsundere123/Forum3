@@ -40,12 +40,10 @@ export class ForumPostCardComponent implements OnInit{
   ngOnInit():void{
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.display = true;
-    this.isAuthenticated.subscribe(auth => {
-      if(auth){
-        this.authorizeService.getUser().subscribe(user => this.userName = user.name)
-      }
-    });
-
+    // get username
+    if(this.isAuthenticated){
+      this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    }
     this.route.params.subscribe(params => this.postId = +params['id']);
   }
   onClickEdit(){
