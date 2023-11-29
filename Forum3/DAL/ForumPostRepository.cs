@@ -53,18 +53,6 @@ public class ForumPostRepository : IForumPostRepository
             return null;
         }
     }
-    
-    public async Task<IEnumerable<ForumPost>?> GetAllForumPostsByAccountId(string accountId)
-    {
-        try {
-            return await _db.ForumPost.Where(p => p.CreatorId == accountId).ToListAsync();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "[ForumPostRepository] ForumPost GetAllForumPostsByAccountId failed, error message: {E}", e.Message);
-            return null;
-        }
-    }
 
     public async Task<bool> CreateNewForumPost(ForumPost forumPost)
     {

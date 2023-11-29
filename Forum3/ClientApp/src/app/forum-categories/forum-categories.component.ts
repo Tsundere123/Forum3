@@ -6,7 +6,6 @@ import { ForumCategory } from "../models/forum-category.model";
   selector: 'app-forum-categories-component',
   templateUrl: './forum-categories.component.html'
 })
-
 export class ForumCategoriesComponent implements OnInit{
   isLoading: boolean = true;
   isError: boolean = false;

@@ -35,8 +35,8 @@ public class HomeControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result);
         var model = Assert.IsAssignableFrom<HomeDto>(okResult.Value);
         
-        Assert.Equal(6, model.threads.Count);
-        Assert.Equal(6, model.posts.Count);
-        Assert.Equal(6, model.members.Count);
+        Assert.Equal(6, model.Threads.Count);
+        Assert.Equal(6, model.Posts.Count);
+        Assert.Equal(6, model.Members.Count);
     }
 }

@@ -36,9 +36,9 @@ public class SearchControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result);
         var model = Assert.IsAssignableFrom<SearchDto>(okResult.Value);
         
-        Assert.Equal(6, model.threads.Count);
-        Assert.Equal(6, model.members.Count);
-        Assert.Empty(model.posts);
+        Assert.Equal(6, model.Threads.Count);
+        Assert.Equal(6, model.Members.Count);
+        Assert.Empty(model.Posts);
     }
 
     [Fact]
@@ -55,6 +55,7 @@ public class SearchControllerTests
             forumThreadRepositoryMock.Object,
             forumPostRepositoryMock.Object);
 
+        userManagerMock.Setup(manager => manager.Users).Returns(Constants.Users.AsQueryable());
         forumThreadRepositoryMock.Setup(repo => repo.GetAll()).ReturnsAsync(Constants.ForumThreads);
         
         // Act
@@ -81,6 +82,7 @@ public class SearchControllerTests
             forumThreadRepositoryMock.Object,
             forumPostRepositoryMock.Object);
 
+        userManagerMock.Setup(manager => manager.Users).Returns(Constants.Users.AsQueryable());
         forumPostRepositoryMock.Setup(repo => repo.GetAll()).ReturnsAsync(Constants.ForumPosts);
         
         // Act

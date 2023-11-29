@@ -22,6 +22,7 @@ export class ForumPostCardComponent implements OnInit{
   oldContent: string;
 
   isAuthenticated?: Observable<boolean>;
+  isError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,46 +40,53 @@ export class ForumPostCardComponent implements OnInit{
 
   ngOnInit():void{
     this.isAuthenticated = this.authorizeService.isAuthenticated();
-    this.display = true;
-    // get username
-    this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    this.authorizeService.getUser().subscribe(user => user ? this.userName = user.name : null);
     this.route.params.subscribe(params => this.postId = +params['id']);
+    this.display = true;
   }
   onClickEdit(){
-    // Toggles display of items
-    if(this.display == true)this.display = false;
-    else this.display = true;
+    this.display = this.display != true;
     this.editPostForm.patchValue({ content: this.currentPost.content })
   }
   deleteToggle(){
-    if(this.displayDelete == true)this.displayDelete = false;
-    else this.displayDelete = true;
-
+    this.displayDelete = this.displayDelete != true;
   }
   editCurrentPost(){
     this.editPostForm.patchValue({ userName: this.userName });
     this.forumPostsService.EditCurrentPost(this.currentPost.id, this.editPostForm.value).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
 
   deleteCurrentPost(){
     this.forumPostsService.PermaDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
   softDeleteCurrentPost(){
     this.forumPostsService.SoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     );
   }
   unDeletePost(){
     this.forumPostsService.UnSoftDeleteCurrentPost(this.currentPost.id).subscribe(
       () => location.reload(),
-      error => console.error(error)
-    )
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
+    );
   }
 }

@@ -22,6 +22,7 @@ export class ForumPostsComponent implements OnInit{
   isAuthenticated?: Observable<boolean>;
 
   display: boolean = true;
+  displayNewPost: boolean = false;
 
   postsInThread: ForumPost[] = [];
   threadId: number;
@@ -46,7 +47,8 @@ export class ForumPostsComponent implements OnInit{
   ngOnInit(): void {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.activatedRoute.params.subscribe(params => this.threadId = +params['id']);
-    this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    this.authorizeService.getUser().subscribe(user => user ? this.userName = user.name : null);
+
     this.forumPostsServices.GetAllPostsOfThread(this.threadId).subscribe({
       next:(posts) => {
         this.postsInThread = posts;
@@ -77,6 +79,11 @@ export class ForumPostsComponent implements OnInit{
       error => console.error(error)
     );
   }
+
+  toggleNewPost(){
+    this.displayNewPost = !this.displayNewPost;
+  }
+
   toggleEdit(){
     this.display = !this.display;
     this.editThreadForm.patchValue({ title: this.threadDetails.title })
@@ -87,45 +94,66 @@ export class ForumPostsComponent implements OnInit{
   permaDeleteCurrentThread(){
     this.forumThreadsServices.PermaDeleteCurrentThread(this.threadId).subscribe(
       () => this.router.navigate(['/']),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   softDeleteCurrentThread(){
     this.forumThreadsServices.SoftDeleteCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unSoftDeleteCurrentThread(){
     this.forumThreadsServices.UnSoftDeleteCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 
   pinCurrentThread(){
     this.forumThreadsServices.pinCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unpinCurrentThread(){
     this.forumThreadsServices.unpinCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 
   lockCurrentThread(){
     this.forumThreadsServices.lockCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
   unlockCurrentThread(){
     this.forumThreadsServices.unlockCurrentThread(this.threadId).subscribe(
       () => location.reload(),
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.isError = true;
+      }
     )
   }
 }

@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {LookupPost} from "../../../models/lookup/lookup-post.model";
+import { Component, Input } from '@angular/core';
+import { LookupPost } from "../../../models/lookup/lookup-post.model";
 
 @Component({
   selector: 'app-lookup-post',

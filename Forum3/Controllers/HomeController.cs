@@ -2,6 +2,7 @@ using Forum3.DAL;
 using Forum3.DTOs;
 using Forum3.DTOs.Lookup;
 using Forum3.Models;
+using Forum3.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,8 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var threads = await _forumThreadRepository.GetAll();
+        var threads = await _forumThreadRepository.GetAll() ?? new List<ForumThread>();
+
         var threadList = threads.ToList();
         var latestThreads = threadList
             .Where(t => t.IsSoftDeleted == false)
@@ -39,17 +41,12 @@ public class HomeController : Controller
                 Id = t.Id,
                 Title = t.Title,
                 CreatedAt = t.CreatedAt,
-                Category = t.Category.Name,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)?.CreatedAt
-                }
+                Category = t.Category!.Name,
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == t.CreatorId)!)
             })
             .ToList();
         
-        var posts = await _forumPostRepository.GetAll();
+        var posts = await _forumPostRepository.GetAll() ?? new List<ForumPost>();
         var postList = posts.ToList();
         var latestPosts = postList
             .Where(p => p.IsSoftDeleted == false)
@@ -62,32 +59,21 @@ public class HomeController : Controller
                 CreatedAt = p.CreatedAt,
                 ThreadTitle = p.Thread.Title,
                 ThreadId = p.Thread.Id,
-                Creator = new LookupUserDto()
-                {
-                    UserName = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.UserName,
-                    Avatar = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.Avatar,
-                    CreatedAt = _userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)?.CreatedAt
-                }
+                Creator = DtoUtilities.GetUserDto(_userManager.Users.FirstOrDefault(u => u.Id == p.CreatorId)!)
             })
             .ToList();
         
-        // Get username and avatar of latest 6 members
         var members = _userManager.Users
             .OrderByDescending(u => u.CreatedAt)
             .Take(6)
-            .Select(u => new LookupUserDto()
-            {
-                UserName = u.UserName,
-                Avatar = u.Avatar,
-                CreatedAt = u.CreatedAt
-            })
+            .Select(u => DtoUtilities.GetUserDto(u))
             .ToList();
 
         var dto = new HomeDto
         {
-            threads = latestThreads,
-            posts = latestPosts,
-            members = members
+            Threads = latestThreads,
+            Posts = latestPosts,
+            Members = members
         };
 
         return Ok(dto);

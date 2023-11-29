@@ -1,4 +1,5 @@
 <div class="row mb-2">
+  <app-error-content [isError]="isError"></app-error-content>
   <div class="col-lg-3 mb-2 mb-lg-0">
     <app-profile-card [member]="currentPost.creator"></app-profile-card>
   </div>
@@ -42,14 +43,13 @@
 
       <div class="card-footer py-2 px-3" *ngIf="isAuthenticated | async">
         <div class="d-flex gap-2">
-          <button class="btn btn-sm btn-dark" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote</button>
           <button class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit</button>
 
           <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete">Delete</button>
-
           <button class="btn btn-sm btn-success" (click)="deleteToggle()" *ngIf="displayDelete">Cancel</button>
+
           <button class="btn btn-sm btn-danger" (click)="deleteCurrentPost()" *ngIf="displayDelete">Permanent Delete</button>
-          <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete">Soft Delete</button>
+          <button class="btn btn-sm btn-danger" (click)="softDeleteCurrentPost()" *ngIf="displayDelete && !currentPost.isSoftDeleted">Soft Delete</button>
         </div>
       </div>
     </div>

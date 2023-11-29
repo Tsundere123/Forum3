@@ -1,17 +1,17 @@
 <div class="d-flex align-items-center">
-  <img src="avatars/{{thread.creator.avatar}}" alt="{{thread.creator.userName}}" class="rounded me-2" height="48" width="48" />
+  <img ngSrc="avatars/{{ thread.creator.avatar }}" alt="{{ thread.creator.userName }}" class="rounded me-2" height="48" width="48" />
   <div>
     <div class="d-block">
-      <a routerLink="/threads/{{thread.id}}" class="link-dark text-decoration-none">
-        {{thread.title | limitStringLength: 30}}
+      <a routerLink="/threads/{{ thread.id }}" class="link-dark text-decoration-none">
+        {{ thread.title | limitStringLength: 30 }}
       </a>
     </div>
     <div class="d-block" style="font-size: 14px">
-      in {{thread.category}}
+      in {{ thread.category }}
     </div>
     <div class="d-block" style="font-size: 12px;">
-      <span class="me-2">{{thread.creator.userName}}</span>
-      <span class="text-muted">{{thread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss"}}</span>
+      <span class="me-2">{{ thread.creator.userName }}</span>
+      <span class="text-muted">{{ thread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss" }}</span>
     </div>
     </div>
 </div>
