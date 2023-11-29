@@ -47,6 +47,7 @@ import { ProfileCardComponent } from "./shared/profile-card/profile-card.compone
 
 import { LoadingContentComponent } from "./shared/loading-content/loading-content.component";
 import { ErrorContentComponent } from "./shared/error-content/error-content.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -89,10 +90,12 @@ import { ErrorContentComponent } from "./shared/error-content/error-content.comp
     ErrorContentComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
     MarkdownModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -106,7 +109,6 @@ import { ErrorContentComponent } from "./shared/error-content/error-content.comp
       { path: 'search/members/:query', component: SearchMembersComponent },
       { path: 'members', component: MemberListComponent },
     ]),
-    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

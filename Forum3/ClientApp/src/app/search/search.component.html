@@ -23,6 +23,7 @@
     </ul>
     <a class="btn btn-sm btn-outline-primary d-block mt-2" *ngIf="threads.length > 0" (click)="goToThreadSearch()">Search in Threads</a>
   </div>
+
   <div class="col-md-4 mb-4 mb-md-0">
     <h2 class="h2 fw-normal">Posts</h2>
     <p *ngIf="posts.length < 1">No posts matching the search query.</p>
@@ -33,6 +34,7 @@
     </ul>
     <a class="btn btn-sm btn-outline-primary d-block mt-2" *ngIf="posts.length > 0" (click)="goToPostSearch()">Search in Posts</a>
   </div>
+
   <div class="col-md-4">
     <h2 class="h2 fw-normal">Members</h2>
     <p *ngIf="members.length < 1">No members matching the search query.</p>

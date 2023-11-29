@@ -50,7 +50,6 @@ export class ForumPostCardComponent implements OnInit{
   }
   deleteToggle(){
     this.displayDelete = this.displayDelete != true;
-
   }
   editCurrentPost(){
     this.editPostForm.patchValue({ userName: this.userName });
@@ -88,6 +87,6 @@ export class ForumPostCardComponent implements OnInit{
         console.error(error);
         this.isError = true;
       }
-    )
+    );
   }
 }

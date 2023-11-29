@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
-import {ForumCategory} from "../models/forum-category.model";
-import {ForumThreadViewModel} from "../models/forum-thread-view.model";
-import {ForumThread} from "../models/forum-thread/forum-thread.model";
-import {ForumCategoryDetailsModel} from "../models/forum-category-details.model";
-import {ForumThreadDetailsModel} from "../models/forum-thread-details.model";
+import { HttpClient } from "@angular/common/http";
+import { ForumThread } from "../models/forum-thread/forum-thread.model";
+import { ForumCategoryDetailsModel } from "../models/forum-category-details.model";
+import { ForumThreadDetailsModel } from "../models/forum-thread-details.model";
 @Injectable({
   providedIn: 'root'
 })
