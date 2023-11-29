@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthorizeService } from "../../../api-authorization/authorize.service";
 import { ForumThreadsService } from "../../services/forum-threads.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-new-forum-thread-component',
@@ -12,6 +13,7 @@ export class NewForumThreadComponent implements OnInit{
   newThreadForm: FormGroup;
   categoryId: number = 0;
   userName?: string
+  isAuthenticated?: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +33,10 @@ export class NewForumThreadComponent implements OnInit{
   get content() { return this.newThreadForm.get('content'); }
 
   ngOnInit() {
-    this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    this.isAuthenticated = this.authorizeService.isAuthenticated();
+    if(this.isAuthenticated){
+      this.authorizeService.getUser().subscribe(user => this.userName = user.name)
+    }
     this.route.params.subscribe(params => this.categoryId = +params['id']);
   }
 
