@@ -1,14 +1,111 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<div class="my-3 py-3 my-md-5 py-md-5" *ngIf="(isAuthenticated | async) !== true">
+  <h1 class="display-5 fw-bold">Forum3</h1>
+  <div class="col-lg-6">
+    <p class="lead mb-4">
+      Join Forum3 today and become part of our community! Share your thoughts and experiences with others, solve
+      challenges, and make new connections. Don't miss out on the opportunity to make your voice heard. Sign up
+      now and start exploring
+    </p>
+  </div>
+  <a class="btn btn-primary btn-lg me-2" [routerLink]='["/authentication/register"]'>Register</a>
+  <a class="btn btn-outline-dark btn-lg" [routerLink]='["/authentication/login"]'>Login</a>
+</div>
+
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
+
+<h2 class="h2 fw-normal">Latest Threads</h2>
+<div class="navigation-wrapper mb-2">
+  <div class="keen-slider keen-slider--vertical" #threadsRef>
+    <div class="keen-slider__slide" *ngFor="let thread of threads">
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-thread [thread]="thread"></app-lookup-thread>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg
+    class="arrow arrow--left"
+    (click)="threadsSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    class="arrow arrow--right"
+    *ngIf="threadsSlider"
+    (click)="threadsSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>
+
+<h2 class="h2 fw-normal">Latest Posts</h2>
+<div class="navigation-wrapper mb-2">
+  <div class="keen-slider keen-slider--vertical" #postsRef>
+    <div class="keen-slider__slide" *ngFor="let post of posts">
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-post [post]="post"></app-lookup-post>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg
+    class="arrow arrow--left"
+    (click)="postsSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    *ngIf="postsSlider"
+    class="arrow arrow--right"
+    (click)="postsSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>
+
+<h2 class="h2 fw-normal">Latest Members</h2>
+<div class="navigation-wrapper mb-2">
+  <div class="keen-slider keen-slider--vertical" #membersRef>
+    <div class="keen-slider__slide" *ngFor="let member of members">
+      <div class="card">
+        <div class="card-body">
+          <app-lookup-member [member]="member"></app-lookup-member>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg
+    class="arrow arrow--left"
+    (click)="membersSlider.prev()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+    />
+  </svg>
+  <svg
+    class="arrow arrow--right"
+    *ngIf="membersSlider"
+    (click)="membersSlider.next()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+  </svg>
+</div>

@@ -1,0 +1,46 @@
+<h1 class="h1 fw-normal">Search</h1>
+
+<div>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="d-flex">
+    <input type="text" class="form-control me-2" id="query" formControlName="query">
+    <button type="submit" class="btn btn-outline-success" [disabled]="searchForm.invalid">Search</button>
+  </form>
+</div>
+
+<hr class="my-4" />
+
+<app-loading-content *ngIf="isLoading"></app-loading-content>
+<app-error-content *ngIf="isError"></app-error-content>
+
+<div class="row" *ngIf="!isLoading && !isError">
+  <div class="col-md-4 mb-4 mb-md-0">
+    <h2 class="h2 fw-normal">Threads</h2>
+    <p *ngIf="threads.length < 1">No threads matching the search query.</p>
+    <ul class="list-group" *ngIf="threads.length > 0">
+      <li class="list-group-item" *ngFor="let thread of threads">
+        <app-lookup-thread [thread]="thread"></app-lookup-thread>
+      </li>
+    </ul>
+    <a class="btn btn-sm btn-outline-primary d-block mt-2" *ngIf="threads.length > 0" (click)="goToThreadSearch()">Search in Threads</a>
+  </div>
+  <div class="col-md-4 mb-4 mb-md-0">
+    <h2 class="h2 fw-normal">Posts</h2>
+    <p *ngIf="posts.length < 1">No posts matching the search query.</p>
+    <ul class="list-group" *ngIf="posts.length > 0">
+      <li class="list-group-item" *ngFor="let post of posts">
+        <app-lookup-post [post]="post"></app-lookup-post>
+      </li>
+    </ul>
+    <a class="btn btn-sm btn-outline-primary d-block mt-2" *ngIf="posts.length > 0" (click)="goToPostSearch()">Search in Posts</a>
+  </div>
+  <div class="col-md-4">
+    <h2 class="h2 fw-normal">Members</h2>
+    <p *ngIf="members.length < 1">No members matching the search query.</p>
+    <ul class="list-group" *ngIf="members.length > 0">
+      <li class="list-group-item" *ngFor="let member of members">
+        <app-lookup-member [member]="member"></app-lookup-member>
+      </li>
+    </ul>
+    <a class="btn btn-sm btn-outline-primary d-block mt-2" *ngIf="members.length > 0" (click)="goToMemberSearch()">Search in Members</a>
+  </div>
+</div>

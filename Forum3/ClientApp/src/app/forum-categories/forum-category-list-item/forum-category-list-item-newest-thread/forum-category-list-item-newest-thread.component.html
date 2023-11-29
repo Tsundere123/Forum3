@@ -1,0 +1,16 @@
+<div style="font-size: 14px;">
+  <a routerLink="/threads/{{ latestThread.id }}" class="link-dark text-decoration-none">
+      {{ latestThread.title }}
+  </a>
+</div>
+<div class="d-flex align-items-center gap-2" style="font-size: 12px;">
+  <img alt="{{ latestThread.creator.userName }}" src="avatars/{{ latestThread.creator.avatar }}" class="rounded" width="32" height="32"/>
+  <div style="font-size:12px;">
+    <div>
+      {{ latestThread.creator.userName }}
+    </div>
+    <div>
+      {{ latestThread.createdAt | convertToReadableDate: "DD/MM/YYYY HH:ss" }}
+    </div>
+  </div>
+</div>
