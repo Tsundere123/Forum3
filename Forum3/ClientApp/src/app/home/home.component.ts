@@ -69,38 +69,40 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.threadsSlider = new KeenSlider(this.threadsRef.nativeElement, {
-      breakpoints: {
-        "(min-width: 400px)": {
-          slides: { perView: 2, spacing: 5 },
+    setTimeout(() => {
+      this.threadsSlider = new KeenSlider(this.threadsRef.nativeElement, {
+        breakpoints: {
+          "(min-width: 400px)": {
+            slides: { perView: 2, spacing: 5 },
+          },
+          "(min-width: 1000px)": {
+            slides: { perView: 3, spacing: 10 },
+          },
         },
-        "(min-width: 1000px)": {
-          slides: { perView: 3, spacing: 10 },
-        },
-      },
-    });
+      });
 
-    this.postsSlider = new KeenSlider(this.postsRef.nativeElement, {
-      breakpoints: {
-        "(min-width: 400px)": {
-          slides: { perView: 2, spacing: 5 },
+      this.postsSlider = new KeenSlider(this.postsRef.nativeElement, {
+        breakpoints: {
+          "(min-width: 400px)": {
+            slides: { perView: 2, spacing: 5 },
+          },
+          "(min-width: 1000px)": {
+            slides: { perView: 3, spacing: 10 },
+          },
         },
-        "(min-width: 1000px)": {
-          slides: { perView: 3, spacing: 10 },
-        },
-      },
-    });
+      });
 
-    this.membersSlider = new KeenSlider(this.membersRef.nativeElement, {
-      breakpoints: {
-        "(min-width: 400px)": {
-          slides: { perView: 2, spacing: 5 },
+      this.membersSlider = new KeenSlider(this.membersRef.nativeElement, {
+        breakpoints: {
+          "(min-width: 400px)": {
+            slides: { perView: 2, spacing: 5 },
+          },
+          "(min-width: 1000px)": {
+            slides: { perView: 3, spacing: 10 },
+          },
         },
-        "(min-width: 1000px)": {
-          slides: { perView: 3, spacing: 10 },
-        },
-      },
-    });
+      });
+    })
   }
 
   ngOnDestroy() {
