@@ -43,7 +43,6 @@
 
       <div class="card-footer py-2 px-3" *ngIf="isAuthenticated | async">
         <div class="d-flex gap-2">
-          <button class="btn btn-sm btn-dark" id="quoteThisPost_@Model.Id.ToString()" *ngIf="display">Quote</button>
           <button class="btn btn-sm btn-dark" (click)="onClickEdit()" *ngIf="display">Edit</button>
 
           <button class="btn btn-sm btn-danger" (click)="deleteToggle()" *ngIf="!displayDelete">Delete</button>
